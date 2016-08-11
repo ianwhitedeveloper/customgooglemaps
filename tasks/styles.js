@@ -15,7 +15,7 @@ let plumber = require('gulp-plumber');
 let injectTransform = {
 	starttag: '/* inject:imports */',
 	endtag: '/* endinject */',
-  transform: filepath => `@import '../..${filepath}';`,
+  transform: filepath => `@import '{filepath}';`,
 };
 
 let injectConfig = {
