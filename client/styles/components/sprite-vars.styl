@@ -1,0 +1,81 @@
+/*
+Stylus variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon_home_width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon_home = x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet = width height image $spritesheet_sprites;
+*/
+$sprite_cd_icon_location_name = 'sprite-cd-icon-location';
+$sprite_cd_icon_location_x = 0px;
+$sprite_cd_icon_location_y = 0px;
+$sprite_cd_icon_location_offset_x = 0px;
+$sprite_cd_icon_location_offset_y = 0px;
+$sprite_cd_icon_location_width = 48px;
+$sprite_cd_icon_location_height = 48px;
+$sprite_cd_icon_location_total_width = 48px;
+$sprite_cd_icon_location_total_height = 48px;
+$sprite_cd_icon_location_image = '../imgs/sprites/sprites.png';
+$sprite_cd_icon_location = 0px 0px 0px 0px 48px 48px 48px 48px '../imgs/sprites/sprites.png' 'sprite-cd-icon-location';
+$spritesheet_width = 48px;
+$spritesheet_height = 48px;
+$spritesheet_image = '../imgs/sprites/sprites.png';
+$spritesheet_sprites = $sprite_cd_icon_location;
+$spritesheet = 48px 48px '../imgs/sprites/sprites.png' $spritesheet_sprites;
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  spriteWidth($icon_home)
+}
+
+.icon-email {
+  sprite($icon_email)
+}
+*/
+spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of Stylus
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+sprites($spritesheet_sprites);
+*/
+sprites($sprites) {
+  for $sprite in $sprites {
+    $sprite_name = $sprite[9];
+    .{$sprite_name} {
+      sprite($sprite);
+    }
+  }
+}

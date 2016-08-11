@@ -6,8 +6,15 @@ html
 
     include ../templates/metas
     include ../templates/favicons
+    include ../templates/styles
 
   body
-    block content
+    header
+      h1 Custom Google Map
+    section#cd-google-map
+      #google-container
+      #cd-zoom-in
+      #cd-zoom-out
+      address 86-90 Paul Street, London, EC2A 4NE
 
     include ../templates/scripts

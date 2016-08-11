@@ -9,7 +9,7 @@ gulp.task('lint', lintTask);
 function lintTask() {
   return gulp
     .src(config.lint)
-    .pipe(eslint())
+    .pipe(eslint({fix: true}))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
     .on('error', beep);

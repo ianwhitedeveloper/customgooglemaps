@@ -20,9 +20,16 @@ module.exports = {
 		src: './client/scripts/**/*.js',
 		dest: './public/scripts/'
 	},
+	images: {
+		src: './client/imgs/*',
+		dest: './public/imgs/'
+	},
 	sprites: {
-		src: './client/sprites/*.png',
+		src: './client/imgs/*.png',
 		dest: './public/imgs/sprites/'
+	},
+	clean: {
+		src: './public'
 	},
 	browserSync: require('browser-sync').create(),
   browserSyncOptions: {
