@@ -21,7 +21,6 @@ function watchTask() {
 
   gulp.watch('./bower.json', [
     'vendorCSS',
-    'vendorJS',
     'styles'
   ]);
 }
