@@ -14,6 +14,7 @@ gulp.task('scripts', scriptsTask);
 
 function scriptsTask() {
   let dependencies = bower.ext('js').files;
+  dependencies.push(config.scripts.src);
   
   return gulp
     .src(dependencies)
