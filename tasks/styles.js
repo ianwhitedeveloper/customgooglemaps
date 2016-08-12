@@ -29,8 +29,11 @@ let configPreprocessor = {
 gulp.task('styles', stylesTask);
 
 function stylesTask() {
+  let allStyles = bower.ext('css').files;
+  allStyles.push(config.styles.src);
+
   return gulp
-    .src(config.styles.src)
+    .src(allStyles)
     .pipe(inject(gulp.src(dependencies, injectConfig), injectTransform))
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sourcemaps.init())

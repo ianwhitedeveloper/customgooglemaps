@@ -8,5 +8,5 @@ require('./tasks/images.js');
 require('./tasks/styles.js');
 require('./tasks/scripts.js');
 require('./tasks/views.js');
-require('./tasks/vendorCSS.js');
+//require('./tasks/vendorCSS.js');
 require('./tasks/watch.js');

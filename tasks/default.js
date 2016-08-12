@@ -3,7 +3,7 @@
 let gulp = require('gulp');
 
 let tasks = [
-	'vendorCSS',
+	// 'vendorCSS',
 	'views',
 	'browser-sync',
 	// 'sprites',
