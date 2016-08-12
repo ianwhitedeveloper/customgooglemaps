@@ -208,6 +208,16 @@ jQuery(document).ready(function(){
 	 	icon: marker_url,
 	});
 
+	var contentString = `<h1>hi there!</h1>`;
+
+	var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+	marker.addListener('click', () => {
+		infowindow.open(map, marker);
+	});
+
 	//add custom buttons for the zoom-in/zoom-out on the map
 	function CustomZoomControl(controlDiv, map) {
 		//grap the zoom elements from the DOM and insert them in the map 
