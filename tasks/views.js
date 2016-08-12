@@ -12,6 +12,7 @@ function viewsTask() {
   return gulp
     .src(config.views.src)
     .pipe(plumber({ errorHandler: onError }))
+    // remove pretty: true for future prod task
     .pipe(jade({pretty: true}))
     .pipe(gulp.dest(config.views.dest));
 }
