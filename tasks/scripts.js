@@ -14,9 +14,9 @@ gulp.task('scripts', scriptsTask);
 
 function scriptsTask() {
   let dependencies = bower.ext('js').files;
-
+  
   return gulp
-    .src(['/Users/ian.white/code/SandBox/maptest/bower_components/jquery/dist/jquery.js', config.scripts.src])
+    .src(dependencies)
     .pipe(plumber({errorHandler}))
     .pipe(sourcemaps.init())
     .pipe(babel())
