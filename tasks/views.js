@@ -12,7 +12,7 @@ function viewsTask() {
   return gulp
     .src(config.views.src)
     .pipe(plumber({ errorHandler: onError }))
-    .pipe(jade())
+    .pipe(jade({pretty: true}))
     .pipe(gulp.dest(config.views.dest));
 }
 
