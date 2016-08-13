@@ -1,10 +1,15 @@
 'use strict';
 
+var map = null;
+var my_boundaries = {};
+var data_layer;
+var info_window;
+var $ = jQuery;
+
 jQuery(document).ready(function(){
 	//set your google maps parameters
-	var latitude = 30.167110,
-		longitude = -97.823998,
-		map_zoom = 14;
+	var map_zoom = 5,
+		latlng = new google.maps.LatLng(39.8282, -98.5795); //you can use any location as center on map startup
 
 	//google map custom marker icon - .png fallback for IE11
 	var is_internetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1;
@@ -188,9 +193,11 @@ jQuery(document).ready(function(){
 		
 	//set google map options
 	var map_options = {
-      	center: new google.maps.LatLng(latitude, longitude),
+		bounds: latlng,
+      	center: latlng,
       	zoom: map_zoom,
       	panControl: false,
+      	draggable: false,
       	zoomControl: false,
       	mapTypeControl: false,
       	streetViewControl: false,
@@ -199,14 +206,28 @@ jQuery(document).ready(function(){
       	styles: style,
     }
     //inizialize the map
-	var map = new google.maps.Map(document.getElementById('google-container'), map_options);
+	map = new google.maps.Map(document.getElementById('google-container'), map_options);
 	//add a custom marker to the map				
 	var marker = new google.maps.Marker({
-	  	position: new google.maps.LatLng(latitude, longitude),
+	  	position: latlng,
 	    map: map,
 	    visible: true,
 	 	icon: marker_url,
 	});
+
+    marker.addListener('click', function() {
+      map.setZoom(8);
+      map.setCenter(marker.getPosition());
+    });
+
+
+	var zoomControlDiv = document.createElement('div');
+	var zoomControl = new CustomZoomControl(zoomControlDiv, map);
+
+	//insert the zoom div on the top left of the map
+	map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
+	
+	loadBoundariesFromGeoJson("https://raw.githubusercontent.com/matej-pavla/Google-Mapshttps://raw.githubusercontent.com/matej-pavla/Google-Maps-Examples/master/BoundariesExample/geojsons/us.states.geo.json");
 
 	var contentString = `<h1>hi there!</h1>`;
 
@@ -217,29 +238,132 @@ jQuery(document).ready(function(){
 	marker.addListener('click', () => {
 		infowindow.open(map, marker);
 	});
-
-	//add custom buttons for the zoom-in/zoom-out on the map
-	function CustomZoomControl(controlDiv, map) {
-		//grap the zoom elements from the DOM and insert them in the map 
-	  	var controlUIzoomIn= document.getElementById('cd-zoom-in'),
-	  		controlUIzoomOut= document.getElementById('cd-zoom-out');
-	  	controlDiv.appendChild(controlUIzoomIn);
-	  	controlDiv.appendChild(controlUIzoomOut);
-
-		// Setup the click event listeners and zoom-in or out according to the clicked element
-		google.maps.event.addDomListener(controlUIzoomIn, 'click', function() {
-		    map.setZoom(map.getZoom()+1)
-		});
-		google.maps.event.addDomListener(controlUIzoomOut, 'click', function() {
-		    map.setZoom(map.getZoom()-1)
-		});
-	}
-
-	var zoomControlDiv = document.createElement('div');
- 	var zoomControl = new CustomZoomControl(zoomControlDiv, map);
-
-  	//insert the zoom div on the top left of the map
-  	map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
 });
 
+//add custom buttons for the zoom-in/zoom-out on the map
+function CustomZoomControl(controlDiv, map) {
+	//grap the zoom elements from the DOM and insert them in the map 
+  	var controlUIzoomIn= document.getElementById('cd-zoom-in'),
+  		controlUIzoomOut= document.getElementById('cd-zoom-out');
+  	controlDiv.appendChild(controlUIzoomIn);
+  	controlDiv.appendChild(controlUIzoomOut);
+
+	// Setup the click event listeners and zoom-in or out according to the clicked element
+	google.maps.event.addDomListener(controlUIzoomIn, 'click', function() {
+	    map.setZoom(map.getZoom()+1)
+	});
+	google.maps.event.addDomListener(controlUIzoomOut, 'click', function() {
+	    map.setZoom(map.getZoom()-1)
+	});
+}
+
+function initializeDataLayer(){
+	if(data_layer){
+		data_layer.forEach(function(feature) {
+			data_layer.remove(feature);
+		});
+		data_layer = null;
+	}
+	data_layer = new google.maps.Data({map: map}); //initialize data layer which contains the boundaries. It's possible to have multiple data layers on one map
+	data_layer.setStyle({ //using set style we can set styles for all boundaries at once
+		fillColor: 'blue',
+		strokeWeight: 1,
+		fillOpacity: 0.8
+	});
+
+	data_layer.addListener('click', function(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundary_id'); we set when adding boundary to data layer
+		var boundary_id = e.feature.getProperty('boundary_id');
+		console.log(e);
+		var boundary_name = "NOT SET";
+		if(boundary_id && 
+			my_boundaries[boundary_id] && 
+			my_boundaries[boundary_id].name
+		) {
+			boundary_name = my_boundaries[boundary_id].name;
+		}
+		if(info_window){
+			info_window.setMap(null);
+			info_window = null;
+		}
+		info_window = new google.maps.InfoWindow({
+			content: '<div>You have clicked a boundary: <span style="color:red;">' + boundary_name + '</span></div>',
+			size: new google.maps.Size(150,50),
+			position: e.latLng, map: map
+		});
+
+		var geocoder = new google.maps.Geocoder();
+
+		geocoder.geocode({'address': boundary_name}, function (results, status) {
+			var ne = results[0].geometry.viewport.getNorthEast();
+			var sw = results[0].geometry.viewport.getSouthWest();
+
+			map.fitBounds(results[0].geometry.viewport);               
+
+			var boundingBoxPoints = [
+				ne, new google.maps.LatLng(ne.lat(), sw.lng()),
+				sw, new google.maps.LatLng(sw.lat(), ne.lng()), ne
+			];
+
+			var boundingBox = new google.maps.Polyline({
+				path: boundingBoxPoints,
+				strokeColor: '#FF0000',
+				strokeOpacity: 1.0,
+				strokeWeight: 2
+			});
+
+			boundingBox.setMap(map);
+		}); 
+	});
+
+	data_layer.addListener('mouseover', function(e) {
+		data_layer.overrideStyle(e.feature, {
+			strokeWeight: 3,
+			strokeColor: '#ff0000'
+		});
+		var boundary_id = e.feature.getProperty('boundary_id');
+		var boundary_name = "NOT SET";
+		if(boundary_id && 
+			my_boundaries[boundary_id] && 
+			my_boundaries[boundary_id].name
+		) {
+			boundary_name = my_boundaries[boundary_id].name;
+		}
+		$('#bname').html(boundary_name);
+	});
+
+	data_layer.addListener('mouseout', function(e) {
+		data_layer.overrideStyle(e.feature, {
+			strokeWeight: 1,
+			strokeColor: ''
+		});
+		$('#bname').html("");
+	});
+}
+
+function loadBoundariesFromGeoJson(geo_json_url) {
+	initializeDataLayer();
+	jQuery.getJSON(geo_json_url, function (data) {
+		if (data.type === "FeatureCollection") { //we have a collection of boundaries in geojson format
+			if (data.features) {
+				for (var i = 0; i < data.features.length; i++) {
+					var boundary_id = i + 1;
+					var new_boundary = {};
+					if (!data.features[i].properties) { 
+						data.features[i].properties = {};
+					}
+					data.features[i].properties.boundary_id = boundary_id; //we will use this id to identify boundary later when clicking on it
+					data_layer.addGeoJson(data.features[i], {idPropertyName: 'boundary_id'});
+					new_boundary.feature = data_layer.getFeatureById(boundary_id);
+					if (data.features[i].properties.name) {
+						new_boundary.name = data.features[i].properties.name;
+					}
+					if (data.features[i].properties.NAME) {
+						new_boundary.name = data.features[i].properties.NAME;
+					}
+					my_boundaries[boundary_id] = new_boundary;
+				}
+			}
+		}
+	});
+}
   
