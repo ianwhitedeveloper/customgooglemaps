@@ -1,4 +1,5 @@
 let jQuery = require('jquery');
+let boundariesFromGeoJson = require('../lib/boundariesFromGeoJson');
 
 jQuery(document).ready(function(){
 	var map = null,
@@ -232,7 +233,7 @@ jQuery(document).ready(function(){
 	//insert the zoom div on the top left of the map
 	map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
 	
-	loadBoundariesFromGeoJson("https://raw.githubusercontent.com/matej-pavla/Google-Mapshttps://raw.githubusercontent.com/matej-pavla/Google-Maps-Examples/master/BoundariesExample/geojsons/us.states.geo.json");
+	loadBoundariesFromGeoJson(boundariesFromGeoJson);
 
 	contentString = `<h1>hi there!</h1>`;
 
