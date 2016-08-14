@@ -16,6 +16,10 @@ module.exports = {
     jQuery: true,
     google: true
   },
+  "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+  },
   rules: {
     semi: [required, 'always'],
     curly: [required, 'all'],

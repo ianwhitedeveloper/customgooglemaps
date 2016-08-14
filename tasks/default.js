@@ -12,7 +12,8 @@ let tasks = [
 	'scripts',
 	'lint',
 	// 'gulp-clean',
-	'watch'
+	'watch',
+	'browserify'
 ];
 
 gulp.task('default', tasks);

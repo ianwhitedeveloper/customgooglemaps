@@ -1,4 +1,4 @@
-'use strict';
+let jQuery = require('jquery');
 
 jQuery(document).ready(function(){
 	var map = null,

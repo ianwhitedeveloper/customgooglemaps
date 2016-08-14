@@ -1,7 +1,0 @@
-{
-  "name": "maptest",
-  "version": "0.0.0",
-  "dependencies": {
-    "jquery": "^3.1.0"
-  }
-}
