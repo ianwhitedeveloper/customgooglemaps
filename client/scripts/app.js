@@ -4,7 +4,7 @@ let boundariesFromGeoJson = require('../lib/boundariesFromGeoJson');
 jQuery(document).ready(function(){
 	var map = null,
 		my_boundaries = {},
-		data_layer,
+		geoDataJson_layer,
 		info_window,
 		$ = jQuery,
 		//set your google maps parameters
@@ -263,23 +263,23 @@ jQuery(document).ready(function(){
 	}
 
 	function initializeDataLayer(){
-		if(data_layer){
-			data_layer.forEach(function(feature) {
-				data_layer.remove(feature);
+		if(geoDataJson_layer){
+			geoDataJson_layer.forEach(function(feature) {
+				geoDataJson_layer.remove(feature);
 			});
-			data_layer = null;
+			geoDataJson_layer = null;
 		}
-		data_layer = new google.maps.Data({map: map}); //initialize data layer which contains the boundaries. It's possible to have multiple data layers on one map
-		data_layer.setStyle({ //using set style we can set styles for all boundaries at once
+		geoDataJson_layer = new google.maps.Data({map: map}); //initialize geoDataJson layer which contains the boundaries. It's possible to have multiple geoDataJson layers on one map
+		geoDataJson_layer.setStyle({ //using set style we can set styles for all boundaries at once
 			fillColor: 'blue',
 			strokeWeight: 1,
 			fillOpacity: 0.8
 		});
 
-		data_layer.addListener('click', boundTheMap);
+		geoDataJson_layer.addListener('click', boundTheMap);
 
-		data_layer.addListener('mouseover', function(e) {
-			data_layer.overrideStyle(e.feature, {
+		geoDataJson_layer.addListener('mouseover', function(e) {
+			geoDataJson_layer.overrideStyle(e.feature, {
 				strokeWeight: 3,
 				strokeColor: '#ff0000'
 			});
@@ -294,8 +294,8 @@ jQuery(document).ready(function(){
 			$('#bname').html(boundary_name);
 		});
 
-		data_layer.addListener('mouseout', function(e) {
-			data_layer.overrideStyle(e.feature, {
+		geoDataJson_layer.addListener('mouseout', function(e) {
+			geoDataJson_layer.overrideStyle(e.feature, {
 				strokeWeight: 1,
 				strokeColor: ''
 			});
@@ -303,7 +303,7 @@ jQuery(document).ready(function(){
 		});
 	}
 
-	function boundTheMap(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundary_id'); we set when adding boundary to data layer
+	function boundTheMap(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundary_id'); we set when adding boundary to geoDataJson layer
 		if (!e.feature) {
 
 		}
@@ -353,31 +353,29 @@ jQuery(document).ready(function(){
 		}); 
 	}
 
-	function loadBoundariesFromGeoJson(geo_json_url) {
+	function loadBoundariesFromGeoJson(geoDataJson) {
 		initializeDataLayer();
-		jQuery.getJSON(geo_json_url, function (data) {
-			if (data.type === "FeatureCollection") { //we have a collection of boundaries in geojson format
-				if (data.features) {
-					for (var i = 0; i < data.features.length; i++) {
-						var boundary_id = i + 1;
-						var new_boundary = {};
-						if (!data.features[i].properties) { 
-							data.features[i].properties = {};
-						}
-						data.features[i].properties.boundary_id = boundary_id; //we will use this id to identify boundary later when clicking on it
-						data_layer.addGeoJson(data.features[i], {idPropertyName: 'boundary_id'});
-						new_boundary.feature = data_layer.getFeatureById(boundary_id);
-						if (data.features[i].properties.name) {
-							new_boundary.name = data.features[i].properties.name;
-						}
-						if (data.features[i].properties.NAME) {
-							new_boundary.name = data.features[i].properties.NAME;
-						}
-						my_boundaries[boundary_id] = new_boundary;
+		if (geoDataJson.type === "FeatureCollection") { //we have a collection of boundaries in geojson format
+			if (geoDataJson.features) {
+				for (var i = 0; i < geoDataJson.features.length; i++) {
+					var boundary_id = i + 1;
+					var new_boundary = {};
+					if (!geoDataJson.features[i].properties) { 
+						geoDataJson.features[i].properties = {};
 					}
+					geoDataJson.features[i].properties.boundary_id = boundary_id; //we will use this id to identify boundary later when clicking on it
+					geoDataJson_layer.addGeoJson(geoDataJson.features[i], {idPropertyName: 'boundary_id'});
+					new_boundary.feature = geoDataJson_layer.getFeatureById(boundary_id);
+					if (geoDataJson.features[i].properties.name) {
+						new_boundary.name = geoDataJson.features[i].properties.name;
+					}
+					if (geoDataJson.features[i].properties.NAME) {
+						new_boundary.name = geoDataJson.features[i].properties.NAME;
+					}
+					my_boundaries[boundary_id] = new_boundary;
 				}
 			}
-		});
+		}
 	}
 });
 

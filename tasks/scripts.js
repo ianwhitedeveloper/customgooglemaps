@@ -18,15 +18,15 @@ function scriptsTask() {
   return gulp
     .src(config.scripts.src)
     .pipe(plumber({errorHandler}))
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(concat('app.js'))
+    // .pipe(concat('app.js'))
     .pipe(browserify({
       insertGlobals : true,
       debug : !gulp.env.production
     }))
-    .pipe(uglify({mangle: false}))
-    .pipe(sourcemaps.write())
+    // .pipe(uglify({mangle: false}))
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.scripts.dest));
 }
 

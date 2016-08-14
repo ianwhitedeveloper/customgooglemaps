@@ -1,7 +1,6 @@
 
 // require('./tasks/gulp-clean.js');
 require('./tasks/default.js');
-require('./tasks/browserify.js');
 require('./tasks/lint.js');
 require('./tasks/browser-sync.js');
 require('./tasks/images.js');
