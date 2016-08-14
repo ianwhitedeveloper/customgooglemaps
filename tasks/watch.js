@@ -13,14 +13,9 @@ function watchTask() {
 
   gulp.watch(gulpConfig.styles.watch, ['styles']);
 
-  gulp.watch(gulpConfig.scripts.src, [
+  gulp.watch(gulpConfig.scripts.watch, [
     'scripts',
     gulpConfig.browserSync.reload
   ]);
   gulp.watch(gulpConfig.lint, ['lint']);
-
-  gulp.watch('./bower.json', [
-    'vendorCSS',
-    'styles'
-  ]);
 }

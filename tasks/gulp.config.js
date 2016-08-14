@@ -8,16 +8,17 @@ module.exports = {
 	],
 	views: {
 		src: './client/views/*.jade',
-    watch: './client/views/**/*.jade',
+	    watch: './client/views/**/*.jade',
 		dest: './public/'
 	},
 	styles: {
 		src: './client/styles/*.styl',
-    watch: './client/styles/**/*.styl',
+	    watch: './client/styles/**/*.styl',
 		dest: './public/styles/'
 	},
 	scripts: {
-		src: ['./client/scripts/app.js', './client/lib/*.js'],
+		src: './client/scripts/app.js',
+		watch: './client/**/*.js',
 		dest: './public/scripts/'
 	},
 	images: {
