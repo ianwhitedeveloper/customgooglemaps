@@ -17,7 +17,7 @@ module.exports = {
 		dest: './public/styles/'
 	},
 	scripts: {
-		src: './client/scripts/app.js',
+		src: ['./client/scripts/app.js', './client/lib/*.js'],
 		dest: './public/scripts/'
 	},
 	images: {
