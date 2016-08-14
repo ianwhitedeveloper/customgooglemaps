@@ -1,4 +1,5 @@
 let boundariesFromGeoJson = require('../lib/boundariesFromGeoJson');
+let geocoderInit = require('../lib/geocoderInit');
 let map = require('../lib/map');
 let $ = require('jquery');
 
@@ -54,14 +55,14 @@ let AddMapBoundaries = {
 				strokeColor: '#ff0000'
 			});
 			var boundary_id = e.feature.getProperty('boundary_id');
-			var boundary_name = "NOT SET";
+			var boundaryName = "NOT SET";
 			if(boundary_id && 
 				AddMapBoundaries.myBoundaries[boundary_id] && 
 				AddMapBoundaries.myBoundaries[boundary_id].name
 			) {
-				boundary_name = AddMapBoundaries.myBoundaries[boundary_id].name;
+				boundaryName = AddMapBoundaries.myBoundaries[boundary_id].name;
 			}
-			$('#bname').html(boundary_name);
+			$('#bname').html(boundaryName);
 		});
 
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseout', function(e) {
@@ -76,19 +77,18 @@ let AddMapBoundaries = {
 	boundTheMap: function boundTheMap(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundary_id'); we set when adding boundary to boundariesFromGeoJson layer
 
 		if (!e.feature) {
-
+			return;
 		}
 
 		var boundary_id = e.feature.getProperty('boundary_id');
-		var boundary_name = "NOT SET";
-		var geocoder = new google.maps.Geocoder();
+		var boundaryName = null;
 
 
 		if(boundary_id && 
 			AddMapBoundaries.myBoundaries[boundary_id] && 
 			AddMapBoundaries.myBoundaries[boundary_id].name
 		) {
-			boundary_name = AddMapBoundaries.myBoundaries[boundary_id].name;
+			boundaryName = AddMapBoundaries.myBoundaries[boundary_id].name;
 		}
 
 		if(AddMapBoundaries.infoWindow){
@@ -97,32 +97,16 @@ let AddMapBoundaries = {
 		}
 
 		AddMapBoundaries.infoWindow = new google.maps.InfoWindow({
-			content: '<div>You have clicked a boundary: <span style="color:red;">' + boundary_name + '</span></div>',
+			content: '<div>You have clicked a boundary: <span style="color:red;">' + boundaryName + '</span></div>',
 			size: new google.maps.Size(150,50),
 			position: e.latLng, map: map
 		});
 
+		$(window).on('resize load', () => {
+			geocoderInit(boundaryName);
+		});
+		geocoderInit(boundaryName);
 
-		geocoder.geocode({'address': boundary_name}, function (results, status) {
-			var ne = results[0].geometry.viewport.getNorthEast();
-			var sw = results[0].geometry.viewport.getSouthWest();
-
-			map.fitBounds(results[0].geometry.viewport);               
-
-			var boundingBoxPoints = [
-				ne, new google.maps.LatLng(ne.lat(), sw.lng()),
-				sw, new google.maps.LatLng(sw.lat(), ne.lng()), ne
-			];
-
-			var boundingBox = new google.maps.Polyline({
-				path: boundingBoxPoints,
-				strokeColor: '#FF0000',
-				strokeOpacity: 1.0,
-				strokeWeight: 2
-			});
-
-			boundingBox.setMap(map);
-		}); 
 	}
 }
 
