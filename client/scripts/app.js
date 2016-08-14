@@ -1,219 +1,33 @@
 let jQuery = require('jquery');
 let boundariesFromGeoJson = require('../lib/boundariesFromGeoJson');
+let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
+let mapOptions = require('../lib/mapOptions');
 
 jQuery(document).ready(function(){
 	var map = null,
-		my_boundaries = {},
-		geoDataJson_layer,
-		info_window,
+		myBoundaries = {},
+		geoDataJsonLayer,
+		infoWindow,
 		$ = jQuery,
 		//set your google maps parameters
-		map_zoom = 5,
-		defaultLatitudeLongitude = new google.maps.LatLng(39.8282, -98.5795), 
 		//you can use any,location as center on map startup
 		//google map custom marker icon - .png fallback for IE11
-		is_internetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
-		marker_url = ( is_internetExplorer11 ) ? 
+		isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
+		marker_url = ( isInternetExplorer11 ) ? 
 			'imgs/cd-icon-location.png' : 
 			'imgs/cd-icon-location.svg',
-		//define the basic color of your map, plus a value for saturation and brightness
-		main_color = '#2d313f',
-		saturation_value= -20,
-		brightness_value= 5,
 		marker,
 		zoomControlDiv = document.createElement('div'),
 		zoomControl,
 		contentString,
-		infowindow,
-
+		infowindow;
+		// defaultLatitudeLongitude = new google.maps.LatLng(39.8282, -98.5795);
 		//we define here the style of the map
-		style= [
-		{
-			//set saturation for the labels on the map
-			elementType: "labels",
-			stylers: [
-				{saturation: saturation_value}
-			]
-		},  
-	    {	//poi stands for point of interest - don't show these lables on the map 
-			featureType: "poi",
-			elementType: "labels",
-			stylers: [
-				{visibility: "off"}
-			]
-		},
-		{
-			//don't show highways lables on the map
-	        featureType: 'road.highway',
-	        elementType: 'labels',
-	        stylers: [
-	            {visibility: "off"}
-	        ]
-	    }, 
-		{ 	
-			//don't show local road lables on the map
-			featureType: "road.local", 
-			elementType: "labels.icon", 
-			stylers: [
-				{visibility: "off"} 
-			] 
-		},
-		{ 
-			//don't show arterial road lables on the map
-			featureType: "road.arterial", 
-			elementType: "labels.icon", 
-			stylers: [
-				{visibility: "off"}
-			] 
-		},
-		{
-			//don't show road lables on the map
-			featureType: "road",
-			elementType: "geometry.stroke",
-			stylers: [
-				{visibility: "off"}
-			]
-		}, 
-		//style different elements on the map
-		{ 
-			featureType: "transit", 
-			elementType: "geometry.fill", 
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		}, 
-		{
-			featureType: "poi",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "poi.government",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "poi.sport_complex",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "poi.attraction",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "poi.business",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "transit",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "transit.station",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "landscape",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-			
-		},
-		{
-			featureType: "road",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		},
-		{
-			featureType: "road.highway",
-			elementType: "geometry.fill",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		}, 
-		{
-			featureType: "water",
-			elementType: "geometry",
-			stylers: [
-				{ hue: main_color },
-				{ visibility: "on" }, 
-				{ lightness: brightness_value }, 
-				{ saturation: saturation_value }
-			]
-		}
-	];
 				
-	//set google map options
-	var map_options = {
-		bounds: defaultLatitudeLongitude,
-	  	center: defaultLatitudeLongitude,
-	  	zoom: map_zoom,
-	  	panControl: false,
-	  	draggable: false,
-	  	zoomControl: false,
-	  	mapTypeControl: false,
-	  	streetViewControl: false,
-	  	mapTypeId: google.maps.MapTypeId.ROADMAP,
-	  	scrollwheel: false,
-	  	styles: style,
-	}
+	
 
     //inizialize the map
-	map = new google.maps.Map(document.getElementById('google-container'), map_options);
+	map = new google.maps.Map(document.getElementById('google-container'), mapOptions);
 	//add a custom marker to the map				
 	marker = new google.maps.Marker({
 	  	position: defaultLatitudeLongitude,
@@ -263,39 +77,39 @@ jQuery(document).ready(function(){
 	}
 
 	function initializeDataLayer(){
-		if(geoDataJson_layer){
-			geoDataJson_layer.forEach(function(feature) {
-				geoDataJson_layer.remove(feature);
+		if(geoDataJsonLayer){
+			geoDataJsonLayer.forEach(function(feature) {
+				geoDataJsonLayer.remove(feature);
 			});
-			geoDataJson_layer = null;
+			geoDataJsonLayer = null;
 		}
-		geoDataJson_layer = new google.maps.Data({map: map}); //initialize geoDataJson layer which contains the boundaries. It's possible to have multiple geoDataJson layers on one map
-		geoDataJson_layer.setStyle({ //using set style we can set styles for all boundaries at once
+		geoDataJsonLayer = new google.maps.Data({map: map}); //initialize geoDataJson layer which contains the boundaries. It's possible to have multiple geoDataJson layers on one map
+		geoDataJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
 			fillColor: 'blue',
 			strokeWeight: 1,
 			fillOpacity: 0.8
 		});
 
-		geoDataJson_layer.addListener('click', boundTheMap);
+		geoDataJsonLayer.addListener('click', boundTheMap);
 
-		geoDataJson_layer.addListener('mouseover', function(e) {
-			geoDataJson_layer.overrideStyle(e.feature, {
+		geoDataJsonLayer.addListener('mouseover', function(e) {
+			geoDataJsonLayer.overrideStyle(e.feature, {
 				strokeWeight: 3,
 				strokeColor: '#ff0000'
 			});
 			var boundary_id = e.feature.getProperty('boundary_id');
 			var boundary_name = "NOT SET";
 			if(boundary_id && 
-				my_boundaries[boundary_id] && 
-				my_boundaries[boundary_id].name
+				myBoundaries[boundary_id] && 
+				myBoundaries[boundary_id].name
 			) {
-				boundary_name = my_boundaries[boundary_id].name;
+				boundary_name = myBoundaries[boundary_id].name;
 			}
 			$('#bname').html(boundary_name);
 		});
 
-		geoDataJson_layer.addListener('mouseout', function(e) {
-			geoDataJson_layer.overrideStyle(e.feature, {
+		geoDataJsonLayer.addListener('mouseout', function(e) {
+			geoDataJsonLayer.overrideStyle(e.feature, {
 				strokeWeight: 1,
 				strokeColor: ''
 			});
@@ -314,17 +128,17 @@ jQuery(document).ready(function(){
 
 
 		if(boundary_id && 
-			my_boundaries[boundary_id] && 
-			my_boundaries[boundary_id].name
+			myBoundaries[boundary_id] && 
+			myBoundaries[boundary_id].name
 		) {
-			boundary_name = my_boundaries[boundary_id].name;
+			boundary_name = myBoundaries[boundary_id].name;
 		}
-		if(info_window){
-			info_window.setMap(null);
-			info_window = null;
+		if(infoWindow){
+			infoWindow.setMap(null);
+			infoWindow = null;
 		}
 
-		info_window = new google.maps.InfoWindow({
+		infoWindow = new google.maps.InfoWindow({
 			content: '<div>You have clicked a boundary: <span style="color:red;">' + boundary_name + '</span></div>',
 			size: new google.maps.Size(150,50),
 			position: e.latLng, map: map
@@ -364,15 +178,15 @@ jQuery(document).ready(function(){
 						geoDataJson.features[i].properties = {};
 					}
 					geoDataJson.features[i].properties.boundary_id = boundary_id; //we will use this id to identify boundary later when clicking on it
-					geoDataJson_layer.addGeoJson(geoDataJson.features[i], {idPropertyName: 'boundary_id'});
-					new_boundary.feature = geoDataJson_layer.getFeatureById(boundary_id);
+					geoDataJsonLayer.addGeoJson(geoDataJson.features[i], {idPropertyName: 'boundary_id'});
+					new_boundary.feature = geoDataJsonLayer.getFeatureById(boundary_id);
 					if (geoDataJson.features[i].properties.name) {
 						new_boundary.name = geoDataJson.features[i].properties.name;
 					}
 					if (geoDataJson.features[i].properties.NAME) {
 						new_boundary.name = geoDataJson.features[i].properties.NAME;
 					}
-					my_boundaries[boundary_id] = new_boundary;
+					myBoundaries[boundary_id] = new_boundary;
 				}
 			}
 		}
