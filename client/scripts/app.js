@@ -67,7 +67,7 @@ jQuery(document).ready(function(){
       content: contentString
     });
 
-    var ibOptions = {
+    /*var ibOptions = {
 		disableAutoPan: false
 		,maxWidth: 0
 		// ,pixelOffset: new google.maps.Size(-140, 0)
@@ -86,26 +86,24 @@ jQuery(document).ready(function(){
 		enableEventPropagation: false
 	};
 	marker.addListener('click', function() {
-	      // return function() {
-	        var source   = $("#infobox-template").html();
-	        var template = 'hi';
-	 
-	        var boxText = document.createElement("div");
-	        boxText.style.cssText = "margin-top: 8px; background: #fff; padding: 0px;";
-	        boxText.innerHTML = 'hi ho silver';
-	 
-			ibOptions.content = 'wtf';
-	        
-			var ib = new InfoBox(ibOptions);
-	      	ib.open(map, marker);
-	        map.panTo(ib.getPosition());
-	      // }
-	  });
+        var source   = $("#infobox-template").html();
+        var template = 'hi';
+ 
+        var boxText = document.createElement("div");
+        boxText.style.cssText = "margin-top: 8px; background: #fff; padding: 0px;";
+        boxText.innerHTML = 'hi ho silver';
+ 
+		ibOptions.content = 'wtf';
+        
+		var ib = new InfoBox(ibOptions);
+      	ib.open(map, marker);
+        map.panTo(ib.getPosition());
+	  });*/
 
 
-	/*marker.addListener('click', () => {
+	marker.addListener('click', () => {
 		infowindow.open(map, marker);
-	});*/
+	});
 
 	//add custom buttons for the zoom-in/zoom-out on the map
 	function CustomZoomControl(controlDiv, map) {
