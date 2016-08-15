@@ -6,12 +6,12 @@ function geocoderInit(boundaryName='united states') {
 	// The Google Maps Javascript API v3 is event based. You need to wait until the new zoom level takes effect before incrementing it by one.
 	google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
 		let zoomLevel = map.getZoom();
-		if (zoomLevel <= 6) {
+		if (zoomLevel <= 7) {
 			map.setZoom(zoomLevel + 1);
 		}
 	});
 
-	geocoder.geocode({'address': boundaryName}, function (results, status) {
+	geocoder.geocode({'address': `${boundaryName} State`}, function (results, status) {
 		var ne = results[0].geometry.viewport.getNorthEast();
 		var sw = results[0].geometry.viewport.getSouthWest();
 
