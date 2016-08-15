@@ -26,7 +26,6 @@ jQuery(document).ready(function(){
 		//we define here the style of the map
 				
 	
-	AddMapBoundaries.initializeDataLayer();
 	AddMapBoundaries.loadBoundariesFromGeoJson(boundariesFromGeoJson);
 
 	//add a custom marker to the map				

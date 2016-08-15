@@ -13,7 +13,7 @@ let AddMapBoundaries = {
 	},
 
 	loadBoundariesFromGeoJson: function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
-		// AddMapBoundaries.initializeDataLayer();
+		AddMapBoundaries.initializeDataLayer();
 		if (boundariesFromGeoJson.type === "FeatureCollection") { //we have a collection of boundaries in geojson format
 			if (boundariesFromGeoJson.features) {
 				for (var i = 0; i < boundariesFromGeoJson.features.length; i++) {
