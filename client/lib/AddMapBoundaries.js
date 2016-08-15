@@ -7,6 +7,10 @@ let AddMapBoundaries = {
 	myBoundaries: {},
 	boundariesFromGeoJsonLayer: null,
 	infoWindow: null,
+	geoStyles: {
+		defaultFillColor: 'blue',
+		defaultOpacity: 0.8
+	},
 
 	loadBoundariesFromGeoJson: function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
 		// AddMapBoundaries.initializeDataLayer();
@@ -42,9 +46,9 @@ let AddMapBoundaries = {
 		}
 		AddMapBoundaries.boundariesFromGeoJsonLayer = new google.maps.Data({map: map}); //initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 		AddMapBoundaries.boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
-			fillColor: 'blue',
+			fillColor: this.geoStyles.defaultFillColor,
 			strokeWeight: 1,
-			fillOpacity: 0.8
+			fillOpacity: this.geoStyles.defaultOpacity
 		});
 
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('click', AddMapBoundaries.boundTheMap);
@@ -68,9 +72,9 @@ let AddMapBoundaries = {
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseout', function(e) {
 			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
 				strokeWeight: 1,
-				strokeColor: ''
+				strokeColor: '#000'
 			});
-			$('#bname').html("");
+			$('#bname').html('United States');
 		});
 	},
 
