@@ -8,6 +8,7 @@ let mapOptions = require('../lib/mapOptions');
 // let boundTheMap = require('../lib/boundTheMap');
 // let initializeDataLayer = require('../lib/initializeDataLayer');
 let AddMapBoundaries = require('../lib/AddMapBoundaries');
+let InfoBox =  require('../lib/infobox');
 
 jQuery(document).ready(function(){
 	    //set your google maps parameters
@@ -16,7 +17,8 @@ jQuery(document).ready(function(){
 	var	isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
 		marker_url = ( isInternetExplorer11 ) ? 
 			'imgs/cd-icon-location.png' : 
-			'imgs/cd-icon-location.svg',
+			// 'imgs/cd-icon-location.svg',
+			'imgs/cd-icon-location.png',
 		marker,
 		zoomControlDiv = document.createElement('div'),
 		zoomControl,
@@ -48,15 +50,62 @@ jQuery(document).ready(function(){
 	map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
 	
 
-	contentString = `<h1>hi there!</h1>`;
+	contentString = 	`<div class="state_info">
+							<h1>Header Lorem Ipsum</h1>
+							<div style="text-align: center;">
+								<img src="imgs/cd-icon-location.png">
+							</div>
+							<div style="text-align: center;">
+								<img src="imgs/cd-icon-location.png">
+							</div>
+							<div style="text-align: center;">
+								<img src="imgs/cd-icon-location.png">
+							</div>
+						</div>`;
 
 	infowindow = new google.maps.InfoWindow({
       content: contentString
     });
 
-	marker.addListener('click', () => {
+    var ibOptions = {
+		disableAutoPan: false
+		,maxWidth: 0
+		// ,pixelOffset: new google.maps.Size(-140, 0)
+		,zIndex: null
+		,boxStyle: {
+      padding: "0px 0px 0px 0px",
+      width: "252px",
+      height: "40px",
+      backgroundColor: '#fff',
+      color: '#000'
+    },
+    closeBoxURL : "",
+    infoBoxClearance: new google.maps.Size(1, 1),
+		isHidden: false,
+		pane: "floatPane",
+		enableEventPropagation: false
+	};
+	marker.addListener('click', function() {
+	      // return function() {
+	        var source   = $("#infobox-template").html();
+	        var template = 'hi';
+	 
+	        var boxText = document.createElement("div");
+	        boxText.style.cssText = "margin-top: 8px; background: #fff; padding: 0px;";
+	        boxText.innerHTML = 'hi ho silver';
+	 
+			ibOptions.content = 'wtf';
+	        
+			var ib = new InfoBox(ibOptions);
+	      	ib.open(map, marker);
+	        map.panTo(ib.getPosition());
+	      // }
+	  });
+
+
+	/*marker.addListener('click', () => {
 		infowindow.open(map, marker);
-	});
+	});*/
 
 	//add custom buttons for the zoom-in/zoom-out on the map
 	function CustomZoomControl(controlDiv, map) {

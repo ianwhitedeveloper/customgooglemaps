@@ -9,7 +9,7 @@ function geocoderInit(boundaryName='united states') {
 
 		map.fitBounds(results[0].geometry.viewport);               
 
-		/*var boundingBoxPoints = [
+		var boundingBoxPoints = [
 			ne, new google.maps.LatLng(ne.lat(), sw.lng()),
 			sw, new google.maps.LatLng(sw.lat(), ne.lng()), ne
 		];
@@ -21,7 +21,7 @@ function geocoderInit(boundaryName='united states') {
 			strokeWeight: 2
 		});
 
-		boundingBox.setMap(map);*/
+		boundingBox.setMap(map);
 	}); 
 }
 
