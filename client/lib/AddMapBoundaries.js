@@ -1,5 +1,7 @@
 let geocoderInit = require('../lib/geocoderInit');
 let map = require('../lib/map');
+let dummyStateResults = require('../lib/dummyStateResults');
+let stateDict = require('../lib/stateDict');
 let $ = require('jquery');
 
 let AddMapBoundaries = {
@@ -7,7 +9,7 @@ let AddMapBoundaries = {
 	boundariesFromGeoJsonLayer: null,
 	infoWindow: null,
 	geoStyles: {
-		defaultFillColor: 'blue',
+		// defaultFillColor: 'blue',
 		defaultOpacity: 0.8
 	},
 
@@ -28,6 +30,16 @@ let AddMapBoundaries = {
 					AddMapBoundaries.boundariesFromGeoJsonLayer.addGeoJson(boundariesFromGeoJson.features[i], {idPropertyName: 'boundaryId'});
 					new_boundary.feature = AddMapBoundaries.boundariesFromGeoJsonLayer.getFeatureById(boundaryId);
 					AddMapBoundaries.myBoundaries[boundaryName] = new_boundary;
+
+					if (boundaryName in stateDict) {
+						AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(AddMapBoundaries.myBoundaries[boundaryName].feature, {
+							strokeWeight: 3,
+							strokeColor: '#fff',
+							fillColor: dummyStateResults.states[stateDict[boundaryName]] ? dummyStateResults.states[stateDict[boundaryName]].winner : '',
+							fillOpacity: 0.8
+						});
+					}
+
 				}
 			}
 		}
@@ -51,17 +63,17 @@ let AddMapBoundaries = {
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('click', function(e) {
 			/*TODO: clean up
 			Crude attempt to Show zoomed into the state in the visual (other states should either not be visible or maybe greyed out if possible)*/
-			AddMapBoundaries.boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
-				fillColor: '#ddd',
-				strokeWeight: 1,
-				fillOpacity: 1
-			});
-			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-				strokeWeight: 3,
-				strokeColor: '#ff0000',
-				fillColor: 'blue',
-				fillOpacity: 0.8
-			});
+			// AddMapBoundaries.boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
+			// 	fillColor: '#ddd',
+			// 	strokeWeight: 1,
+			// 	fillOpacity: 1
+			// });
+			// AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
+			// 	strokeWeight: 3,
+			// 	strokeColor: '#ff0000',
+			// 	fillColor: 'blue',
+			// 	fillOpacity: 0.8
+			// });
 		});
 
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseover', function(e) {
