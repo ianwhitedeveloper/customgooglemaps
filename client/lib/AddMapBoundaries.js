@@ -86,7 +86,7 @@ let AddMapBoundaries = {
 
 	boundTheMap: function boundTheMap(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
 		var boundaryId = e.feature.f.NAME;
-
+		
 		if (
 			e.feature &&
 			boundaryId && 
