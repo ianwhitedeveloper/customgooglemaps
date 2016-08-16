@@ -1,4 +1,3 @@
-let boundariesFromGeoJson = require('../lib/boundariesFromGeoJson');
 let geocoderInit = require('../lib/geocoderInit');
 let map = require('../lib/map');
 let $ = require('jquery');
