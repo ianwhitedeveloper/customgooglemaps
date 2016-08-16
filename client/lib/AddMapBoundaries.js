@@ -33,7 +33,7 @@ let AddMapBoundaries = {
 
 					if (boundaryName in stateDict) {
 						AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(AddMapBoundaries.myBoundaries[boundaryName].feature, {
-							strokeWeight: 3,
+							strokeWeight: 1,
 							strokeColor: '#fff',
 							fillColor: dummyStateResults.states[stateDict[boundaryName]] ? dummyStateResults.states[stateDict[boundaryName]].winner : '',
 							fillOpacity: 0.8
@@ -79,7 +79,6 @@ let AddMapBoundaries = {
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseover', function(e) {
 			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
 				strokeWeight: 3,
-				strokeColor: '#ff0000'
 			});
 			var boundaryId = e.feature.getProperty('boundaryId');
 			var boundaryName = "NOT SET";
@@ -95,7 +94,7 @@ let AddMapBoundaries = {
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseout', function(e) {
 			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
 				strokeWeight: 1,
-				strokeColor: '#000'
+				strokeColor: '#fff'
 			});
 			$('#bname').html('United States');
 		});
