@@ -9,8 +9,7 @@ let AddMapBoundaries = {
 	boundariesFromGeoJsonLayer: null,
 	infoWindow: null,
 	geoStyles: {
-		// defaultFillColor: 'blue',
-		defaultOpacity: 0.8
+		defaultOpacity: 0.6
 	},
 
 	loadBoundariesFromGeoJson: function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
@@ -36,7 +35,7 @@ let AddMapBoundaries = {
 							strokeWeight: 1,
 							strokeColor: '#fff',
 							fillColor: dummyStateResults.states[stateDict[boundaryName]] ? dummyStateResults.states[stateDict[boundaryName]].winner : '',
-							fillOpacity: 0.8
+							fillOpacity: this.geoStyles.defaultOpacity
 						});
 					}
 
