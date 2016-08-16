@@ -16,21 +16,18 @@ let AddMapBoundaries = {
 		if (boundariesFromGeoJson.type === "FeatureCollection") { //we have a collection of boundaries in geojson format
 			if (boundariesFromGeoJson.features) {
 				for (var i = 0; i < boundariesFromGeoJson.features.length; i++) {
-					var boundary_id = i + 1;
+					var boundaryId = i + 1;
 					var new_boundary = {};
+					var boundaryName = boundariesFromGeoJson.features[i].properties.NAME;
+
 					if (!boundariesFromGeoJson.features[i].properties) { 
 						boundariesFromGeoJson.features[i].properties = {};
 					}
-					boundariesFromGeoJson.features[i].properties.boundary_id = boundary_id; //we will use this id to identify boundary later when clicking on it
-					AddMapBoundaries.boundariesFromGeoJsonLayer.addGeoJson(boundariesFromGeoJson.features[i], {idPropertyName: 'boundary_id'});
-					new_boundary.feature = AddMapBoundaries.boundariesFromGeoJsonLayer.getFeatureById(boundary_id);
-					if (boundariesFromGeoJson.features[i].properties.name) {
-						new_boundary.name = boundariesFromGeoJson.features[i].properties.name;
-					}
-					if (boundariesFromGeoJson.features[i].properties.NAME) {
-						new_boundary.name = boundariesFromGeoJson.features[i].properties.NAME;
-					}
-					AddMapBoundaries.myBoundaries[boundary_id] = new_boundary;
+
+					boundariesFromGeoJson.features[i].properties.boundaryId = boundaryId; //we will use this id to identify boundary later when clicking on it
+					AddMapBoundaries.boundariesFromGeoJsonLayer.addGeoJson(boundariesFromGeoJson.features[i], {idPropertyName: 'boundaryId'});
+					new_boundary.feature = AddMapBoundaries.boundariesFromGeoJsonLayer.getFeatureById(boundaryId);
+					AddMapBoundaries.myBoundaries[boundaryName] = new_boundary;
 				}
 			}
 		}
@@ -72,13 +69,13 @@ let AddMapBoundaries = {
 				strokeWeight: 3,
 				strokeColor: '#ff0000'
 			});
-			var boundary_id = e.feature.getProperty('boundary_id');
+			var boundaryId = e.feature.getProperty('boundaryId');
 			var boundaryName = "NOT SET";
-			if(boundary_id && 
-				AddMapBoundaries.myBoundaries[boundary_id] && 
-				AddMapBoundaries.myBoundaries[boundary_id].name
+			if(boundaryId && 
+				AddMapBoundaries.myBoundaries[boundaryId] && 
+				AddMapBoundaries.myBoundaries[boundaryId].name
 			) {
-				boundaryName = AddMapBoundaries.myBoundaries[boundary_id].name;
+				boundaryName = AddMapBoundaries.myBoundaries[boundaryId].name;
 			}
 			$('#bname').html(boundaryName);
 		});
@@ -92,39 +89,30 @@ let AddMapBoundaries = {
 		});
 	},
 
-	boundTheMap: function boundTheMap(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundary_id'); we set when adding boundary to boundariesFromGeoJson layer
+	boundTheMap: function boundTheMap(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
+		var boundaryId = e.feature.f.NAME;
 
-		if (!e.feature) {
-			return;
-		}
-
-		var boundary_id = e.feature.getProperty('boundary_id');
-		var boundaryName = null;
-
-
-		if(boundary_id && 
-			AddMapBoundaries.myBoundaries[boundary_id] && 
-			AddMapBoundaries.myBoundaries[boundary_id].name
+		if (
+			e.feature &&
+			boundaryId && 
+			AddMapBoundaries.myBoundaries[boundaryId]
 		) {
-			boundaryName = AddMapBoundaries.myBoundaries[boundary_id].name;
+			if(AddMapBoundaries.infoWindow){
+				AddMapBoundaries.infoWindow.setMap(null);
+				AddMapBoundaries.infoWindow = null;
+			}
+
+			AddMapBoundaries.infoWindow = new google.maps.InfoWindow({
+				content: '<div>You have clicked a boundary: <span style="color:red;">' + boundaryId + '</span></div>',
+				size: new google.maps.Size(150,50),
+				position: e.latLng, map: map
+			});
+
+			$(window).on('resize load', () => {
+				geocoderInit(boundaryId);
+			});
+			geocoderInit(boundaryId);
 		}
-
-		if(AddMapBoundaries.infoWindow){
-			AddMapBoundaries.infoWindow.setMap(null);
-			AddMapBoundaries.infoWindow = null;
-		}
-
-		AddMapBoundaries.infoWindow = new google.maps.InfoWindow({
-			content: '<div>You have clicked a boundary: <span style="color:red;">' + boundaryName + '</span></div>',
-			size: new google.maps.Size(150,50),
-			position: e.latLng, map: map
-		});
-
-		$(window).on('resize load', () => {
-			geocoderInit(boundaryName);
-		});
-		geocoderInit(boundaryName);
-
 	}
 }
 

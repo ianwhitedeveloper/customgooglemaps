@@ -30,6 +30,13 @@ jQuery(document).ready(function(){
 	
 	AddMapBoundaries.loadBoundariesFromGeoJson(boundariesFromGeoJson);
 
+
+	
+
+
+
+
+
 	//add a custom marker to the map				
 	marker = new google.maps.Marker({
 	  	position: defaultLatitudeLongitude,
