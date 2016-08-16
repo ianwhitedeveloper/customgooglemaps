@@ -1,7 +1,8 @@
 let geocoderInit = require('../lib/geocoderInit');
 let map = require('../lib/map');
-let dummyStateResults = require('../lib/dummyStateResults');
+let stateResults = require('../lib/dummyStateResults');
 let stateDict = require('../lib/stateDict');
+let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
 
 let AddMapBoundaries = {
@@ -34,7 +35,7 @@ let AddMapBoundaries = {
 						AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(AddMapBoundaries.myBoundaries[boundaryName].feature, {
 							strokeWeight: 1,
 							strokeColor: '#fff',
-							fillColor: dummyStateResults.states[stateDict[boundaryName]] ? dummyStateResults.states[stateDict[boundaryName]].winner : '',
+							fillColor: stateResults.states[stateDict[boundaryName]] ? stateResults.states[stateDict[boundaryName]].winner : '',
 							fillOpacity: this.geoStyles.defaultOpacity
 						});
 					}
@@ -42,6 +43,8 @@ let AddMapBoundaries = {
 				}
 			}
 		}
+
+		calcAndDisplayResults([stateResults, "national"]);
 	},
 
 	initializeDataLayer: function initializeDataLayer(){

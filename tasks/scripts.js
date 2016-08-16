@@ -24,7 +24,7 @@ function scriptsTask() {
       insertGlobals : true,
       debug : !gulp.env.production
     }))
-    .pipe(babel())
+    // .pipe(babel())
     // .pipe(uglify({mangle: false}))
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.scripts.dest));
