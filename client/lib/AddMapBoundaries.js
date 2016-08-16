@@ -54,6 +54,8 @@ let AddMapBoundaries = {
 		}
 		AddMapBoundaries.boundariesFromGeoJsonLayer = new google.maps.Data({map: map}); //initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 
+		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('click', AddMapBoundaries.boundTheMap);
+
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseover', function(e) {
 			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
 				strokeWeight: 3,
