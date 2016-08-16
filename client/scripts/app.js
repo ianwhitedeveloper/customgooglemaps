@@ -4,9 +4,6 @@ let map = require('../lib/map');
 let boundariesFromGeoJson = require('../lib/boundariesFromGeoJson');
 let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
 let mapOptions = require('../lib/mapOptions');
-// let loadBoundariesFromGeoJson = require('../lib/loadBoundariesFromGeoJson');
-// let boundTheMap = require('../lib/boundTheMap');
-// let initializeDataLayer = require('../lib/initializeDataLayer');
 let AddMapBoundaries = require('../lib/AddMapBoundaries');
 let InfoBox =  require('../lib/infobox');
 
@@ -26,16 +23,8 @@ jQuery(document).ready(function(){
 		infowindow;
 		// defaultLatitudeLongitude = new google.maps.LatLng(39.8282, -98.5795);
 		//we define here the style of the map
-				
 	
 	AddMapBoundaries.loadBoundariesFromGeoJson(boundariesFromGeoJson);
-
-
-	
-
-
-
-
 
 	//add a custom marker to the map				
 	marker = new google.maps.Marker({
