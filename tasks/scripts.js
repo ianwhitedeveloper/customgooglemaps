@@ -19,12 +19,12 @@ function scriptsTask() {
     .src(config.scripts.src)
     .pipe(plumber({errorHandler}))
     // .pipe(sourcemaps.init())
-    .pipe(babel())
     // .pipe(concat('app.js'))
     .pipe(browserify({
       insertGlobals : true,
       debug : !gulp.env.production
     }))
+    .pipe(babel())
     // .pipe(uglify({mangle: false}))
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.scripts.dest));
