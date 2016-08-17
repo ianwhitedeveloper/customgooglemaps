@@ -18,6 +18,7 @@ function bundle(bundler) {
     bundler
     // Start bundle
         .bundle()
+        .on('error', errorHandler)
         // Entry point
         .pipe(source(config.scripts.src))
         // Convert to gulp pipeline
@@ -30,7 +31,6 @@ function bundle(bundler) {
         .pipe(sourceMaps.write()) 
         // .pipe(uglify({mangle: false}))
         // Save 'bundle' to build/
-        .pipe(plumber({errorHandler}))
         .pipe(gulp.dest(config.scripts.dest));
 }
 
@@ -45,8 +45,9 @@ gulp.task('scripts', function() {
     bundle(bundler);
 });
 
+
 function errorHandler(err) {
- let message = new gutil.PluginError(err.plugin, err.message).toString();
- process.stderr.write(message + '\n');
+ console.log(err);
  gutil.beep();
+ this.emit('end');
 }
