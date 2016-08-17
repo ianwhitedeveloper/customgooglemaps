@@ -85,8 +85,7 @@ let AddMapBoundaries = {
 
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseout', function(e) {
 			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-				strokeWeight: 1,
-				strokeColor: '#fff'
+				strokeWeight: 1
 			});
 			$('#bname').html('United States');
 		});
