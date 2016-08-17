@@ -59,7 +59,15 @@ let AddMapBoundaries = {
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('click', AddMapBoundaries.boundTheMap);
 
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('click', function(e) {
-			calcAndDisplayResults(stateResults, stateDict[e.feature.f.NAME], true)
+			calcAndDisplayResults(stateResults, stateDict[e.feature.f.NAME], true);
+			AddMapBoundaries.boundariesFromGeoJsonLayer.revertStyle();
+			AddMapBoundaries.boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
+				fillColor: '#ddd',
+				fillOpacity: 1
+			});
+			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
+				fillColor: stateResults.states[stateDict[e.feature.f.NAME]] ? stateResults.states[stateDict[e.feature.f.NAME]].winner : ''
+			});
 		});
 
 		AddMapBoundaries.boundariesFromGeoJsonLayer.addListener('mouseover', function(e) {
