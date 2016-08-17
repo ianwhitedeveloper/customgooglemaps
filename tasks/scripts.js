@@ -12,13 +12,6 @@ let babelify   = require('babelify'),
     plumber = require('gulp-plumber'),
     config = require('./gulp.config.js');
 
-
-function errorHandler(err) {
- let message = new gutil.PluginError(err.plugin, err.message).toString();
- process.stderr.write(message + '\n');
- gutil.beep();
-}
-
 function bundle(bundler) {
 
     // Add options to add to "base" bundler passed as parameter
@@ -51,3 +44,9 @@ gulp.task('scripts', function() {
     // Chain other options -- sourcemaps, rename, etc.
     bundle(bundler);
 });
+
+function errorHandler(err) {
+ let message = new gutil.PluginError(err.plugin, err.message).toString();
+ process.stderr.write(message + '\n');
+ gutil.beep();
+}
