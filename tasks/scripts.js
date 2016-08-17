@@ -24,11 +24,11 @@ function bundle(bundler) {
         // Convert to gulp pipeline
         .pipe(buffer())
         // Rename output from 'main.js' to 'bundle.js'
-        .pipe(rename('app.js')) 
+        .pipe(rename(config.scripts.outputFile)) 
         // Strip inline source maps
-        .pipe(sourceMaps.init()) 
+        .pipe(sourceMaps.init({ loadMaps : true }))
         // Save source maps to their own directory
-        .pipe(sourceMaps.write()) 
+        .pipe(sourceMaps.write(config.scripts.mapsDir))
         // .pipe(uglify({mangle: false}))
         // Save 'bundle' to build/
         .pipe(gulp.dest(config.scripts.dest));

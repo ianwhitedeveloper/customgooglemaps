@@ -20,7 +20,6 @@ module.exports = {
 		src: './client/scripts/app.js',
 		watch: './client/**/*.js',
 		mapsDir: './maps/',
-		outputDir: './build/',
 		outputFile: 'app.js',
 		dest: './public/scripts/'
 	},
