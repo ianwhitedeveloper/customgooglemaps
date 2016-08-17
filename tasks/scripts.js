@@ -36,7 +36,7 @@ function bundle(bundler) {
 
 gulp.task('scripts', function() {
     // Pass browserify the entry point
-    var bundler = browserify(config.scripts.src)
+    var bundler = browserify(config.scripts.src, { debug: true })
         // Then, babelify, with ES2015 preset
         .transform(babelify, {
             presets: ['es2015']
