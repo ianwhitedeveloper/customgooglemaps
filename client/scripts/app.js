@@ -7,7 +7,7 @@ let mapOptions = require('../lib/mapOptions');
 let AddMapBoundaries = require('../lib/AddMapBoundaries');
 let InfoBox =  require('../lib/infobox');
 
-jQuery(document).ready(function(){
+$(document).ready(function(){
 	    //set your google maps parameters
 		//you can use any,location as center on map startup
 		//google map custom marker icon - .png fallback for IE11
