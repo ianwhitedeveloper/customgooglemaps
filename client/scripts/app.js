@@ -21,7 +21,6 @@ $(document).ready(function(){
 		zoomControl,
 		contentString,
 		infowindow;
-		//we define here the style of the map
 	
 	AddMapBoundaries.loadBoundariesFromGeoJson(boundariesFromGeoJson);
 
