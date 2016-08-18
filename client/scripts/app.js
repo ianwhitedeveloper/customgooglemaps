@@ -21,7 +21,6 @@ $(document).ready(function(){
 		zoomControl,
 		contentString,
 		infowindow;
-		// defaultLatitudeLongitude = new google.maps.LatLng(39.8282, -98.5795);
 		//we define here the style of the map
 	
 	AddMapBoundaries.loadBoundariesFromGeoJson(boundariesFromGeoJson);
