@@ -6,10 +6,14 @@ function calcPercent([partial, total]) {
 }
 
 function calcAndDisplayResults(results, scope, state=false) {
-	var totalVotes = state ? results.states[scope].total_votes : results[scope].total_votes;
-	var totalRed = state ? results.states[scope].votes.red : results[scope].votes.red;
-	var totalBlue = state ? results.states[scope].votes.blue : results[scope].votes.blue;
-	var totalPurple = state ? results.states[scope].votes.purple : results[scope].votes.purple;
+	let resultsObject;
+
+	state ? resultsObject = results.states[scope] : resultsObject = results[scope];
+
+	let totalVotes = resultsObject.total_votes;
+	let totalRed = resultsObject.votes.red;
+	let totalBlue = resultsObject.votes.blue;
+	let totalPurple = resultsObject.votes.purple;
 
 
 	$('.cup.red').text(`Red: ${calcPercent([totalRed, totalVotes])}%`);
