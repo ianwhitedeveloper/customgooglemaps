@@ -14,8 +14,8 @@ let babelify   = require('babelify'),
     assign = require('lodash.assign'),
 // add custom browserify options here
     customOpts = {
-      entries: [config.scripts.src],
-      debug: true
+        entries: [config.scripts.src],
+        debug: true
     },
     opts = assign({}, watchify.args, customOpts),
     bundler = watchify(browserify(opts)); 
