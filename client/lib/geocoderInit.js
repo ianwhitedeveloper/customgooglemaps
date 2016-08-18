@@ -31,6 +31,8 @@ function geocoderInit(boundaryName='united states') {
 
 		map.fitBounds(results[0].geometry.viewport);               
 
+
+		// DEBUG - Remove this for production
 		var boundingBoxPoints = [
 			ne, new google.maps.LatLng(ne.lat(), sw.lng()),
 			sw, new google.maps.LatLng(sw.lat(), ne.lng()), ne
