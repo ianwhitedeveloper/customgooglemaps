@@ -9,7 +9,10 @@ function geocoderInit(boundaryName='united states') {
 	// when Google maps zooms in
 	$('#mask').css({backgroundColor: '#fff', zIndex: '10'});
 
-	// The Google Maps Javascript API v3 is event based. You need to wait until the new zoom level takes effect before incrementing it by one.
+	// The Google Maps Javascript API v3 is event based. 
+	// You need to wait until the new zoom level takes effect before incrementing it by one.
+	// Doing this because some states e.g. Texas, new york, have 
+	// default zoom levels that are too wide
 	google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
 		let zoomLevel = map.getZoom();
 		if (zoomLevel <= 7) {
