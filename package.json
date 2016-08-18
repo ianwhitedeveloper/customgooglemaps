@@ -6,6 +6,7 @@
     "test": "scripts/test"
   },
   "dependencies": {
+    "eventemitter2": "^2.1.0",
     "google-maps-utility-library-v3-infobox": "^1.1.14"
   },
   "devDependencies": {
