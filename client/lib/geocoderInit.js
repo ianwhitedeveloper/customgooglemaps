@@ -17,7 +17,7 @@ function geocoderInit(boundaryName='united states') {
 		$('#mask').css({backgroundColor: 'transparent', zIndex: '-1'});
 	});
 
-	geocoder.geocode({'address': `${boundaryName} State`}, function (results, status) {
+	geocoder.geocode({'address': `${boundaryName}`}, function (results, status) {
 		var ne = results[0].geometry.viewport.getNorthEast();
 		var sw = results[0].geometry.viewport.getSouthWest();
 

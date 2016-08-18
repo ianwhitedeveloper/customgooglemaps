@@ -10,7 +10,7 @@ let AddMapBoundaries = {
 	boundariesFromGeoJsonLayer: null,
 	infoWindow: null,
 	geoStyles: {
-		defaultOpacity: 0.6
+		defaultOpacity: 1
 	},
 
 	loadBoundariesFromGeoJson: function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
@@ -66,7 +66,8 @@ let AddMapBoundaries = {
 				fillOpacity: 1
 			});
 			AddMapBoundaries.boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-				fillColor: stateResults.states[stateDict[e.feature.f.NAME]] ? stateResults.states[stateDict[e.feature.f.NAME]].winner : ''
+				fillColor: stateResults.states[stateDict[e.feature.f.NAME]] ? stateResults.states[stateDict[e.feature.f.NAME]].winner : '',
+				fillOpacity: 0.3
 			});
 		});
 
@@ -111,9 +112,9 @@ let AddMapBoundaries = {
 			});
 
 			$(window).on('resize load', () => {
-				geocoderInit(boundaryId);
+				geocoderInit(`${boundaryId} State`);
 			});
-			geocoderInit(boundaryId);
+			geocoderInit(`${boundaryId} State`);
 		}
 	}
 }
