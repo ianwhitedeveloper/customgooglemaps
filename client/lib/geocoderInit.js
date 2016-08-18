@@ -3,6 +3,10 @@ let $ = require('jquery');
 
 function geocoderInit(boundaryName='united states') {
 	var geocoder = new google.maps.Geocoder();
+
+	// Fade in a mask covering the map
+	// to try to prevent janky flickering 'animation'
+	// when Google maps zooms in
 	$('#mask').css({backgroundColor: '#fff', zIndex: '10'});
 
 	// The Google Maps Javascript API v3 is event based. You need to wait until the new zoom level takes effect before incrementing it by one.
@@ -13,6 +17,7 @@ function geocoderInit(boundaryName='united states') {
 		}
 	});
 
+	// Fade out mask
 	google.maps.event.addListenerOnce(map, 'idle', function() {
 		$('#mask').css({backgroundColor: 'transparent', zIndex: '-1'});
 	});
