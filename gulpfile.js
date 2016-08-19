@@ -14,3 +14,4 @@ require('./tasks/views-prod.js');
 require('./tasks/watch.js');
 require('./tasks/copy.js');
 require('./tasks/copy-prod.js');
+require('./tasks/sftp-internal.js');
