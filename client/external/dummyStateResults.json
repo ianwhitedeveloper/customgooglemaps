@@ -1,4 +1,4 @@
-module.exports = {
+{
     "is_cached_data": false,
     "states": {
         "DC": {

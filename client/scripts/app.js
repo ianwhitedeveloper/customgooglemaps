@@ -1,10 +1,11 @@
 let jQuery = require('jquery');
 let $ = require('jquery');
 let map = require('../lib/map');
-let boundariesFromGeoJson = require('../external/boundariesFromGeoJson');
 let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
 let mapOptions = require('../lib/mapOptions');
-let AddMapBoundaries = require('../lib/AddMapBoundaries');
+let setResults = require('../lib/AddMapBoundaries').setResults;
+let loadBoundariesFromGeoJson = require('../lib/AddMapBoundaries').loadBoundariesFromGeoJson;
+let initializeDataLayer = require('../lib/AddMapBoundaries').initializeDataLayer;
 
 $(document).ready(function(){
 	    //set your google maps parameters
@@ -21,7 +22,13 @@ $(document).ready(function(){
 		contentString,
 		infowindow;
 	
-	AddMapBoundaries.loadBoundariesFromGeoJson(boundariesFromGeoJson);
+
+	$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
+	.then((bounds, results) => {
+		setResults(results[0]);
+		initializeDataLayer();
+		loadBoundariesFromGeoJson(bounds[0]);
+	});
 
 	//add a custom marker to the map				
 	marker = new google.maps.Marker({
