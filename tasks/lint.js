@@ -4,7 +4,7 @@ let gulp = require('gulp');
 let config = require('./gulp.config.js');
 let eslint = require('gulp-eslint');
 
-gulp.task('lint', lintTask);
+gulp.task('lint', ['clean'], lintTask);
 
 function lintTask() {
   return gulp
