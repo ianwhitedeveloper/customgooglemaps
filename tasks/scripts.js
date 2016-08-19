@@ -18,6 +18,7 @@ let babelify   = require('babelify'),
         debug: true
     },
     opts = assign({}, watchify.args, customOpts),
+    errorHandler = require('./errorHandler'),
     bundler = watchify(browserify(opts)); 
 
 // add transformations here
@@ -50,10 +51,3 @@ function bundle() {
 }
 
 gulp.task('scripts', bundle);
-
-
-function errorHandler(err) {
-    console.log(err);
-    gutil.beep();
-    this.emit('end');
-}

@@ -11,6 +11,7 @@ let autoprefixer = require('gulp-autoprefixer');
 let sourcemaps = require('gulp-sourcemaps');
 let config = require('./gulp.config.js');
 let plumber = require('gulp-plumber');
+let errorHandler = require('./errorHandler');
 
 let injectTransform = {
 	starttag: '/* inject:imports */',
@@ -33,17 +34,11 @@ function stylesTask() {
   return gulp
     .src(config.styles.src)
     .pipe(inject(gulp.src(dependencies, injectConfig), injectTransform))
-    .pipe(plumber({ errorHandler: onError }))
+    .pipe(plumber({ errorHandler: errorHandler }))
     .pipe(sourcemaps.init())
     .pipe(stylus(configPreprocessor))
     .pipe(autoprefixer())
     .pipe(sourcemaps.write({sourceRoot: '/client/styles'}))
     .pipe(gulp.dest(config.styles.dest))
     .pipe(config.browserSync.stream({match: '**/*.css'}));
-}
-
-function onError(err) {
-	let message = new gutil.PluginError(err.plugin, err.message).toString();
-	process.stderr.write(message + '\n');
-	gutil.beep();
 }

@@ -1,4 +1,7 @@
+- var books = ['Texas', 'Oklahoma', 'etc'];
 .results
+	address#bname United States
+	.blur
 	header
 		h1 Header Lorem Ipsum
 		p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -13,3 +16,8 @@
 			  type='text'
 			  name='cityzip'
 			)
+			
+		.state_select
+			select
+				each book, i in books
+					option(value=i) #{book}

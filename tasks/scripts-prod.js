@@ -14,6 +14,7 @@ let babelify   = require('babelify'),
     opts = {
         entries: [config.scripts.src]
     },
+    errorHandler = require('./errorHandler'),
     bundler = browserify(opts);
 
 // add transformations here
@@ -42,10 +43,3 @@ function bundle() {
 }
 
 gulp.task('scripts-prod', ['clean'], bundle);
-
-
-function errorHandler(err) {
-    console.log(err);
-    gutil.beep();
-    this.emit('end');
-}
