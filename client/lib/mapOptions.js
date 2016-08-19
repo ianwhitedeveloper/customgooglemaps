@@ -9,7 +9,7 @@ let mapOptions = {
   	zoom: mapZoom,
   	panControl: false,
   	draggable: true,
-  	zoomControl: true,
+  	zoomControl: false,
   	mapTypeControl: false,
   	streetViewControl: false,
   	mapTypeId: google.maps.MapTypeId.ROADMAP,
