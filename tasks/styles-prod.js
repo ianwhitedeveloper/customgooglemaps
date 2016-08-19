@@ -8,7 +8,6 @@ let inject = require('gulp-inject');
 let util = require('util');
 let stylus = require('gulp-stylus');
 let autoprefixer = require('gulp-autoprefixer');
-let sourcemaps = require('gulp-sourcemaps');
 let config = require('./gulp.config.js');
 let plumber = require('gulp-plumber');
 
@@ -34,10 +33,8 @@ function stylesTask() {
     .src(config.styles.src)
     .pipe(inject(gulp.src(dependencies, injectConfig), injectTransform))
     .pipe(plumber({ errorHandler: onError }))
-    .pipe(sourcemaps.init())
     .pipe(stylus(configPreprocessor))
     .pipe(autoprefixer())
-    .pipe(sourcemaps.write({sourceRoot: '/client/styles'}))
     .pipe(gulp.dest(config.styles.dest))
     .pipe(config.browserSync.stream({match: '**/*.css'}));
 }
