@@ -1,6 +1,6 @@
 let geocoderInit = require('../lib/geocoderInit');
 let map = require('../lib/map');
-let stateResults = require('../lib/dummyStateResults');
+let stateResults = require('../external/dummyStateResults');
 let stateDict = require('../lib/stateDict');
 let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');

@@ -17,5 +17,5 @@ function watchTask() {
     'scripts',
     gulpConfig.browserSync.reload
   ]);
-  gulp.watch(gulpConfig.lint, ['lint']);
+  // gulp.watch(gulpConfig.lint, ['lint']);
 }

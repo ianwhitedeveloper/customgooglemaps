@@ -3,14 +3,13 @@
 let gulp = require('gulp');
 
 let tasks = [
-	// 'vendorCSS',
 	'views',
 	'browser-sync',
 	// 'sprites',
-	'images',
+	// 'images',
 	'styles',
 	'scripts',
-	'lint',
+	// 'lint',
 	// 'gulp-clean',
 	'watch',
 ];

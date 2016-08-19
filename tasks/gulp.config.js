@@ -4,7 +4,7 @@ module.exports = {
 	lint: [
 		'./gulpfile.js',
 		'./test/**/*.js',
-		'./client/scripts/**/*.js'
+		'./client/**/*.js'
 	],
 	views: {
 		src: './client/views/*.jade',

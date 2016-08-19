@@ -1,11 +1,10 @@
 let jQuery = require('jquery');
 let $ = require('jquery');
 let map = require('../lib/map');
-let boundariesFromGeoJson = require('../lib/boundariesFromGeoJson');
+let boundariesFromGeoJson = require('../external/boundariesFromGeoJson');
 let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
 let mapOptions = require('../lib/mapOptions');
 let AddMapBoundaries = require('../lib/AddMapBoundaries');
-let InfoBox =  require('../lib/infobox');
 
 $(document).ready(function(){
 	    //set your google maps parameters
@@ -60,40 +59,6 @@ $(document).ready(function(){
 	infowindow = new google.maps.InfoWindow({
       content: contentString
     });
-
-    /*var ibOptions = {
-		disableAutoPan: false
-		,maxWidth: 0
-		// ,pixelOffset: new google.maps.Size(-140, 0)
-		,zIndex: null
-		,boxStyle: {
-      padding: "0px 0px 0px 0px",
-      width: "252px",
-      height: "40px",
-      backgroundColor: '#fff',
-      color: '#000'
-    },
-    closeBoxURL : "",
-    infoBoxClearance: new google.maps.Size(1, 1),
-		isHidden: false,
-		pane: "floatPane",
-		enableEventPropagation: false
-	};
-	marker.addListener('click', function() {
-        var source   = $("#infobox-template").html();
-        var template = 'hi';
- 
-        var boxText = document.createElement("div");
-        boxText.style.cssText = "margin-top: 8px; background: #fff; padding: 0px;";
-        boxText.innerHTML = 'hi ho silver';
- 
-		ibOptions.content = 'wtf';
-        
-		var ib = new InfoBox(ibOptions);
-      	ib.open(map, marker);
-        map.panTo(ib.getPosition());
-	  });*/
-
 
 	marker.addListener('click', () => {
 		infowindow.open(map, marker);
