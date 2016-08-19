@@ -30,7 +30,7 @@ $(document).ready(function(){
 		});
 	});
 
-	//add a custom marker to the map				
+	/*//add a custom marker to the map				
 	marker = new google.maps.Marker({
 	  	position: defaultLatitudeLongitude,
 	    map: map,
@@ -41,7 +41,7 @@ $(document).ready(function(){
     marker.addListener('click', function() {
       map.setZoom(8);
       map.setCenter(marker.getPosition());
-    });
+    });*/
 
 
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
 	
 
-	contentString = 	`<div class="state_info">
+	/*contentString = 	`<div class="state_info">
 							<h1>Header Lorem Ipsum</h1>
 							<div style="text-align: center;">
 								<img src="imgs/cd-icon-location.png">
@@ -69,7 +69,7 @@ $(document).ready(function(){
 
 	marker.addListener('click', () => {
 		infowindow.open(map, marker);
-	});
+	});*/
 
 	//add custom buttons for the zoom-in/zoom-out on the map
 	function CustomZoomControl(controlDiv, map) {
