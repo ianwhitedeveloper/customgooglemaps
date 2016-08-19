@@ -1,7 +1,5 @@
 let geocoderInit = require('../lib/geocoderInit');
 let map = require('../lib/map');
-// let stateResults = require('../external/dummyStateResults');
-let results = require('../external/dummyStateResults');
 let stateDict = require('../lib/stateDict');
 let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
@@ -9,11 +7,11 @@ let $ = require('jquery');
 let myBoundaries = {};
 let boundariesFromGeoJsonLayer = null;
 let infoWindow = null;
-// let results = null;
+let results = null;
 
 
-function setResults(results) {
-	results = results;
+function setResults(r) {
+	results = r;
 }
 
 function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
