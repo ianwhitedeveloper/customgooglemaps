@@ -10,14 +10,15 @@
 			.cup.red
 			.cup.blue
 			.cup.purple
-		
+	
+	.search_module
 		.search_box
 			input(
 			  type='text'
 			  name='cityzip'
 			)
-			
 		.state_select
 			select
 				each book, i in books
 					option(value=i) #{book}
+		button Find a Store

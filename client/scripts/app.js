@@ -47,7 +47,7 @@ $(document).ready(function(){
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
 
 	//insert the zoom div on the top left of the map
-	map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
+	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomControlDiv);
 	
 
 	/*contentString = 	`<div class="state_info">

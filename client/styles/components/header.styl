@@ -4,6 +4,9 @@
 	left: 0;
 	width: 100%;
 	z-index: 101;
+	z-index 102
+	padding 30px 10px
+	text-align center
 	
 address
 	position absolute
@@ -20,7 +23,7 @@ address
 
 
 .blur
-	background-color: rgba(211,211,211,0.7);
+	background-color: rgba(200,200,200,0.7);
 	-webkit-filter: blur(5px);
 	position: absolute;
 	top: 0;
@@ -30,9 +33,6 @@ address
 
 header
 	position relative
-	z-index 102
-	padding 30px 10px
-	text-align center
 	width 100%
 	
 	h1, p
@@ -40,11 +40,27 @@ header
 	
 	p
 		display none
+		
+.search_module
+	position relative
+	z-index 102
+	padding 50px
+	background-color #ddd
+	
+	input, select
+		width 100%
+		
 
 @media only screen and (min-width: 768px)
-	#cd-google-map
-		address
-		font-size 15px
-		font-size 0.9375rem
-		text-align center
+	address
+	font-size 15px
+	font-size 0.9375rem
+	text-align center
 
+	header
+		width 65%
+		display inline-block
+		
+	.search_module
+		width 34%
+		display inline-block
