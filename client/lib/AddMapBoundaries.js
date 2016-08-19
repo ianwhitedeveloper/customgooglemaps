@@ -8,6 +8,24 @@ let myBoundaries = {};
 let boundariesFromGeoJsonLayer = null;
 let infoWindow = null;
 let results = null;
+let colorKey = {
+	purple: '#4F2169',
+	red: '#DA1F31',
+	blue: '#0099DD'
+};
+
+function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#fff',fillOpacity:1}}={}) {
+	if (boundaryName in stateDict) {
+		let boundaryWinner = results.states[stateDict[boundaryName]] ? results.states[stateDict[boundaryName]].winner : '';
+
+		boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
+			strokeWeight: style.strokeWeight,
+			strokeColor: style.strokeColor,
+			fillColor: colorKey[boundaryWinner],
+			fillOpacity: style.fillOpacity
+		});
+	}
+}
 
 function init({bounds, results}={}) {
 	setResults(results);
@@ -36,14 +54,7 @@ function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
 				new_boundary.feature = boundariesFromGeoJsonLayer.getFeatureById(boundaryId);
 				myBoundaries[boundaryName] = new_boundary;
 
-				if (boundaryName in stateDict) {
-					boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
-						strokeWeight: 1,
-						strokeColor: '#fff',
-						fillColor: results.states[stateDict[boundaryName]] ? results.states[stateDict[boundaryName]].winner : '',
-						fillOpacity: 1
-					});
-				}
+				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 1, strokeColor: '#fff', fillOpacity: 1}});
 
 			}
 		}
@@ -70,10 +81,8 @@ function initializeDataLayer(){
 			fillColor: '#ddd',
 			fillOpacity: 1
 		});
-		boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-			fillColor: results.states[stateDict[e.feature.f.NAME]] ? results.states[stateDict[e.feature.f.NAME]].winner : '',
-			fillOpacity: 0.3
-		});
+		
+		overrideGeoStyle({boundaryName: e.feature.f.NAME, style: {fillOpacity: 0.3}});
 	});
 
 	boundariesFromGeoJsonLayer.addListener('mouseover', function(e) {
