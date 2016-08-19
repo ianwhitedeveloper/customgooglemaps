@@ -9,6 +9,11 @@ let boundariesFromGeoJsonLayer = null;
 let infoWindow = null;
 let results = null;
 
+function init({bounds, results}={}) {
+	setResults(results);
+	initializeDataLayer();
+	loadBoundariesFromGeoJson(bounds);
+}
 
 function setResults(r) {
 	results = r;
@@ -119,7 +124,5 @@ function boundTheMap(e) { //we can listen for a boundary click and identify boun
 }
 
 module.exports = {
-	setResults: setResults,
-	loadBoundariesFromGeoJson: loadBoundariesFromGeoJson,
-	initializeDataLayer: initializeDataLayer
+	init: init
 }
