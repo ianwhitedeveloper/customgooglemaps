@@ -13,6 +13,11 @@ function watchTask() {
 
   gulp.watch(gulpConfig.styles.watch, ['styles']);
 
+  gulp.watch(gulpConfig.copy.src, [
+    'copy',
+    gulpConfig.browserSync.reload
+  ]);
+
   gulp.watch(gulpConfig.scripts.watch, [
     'scripts',
     gulpConfig.browserSync.reload
