@@ -4,6 +4,7 @@ let gulp = require('gulp');
 
 let tasks = [
 	'views',
+	'copy',
 	'browser-sync',
 	// 'sprites',
 	// 'images',

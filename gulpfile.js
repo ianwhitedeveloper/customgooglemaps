@@ -8,3 +8,4 @@ require('./tasks/styles.js');
 require('./tasks/scripts.js');
 require('./tasks/views.js');
 require('./tasks/watch.js');
+require('./tasks/copy.js');
