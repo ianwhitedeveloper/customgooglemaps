@@ -5,10 +5,10 @@ let main_color = '#2d313f',
 
 let styles = [
 	{
-		//set saturation for the labels on the map
+		// remove all labels (cities, states, oceans, countries, etc)
 		elementType: "labels",
 		stylers: [
-			{saturation: saturation_value}
+			{ visibility: "off" }
 		]
 	},  
     {	//poi stands for point of interest - don't show these lables on the map 
