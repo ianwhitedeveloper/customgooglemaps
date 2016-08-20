@@ -1,14 +1,7 @@
 let map = require('../lib/map');
 let $ = require('jquery');
 
-function geocoderInit(boundaryName='united states') {
-	var geocoder = new google.maps.Geocoder();
-
-	// Fade in a mask covering the map
-	// to try to prevent janky flickering 'animation'
-	// when Google maps zooms in
-	$('#mask').css({backgroundColor: '#fff', zIndex: '10'});
-
+function customDefaultZoom() {
 	// The Google Maps Javascript API v3 is event based. 
 	// You need to wait until the new zoom level takes effect before incrementing it by one.
 	// Doing this because some states e.g. Texas, new york, have 
@@ -19,11 +12,23 @@ function geocoderInit(boundaryName='united states') {
 			map.setZoom(zoomLevel + 1);
 		}
 	});
+}
 
+function geocoderInit(boundaryName) {
+	var geocoder = new google.maps.Geocoder();
+
+	// Fade in a mask covering the map
+	// to try to prevent janky flickering 'animation'
+	// when Google maps zooms in
+	$('#mask').css({backgroundColor: '#fff', zIndex: '10'});
 	// Fade out mask
 	google.maps.event.addListenerOnce(map, 'idle', function() {
 		$('#mask').css({backgroundColor: 'transparent', zIndex: '-1'});
 	});
+
+	if (boundaryName !== 'united states') {	
+		customDefaultZoom();
+	}
 
 	geocoder.geocode({'address': `${boundaryName}`}, function (results, status) {
 		var ne = results[0].geometry.viewport.getNorthEast();

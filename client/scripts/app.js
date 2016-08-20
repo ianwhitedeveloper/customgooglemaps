@@ -10,7 +10,7 @@ $(document).ready(function(){
 	    //set your google maps parameters
 		//you can use any,location as center on map startup
 		//google map custom marker icon - .png fallback for IE11
-	var	isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
+	let	isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
 		marker_url = ( isInternetExplorer11 ) ? 
 			'imgs/cd-icon-location.png' : 
 			// 'imgs/cd-icon-location.svg',
@@ -19,14 +19,17 @@ $(document).ready(function(){
 		zoomControlDiv = document.createElement('div'),
 		zoomControl,
 		contentString,
-		infowindow;
+		infowindow,
+		hash = (location.href.split("#")[1] || null);
 	
 
 	$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
 	.then((usBounds, results) => {
 		init({
 			bounds: usBounds[0],
-			results: results[0]
+			results: results[0],
+			scope: hash || 'national',
+			boundaryId: hash || 'united states'
 		});
 	});
 

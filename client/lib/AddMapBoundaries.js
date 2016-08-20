@@ -27,17 +27,18 @@ function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#ff
 	}
 }
 
-function init({bounds, results}={}) {
+function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);
 	initializeDataLayer();
-	loadBoundariesFromGeoJson(bounds);
+	loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds, scope: scope});
+	boundTheMap({boundaryId: boundaryId});
 }
 
 function setResults(r) {
 	results = r;
 }
 
-function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
+function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 	if (boundariesFromGeoJson.type === "FeatureCollection") { //we have a collection of boundaries in geojson format
 		if (boundariesFromGeoJson.features) {
 			for (var i = 0; i < boundariesFromGeoJson.features.length; i++) {
@@ -60,7 +61,7 @@ function loadBoundariesFromGeoJson(boundariesFromGeoJson) {
 		}
 	}
 
-	calcAndDisplayResults(results, "national");
+	calcAndDisplayResults(results, scope);
 }
 
 function initializeDataLayer(){
@@ -72,9 +73,11 @@ function initializeDataLayer(){
 	}
 	boundariesFromGeoJsonLayer = new google.maps.Data({map: map}); //initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 
-	boundariesFromGeoJsonLayer.addListener('click', boundTheMap);
+	boundariesFromGeoJsonLayer.addListener('click', (e) => {
+		boundTheMap({boundaryId: e.feature.f.NAME});
+	});
 
-	boundariesFromGeoJsonLayer.addListener('click', function(e) {
+	boundariesFromGeoJsonLayer.addListener('click', (e) => {
 		calcAndDisplayResults(results, stateDict[e.feature.f.NAME], true);
 		boundariesFromGeoJsonLayer.revertStyle();
 		boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
@@ -106,29 +109,28 @@ function initializeDataLayer(){
 	});
 }
 
-function boundTheMap(e) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
-	var boundaryId = e.feature.f.NAME;
-	
-	if (
-		e.feature &&
-		boundaryId && 
-		myBoundaries[boundaryId]
-	) {
+function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
+	try {
+		let boundThis = `${myBoundaries[boundaryId]} State` || boundaryId;
+
 		if(infoWindow){
 			infoWindow.setMap(null);
 			infoWindow = null;
 		}
 
-		infoWindow = new google.maps.InfoWindow({
+		/*infoWindow = new google.maps.InfoWindow({
 			content: '<div>You have clicked a boundary: <span style="color:red;">' + boundaryId + '</span></div>',
 			size: new google.maps.Size(150,50),
 			position: e.latLng, map: map
-		});
+		});*/
 
 		$(window).on('resize load', () => {
-			geocoderInit(`${boundaryId} State`);
+			geocoderInit(boundaryId);
 		});
-		geocoderInit(`${boundaryId} State`);
+		geocoderInit(boundaryId);
+	}
+	catch (err) {
+		console.warn(err);
 	}
 }
 
