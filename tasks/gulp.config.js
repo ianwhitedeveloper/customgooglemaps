@@ -35,8 +35,8 @@ module.exports = {
 		src: './public'
 	},
 	copy: {
-		src: './client/external/*',
-		dest: './public/external'
+		src: ['./client/{external,imgs}/**/*'],
+		dest: './public/'
 	},
 	browserSync: require('browser-sync').create(),
   browserSyncOptions: {
