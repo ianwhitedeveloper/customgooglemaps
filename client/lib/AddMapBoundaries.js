@@ -14,19 +14,6 @@ let colorKey = {
 	blue: '#0099DD'
 };
 
-function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#fff',fillOpacity:1}}={}) {
-	if (boundaryName in stateDict) {
-		let boundaryWinner = results.states[stateDict[boundaryName]] ? results.states[stateDict[boundaryName]].winner : '';
-
-		boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
-			strokeWeight: style.strokeWeight,
-			strokeColor: style.strokeColor,
-			fillColor: colorKey[boundaryWinner],
-			fillOpacity: style.fillOpacity
-		});
-	}
-}
-
 function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);
 	initializeDataLayer();
@@ -73,40 +60,9 @@ function initializeDataLayer(){
 	}
 	boundariesFromGeoJsonLayer = new google.maps.Data({map: map}); //initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 
-	boundariesFromGeoJsonLayer.addListener('click', (e) => {
-		boundTheMap({boundaryId: e.feature.f.NAME});
-	});
-
-	boundariesFromGeoJsonLayer.addListener('click', (e) => {
-		calcAndDisplayResults(results, stateDict[e.feature.f.NAME], true);
-		boundariesFromGeoJsonLayer.revertStyle();
-		boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
-			fillColor: '#ddd',
-			fillOpacity: 1
-		});
-		
-		overrideGeoStyle({boundaryName: e.feature.f.NAME, style: {fillOpacity: 0.3}});
-	});
-
-	boundariesFromGeoJsonLayer.addListener('mouseover', function(e) {
-		boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-			strokeWeight: 3,
-		});
-
-		var boundaryName = e.feature.f.NAME;
-		
-
-		if(boundaryName) {
-			$('#bname').html(boundaryName);
-		}
-	});
-
-	boundariesFromGeoJsonLayer.addListener('mouseout', function(e) {
-		boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-			strokeWeight: 1
-		});
-		$('#bname').html('United States');
-	});
+	boundariesFromGeoJsonLayer.addListener('click', boundaryClick);
+	boundariesFromGeoJsonLayer.addListener('mouseover', boundaryMouseOver);
+	boundariesFromGeoJsonLayer.addListener('mouseout', boundaryMouseOut);
 }
 
 function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
@@ -134,6 +90,54 @@ function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click a
 	}
 }
 
+
+/////////////
+// Helpers //
+/////////////
+
+function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#fff',fillOpacity:1}}={}) {
+	if (boundaryName in stateDict) {
+		let boundaryWinner = results.states[stateDict[boundaryName]] ? results.states[stateDict[boundaryName]].winner : '';
+
+		boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
+			strokeWeight: style.strokeWeight,
+			strokeColor: style.strokeColor,
+			fillColor: colorKey[boundaryWinner],
+			fillOpacity: style.fillOpacity
+		});
+	}
+}
+
+function boundaryClick(e) {
+	boundTheMap({boundaryId: e.feature.f.NAME});
+	calcAndDisplayResults(results, stateDict[e.feature.f.NAME], true);
+	boundariesFromGeoJsonLayer.revertStyle();
+	boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
+		fillColor: '#ddd',
+		fillOpacity: 1
+	});
+	overrideGeoStyle({boundaryName: e.feature.f.NAME, style: {fillOpacity: 0.3}});
+}
+
+function boundaryMouseOver(e) {
+	boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
+		strokeWeight: 3,
+	});
+
+	var boundaryName = e.feature.f.NAME;
+	
+	if(boundaryName) {
+		$('#bname').html(boundaryName);
+	}
+}
+
+function boundaryMouseOut(e) {
+	boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
+		strokeWeight: 1
+	});
+	$('#bname').html('United States');
+}
+
 module.exports = {
-	init: init
+	init
 }
