@@ -16,7 +16,7 @@ function customDefaultZoom() {
 
 function geocoderInit(boundaryName) {
 	var geocoder = new google.maps.Geocoder();
-
+/*
 	// Fade in a mask covering the map
 	// to try to prevent janky flickering 'animation'
 	// when Google maps zooms in
@@ -25,7 +25,8 @@ function geocoderInit(boundaryName) {
 	google.maps.event.addListenerOnce(map, 'idle', function() {
 		$('#mask').css({backgroundColor: 'transparent', zIndex: '-1'});
 	});
-
+*/
+	// will probably need to change this on mobile
 	if (boundaryName !== 'united states') {	
 		customDefaultZoom();
 	}
