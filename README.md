@@ -5,7 +5,7 @@
 npm install
 ```
 
-## To start application, running:
+## To start application
 
 ```sh
 gulp
