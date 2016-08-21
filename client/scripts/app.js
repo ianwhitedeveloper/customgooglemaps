@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 	$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
 	.then((usBounds, results) => {
-		if (hash) hash = hash.toLowerCase();
+		if (hash) { hash = hash.toLowerCase(); }
 		init({
 			bounds: usBounds[0],
 			results: results[0],
