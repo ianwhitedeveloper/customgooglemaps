@@ -10,6 +10,13 @@ npm install
 ```sh
 gulp
 ```
+
+## If you want open on browser automatically, use flag open, like below:
+```sh
+gulp --open
+```
+Browser is editable on gulpfile.
+
 ## To compile project for production
 ```sh
 gulp clean
@@ -33,12 +40,6 @@ Then
 ```sh
 gulp sftp-internal
 ```
-
-## If you want open on browser automatically, use flag open, like below:
-```sh
-gulp --open
-```
-Browser is editable on gulpfile.
 
 ## Not currently implemented
 Scripts on package.json
