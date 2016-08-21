@@ -13,8 +13,7 @@ $(document).ready(function(){
 	let	isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
 		marker_url = ( isInternetExplorer11 ) ? 
 			'imgs/cd-icon-location.png' : 
-			// 'imgs/cd-icon-location.svg',
-			'imgs/cd-icon-location.png',
+			'imgs/cd-icon-location.svg',
 		marker,
 		zoomControlDiv = document.createElement('div'),
 		zoomControl,
