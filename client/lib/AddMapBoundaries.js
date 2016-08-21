@@ -5,7 +5,8 @@ let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
 
 let myBoundaries = {};
-let boundariesFromGeoJsonLayer = null;
+// initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
+let boundariesFromGeoJsonLayer = new google.maps.Data({map: map});
 let infoWindow = null;
 let results = null;
 let colorKey = {
@@ -52,14 +53,6 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 }
 
 function initializeDataLayer(){
-	if(boundariesFromGeoJsonLayer){
-		boundariesFromGeoJsonLayer.forEach(function(feature) {
-			boundariesFromGeoJsonLayer.remove(feature);
-		});
-		boundariesFromGeoJsonLayer = null;
-	}
-	boundariesFromGeoJsonLayer = new google.maps.Data({map: map}); //initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
-
 	boundariesFromGeoJsonLayer.addListener('click', boundaryClick);
 	boundariesFromGeoJsonLayer.addListener('mouseover', boundaryMouseOver);
 	boundariesFromGeoJsonLayer.addListener('mouseout', boundaryMouseOut);
@@ -67,18 +60,8 @@ function initializeDataLayer(){
 
 function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
 	try {
-		let boundThis = `${myBoundaries[boundaryId]} State` || boundaryId;
 
-		if(infoWindow){
-			infoWindow.setMap(null);
-			infoWindow = null;
-		}
-
-		/*infoWindow = new google.maps.InfoWindow({
-			content: '<div>You have clicked a boundary: <span style="color:red;">' + boundaryId + '</span></div>',
-			size: new google.maps.Size(150,50),
-			position: e.latLng, map: map
-		});*/
+		if (myBoundaries[boundaryId]) boundaryId = `${boundaryId} State`
 
 		$(window).on('resize load', () => {
 			geocoderInit(boundaryId);
@@ -95,9 +78,9 @@ function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click a
 // Helpers //
 /////////////
 
-function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#fff',fillOpacity:1}}={}) {
+function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#fff',fillOpacity:0.2}}={}) {
 	if (boundaryName in stateDict) {
-		let boundaryWinner = results.states[stateDict[boundaryName]] ? results.states[stateDict[boundaryName]].winner : '';
+		let boundaryWinner = results.states[boundaryName] ? results.states[boundaryName].winner : '';
 
 		boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
 			strokeWeight: style.strokeWeight,
@@ -110,7 +93,7 @@ function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#ff
 
 function boundaryClick(e) {
 	boundTheMap({boundaryId: e.feature.f.NAME});
-	calcAndDisplayResults(results, stateDict[e.feature.f.NAME], true);
+	calcAndDisplayResults(results, e.feature.f.NAME, true);
 	boundariesFromGeoJsonLayer.revertStyle();
 	boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
 		fillColor: '#ddd',
