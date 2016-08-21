@@ -8,18 +8,15 @@ let babelify   = require('babelify'),
     rename     = require('gulp-rename'),
     source     = require('vinyl-source-stream'),
     sourceMaps = require('gulp-sourcemaps'),
-    watchify   = require('watchify'),
     plumber = require('gulp-plumber'),
     config = require('./gulp.config.js'),
-    assign = require('lodash.assign'),
 // add custom browserify options here
     customOpts = {
         entries: [config.scripts.src],
         debug: true
     },
-    opts = assign({}, watchify.args, customOpts),
     errorHandler = require('./errorHandler'),
-    bundler = watchify(browserify(opts)); 
+    bundler = browserify(customOpts);
 
 // add transformations here
 // i.e. b.transform(coffeeify);
