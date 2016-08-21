@@ -7,9 +7,7 @@ function calcPercent([partial, total]) {
 
 function calcAndDisplayResults(results, scope) {
 	try {
-		let resultsObject;
-
-		results.states[scope] ? resultsObject = results.states[scope] : resultsObject = results[scope];
+		let resultsObject = results.states[scope] ? results.states[scope] : results[scope];
 
 		let totalVotes = resultsObject.total_votes;
 		let totalRed = resultsObject.votes.red;

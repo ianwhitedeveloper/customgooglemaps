@@ -60,9 +60,18 @@ function initializeDataLayer(){
 
 function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
 	try {
+		/*This means we've found a state
+		so now update state color
+		and append 'State' to name
+		because Google isn't smart enough 
+		in certain situations e.g. new york will
+		show NYC, not NY, the state*/
+		if (myBoundaries[boundaryId]) {
+			updateStateColor(boundaryId);
+			boundaryId = `${boundaryId} State`
+		}
 
-		if (myBoundaries[boundaryId]) boundaryId = `${boundaryId} State`
-
+		$(window).off('resize load');
 		$(window).on('resize load', () => {
 			geocoderInit(boundaryId);
 		});
@@ -91,15 +100,18 @@ function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#ff
 	}
 }
 
-function boundaryClick(e) {
-	boundTheMap({boundaryId: e.feature.f.NAME});
-	calcAndDisplayResults(results, e.feature.f.NAME, true);
+function updateStateColor(boundaryName) {
 	boundariesFromGeoJsonLayer.revertStyle();
 	boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
 		fillColor: '#ddd',
 		fillOpacity: 1
 	});
-	overrideGeoStyle({boundaryName: e.feature.f.NAME, style: {fillOpacity: 0.3}});
+	overrideGeoStyle({boundaryName: boundaryName, style: {fillOpacity: 0.3}});
+}
+
+function boundaryClick(e) {
+	boundTheMap({boundaryId: e.feature.f.NAME});
+	calcAndDisplayResults(results, e.feature.f.NAME, true);
 }
 
 function boundaryMouseOver(e) {
