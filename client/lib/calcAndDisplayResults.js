@@ -5,7 +5,7 @@ function calcPercent([partial, total]) {
 	return isNaN(result) ? 0 : result;
 }
 
-function calcAndDisplayResults(results, scope) {
+function calcAndDisplayResults({results, scope}) {
 	try {
 		let resultsObject = results.states[scope] ? results.states[scope] : results[scope];
 

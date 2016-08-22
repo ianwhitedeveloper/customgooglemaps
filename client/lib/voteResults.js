@@ -32,13 +32,13 @@ function plotMarkers(resultsArray) {
         let position = new google.maps.LatLng(resultsArray[i].lat, resultsArray[i].lon);
      	addMarker(position);
     }
-
  	showMarkers();
-
 }
 
-
-// Adds a marker to the map and push to the array.
+/////////////////////////////////////////////////////
+// Helpers                                         //
+// Adds a marker to the map and push to the array. //
+/////////////////////////////////////////////////////
 function addMarker(location) {
 	var marker = new google.maps.Marker({
 		position: location,

@@ -49,7 +49,7 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 		}
 	}
 
-	calcAndDisplayResults(results, scope);
+	calcAndDisplayResults({results: results, scope: scope});
 }
 
 function initializeDataLayer(){
@@ -111,7 +111,7 @@ function updateStateColor(boundaryName) {
 
 function boundaryClick(e) {
 	boundTheMap({boundaryId: e.feature.f.NAME});
-	calcAndDisplayResults(results, e.feature.f.NAME, true);
+	calcAndDisplayResults({results: results, scope: e.feature.f.NAME});
 }
 
 function boundaryMouseOver(e) {
