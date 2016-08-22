@@ -24,7 +24,7 @@ $(document).ready(function(){
 		hash = (location.href.split("#")[1] || null);
 	
 
-	/*$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
+	$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
 	.then((usBounds, results) => {
 		if (hash) { hash = hash.toUpperCase(); }
 		init({
@@ -33,9 +33,9 @@ $(document).ready(function(){
 			scope: hash || 'national',
 			boundaryId: hash || 'united states'
 		});
-	});*/
+	});
 
-	let bounds = new google.maps.LatLngBounds();
+	/*let bounds = new google.maps.LatLngBounds();
 
     // Multiple Markers
     let markers = [
@@ -59,7 +59,7 @@ $(document).ready(function(){
         // Automatically center the map fitting all markers on the screen
         map.fitBounds(bounds);
     }
-
+*/
 
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
 

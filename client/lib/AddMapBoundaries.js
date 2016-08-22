@@ -43,7 +43,7 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 				new_boundary.feature = boundariesFromGeoJsonLayer.getFeatureById(boundaryId);
 				myBoundaries[boundaryName] = new_boundary;
 
-				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 1, strokeColor: '#fff', fillOpacity: 1}});
+				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 1, strokeColor: '#fff', fillOpacity: 0.3}});
 
 			}
 		}
@@ -101,11 +101,11 @@ function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#ff
 }
 
 function updateStateColor(boundaryName) {
-	boundariesFromGeoJsonLayer.revertStyle();
+	/*boundariesFromGeoJsonLayer.revertStyle();
 	boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
 		fillColor: '#ddd',
 		fillOpacity: 1
-	});
+	});*/
 	overrideGeoStyle({boundaryName: boundaryName, style: {fillOpacity: 0.3}});
 }
 
