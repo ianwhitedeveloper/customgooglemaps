@@ -1,7 +1,7 @@
 {
     "is_cached_data": false,
     "states": {
-        "dc": {
+        "DC": {
             "total_votes": 40590,
             "winner": "purple",
             "votes": {
@@ -11,7 +11,7 @@
             },
             "state_name": "District of Columbia"
         },
-        "wi": {
+        "WI": {
             "total_votes": 2378,
             "winner": "red",
             "votes": {
@@ -21,7 +21,7 @@
             },
             "state_name": "Wisconsin"
         },
-        "tn": {
+        "TN": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -31,7 +31,7 @@
             },
             "state_name": "Tennessee"
         },
-        "mi": {
+        "MI": {
             "total_votes": 59026,
             "winner": "red",
             "votes": {
@@ -41,7 +41,7 @@
             },
             "state_name": "Michigan"
         },
-        "wv": {
+        "WV": {
             "total_votes": 16818,
             "winner": "red",
             "votes": {
@@ -51,7 +51,7 @@
             },
             "state_name": "West Virginia"
         },
-        "ma": {
+        "MA": {
             "total_votes": 41491,
             "winner": "purple",
             "votes": {
@@ -61,7 +61,7 @@
             },
             "state_name": "Massachusetts"
         },
-        "ri": {
+        "RI": {
             "total_votes": 6682,
             "winner": "purple",
             "votes": {
@@ -71,7 +71,7 @@
             },
             "state_name": "Rhode Island"
         },
-        "ak": {
+        "AK": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -81,7 +81,7 @@
             },
             "state_name": "Alaska"
         },
-        "ar": {
+        "AR": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -91,7 +91,7 @@
             },
             "state_name": "Arkansas"
         },
-        "co": {
+        "CO": {
             "total_votes": 104433,
             "winner": "red",
             "votes": {
@@ -101,7 +101,7 @@
             },
             "state_name": "Colorado"
         },
-        "sc": {
+        "SC": {
             "total_votes": 4160,
             "winner": "purple",
             "votes": {
@@ -111,7 +111,7 @@
             },
             "state_name": "South Carolina"
         },
-        "nh": {
+        "NH": {
             "total_votes": 5981,
             "winner": "red",
             "votes": {
@@ -121,7 +121,7 @@
             },
             "state_name": "New Hampshire"
         },
-        "ks": {
+        "KS": {
             "total_votes": 4490,
             "winner": "red",
             "votes": {
@@ -131,7 +131,7 @@
             },
             "state_name": "Kansas"
         },
-        "nj": {
+        "NJ": {
             "total_votes": 285839,
             "winner": "red",
             "votes": {
@@ -141,7 +141,7 @@
             },
             "state_name": "New Jersey"
         },
-        "hi": {
+        "HI": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -151,7 +151,7 @@
             },
             "state_name": "Hawaii"
         },
-        "ga": {
+        "GA": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -161,7 +161,7 @@
             },
             "state_name": "Georgia"
         },
-        "id": {
+        "ID": {
             "total_votes": 217,
             "winner": "blue",
             "votes": {
@@ -171,7 +171,7 @@
             },
             "state_name": "Idaho"
         },
-        "ut": {
+        "UT": {
             "total_votes": 35164,
             "winner": "blue",
             "votes": {
@@ -181,7 +181,7 @@
             },
             "state_name": "Utah"
         },
-        "ca": {
+        "CA": {
             "total_votes": 994961,
             "winner": "red",
             "votes": {
@@ -191,7 +191,7 @@
             },
             "state_name": "California"
         },
-        "ia": {
+        "IA": {
             "total_votes": 284,
             "winner": "red",
             "votes": {
@@ -201,7 +201,7 @@
             },
             "state_name": "Iowa"
         },
-        "in": {
+        "IN": {
             "total_votes": 15223,
             "winner": "red",
             "votes": {
@@ -211,7 +211,7 @@
             },
             "state_name": "Indiana"
         },
-        "mt": {
+        "MT": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -221,7 +221,7 @@
             },
             "state_name": "Montana"
         },
-        "wy": {
+        "WY": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -231,7 +231,7 @@
             },
             "state_name": "Wyoming"
         },
-        "va": {
+        "VA": {
             "total_votes": 407291,
             "winner": "red",
             "votes": {
@@ -241,7 +241,7 @@
             },
             "state_name": "Virginia"
         },
-        "ms": {
+        "MS": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -251,7 +251,7 @@
             },
             "state_name": "Mississippi"
         },
-        "pa": {
+        "PA": {
             "total_votes": 88100,
             "winner": "red",
             "votes": {
@@ -261,7 +261,7 @@
             },
             "state_name": "Pennsylvania"
         },
-        "nm": {
+        "NM": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -271,7 +271,7 @@
             },
             "state_name": "New Mexico"
         },
-        "ok": {
+        "OK": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -281,7 +281,7 @@
             },
             "state_name": "Oklahoma"
         },
-        "or": {
+        "OR": {
             "total_votes": 41736,
             "winner": "red",
             "votes": {
@@ -291,7 +291,7 @@
             },
             "state_name": "Oregon"
         },
-        "vt": {
+        "VT": {
             "total_votes": 1842,
             "winner": "purple",
             "votes": {
@@ -301,7 +301,7 @@
             },
             "state_name": "Vermont"
         },
-        "mn": {
+        "MN": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -311,7 +311,7 @@
             },
             "state_name": "Minnesota"
         },
-        "sd": {
+        "SD": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -321,7 +321,7 @@
             },
             "state_name": "South Dakota"
         },
-        "md": {
+        "MD": {
             "total_votes": 326953,
             "winner": "red",
             "votes": {
@@ -331,7 +331,7 @@
             },
             "state_name": "Maryland"
         },
-        "nd": {
+        "ND": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -341,7 +341,7 @@
             },
             "state_name": "North Dakota"
         },
-        "la": {
+        "LA": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -351,7 +351,7 @@
             },
             "state_name": "Louisiana"
         },
-        "al": {
+        "AL": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
@@ -361,7 +361,7 @@
             },
             "state_name": "Alabama"
         },
-        "tx": {
+        "TX": {
             "total_votes": 213421,
             "winner": "purple",
             "votes": {
@@ -371,7 +371,7 @@
             },
             "state_name": "Texas"
         },
-        "wa": {
+        "WA": {
             "total_votes": 72168,
             "winner": "red",
             "votes": {
@@ -381,7 +381,7 @@
             },
             "state_name": "Washington"
         },
-        "ct": {
+        "CT": {
             "total_votes": 23591,
             "winner": "red",
             "votes": {
@@ -391,7 +391,7 @@
             },
             "state_name": "Connecticut"
         },
-        "ky": {
+        "KY": {
             "total_votes": 163,
             "winner": "purple",
             "votes": {
@@ -401,7 +401,7 @@
             },
             "state_name": "Kentucky"
         },
-        "fl": {
+        "FL": {
             "total_votes": 247971,
             "winner": "purple",
             "votes": {
@@ -411,7 +411,7 @@
             },
             "state_name": "Florida"
         },
-        "nv": {
+        "NV": {
             "total_votes": 59275,
             "winner": "purple",
             "votes": {
@@ -421,7 +421,7 @@
             },
             "state_name": "Nevada"
         },
-        "mo": {
+        "MO": {
             "total_votes": 13602,
             "winner": "red",
             "votes": {
@@ -431,7 +431,7 @@
             },
             "state_name": "Missouri"
         },
-        "oh": {
+        "OH": {
             "total_votes": 12588,
             "winner": "purple",
             "votes": {
@@ -441,7 +441,7 @@
             },
             "state_name": "Ohio"
         },
-        "de": {
+        "DE": {
             "total_votes": 6412,
             "winner": "red",
             "votes": {
@@ -451,7 +451,7 @@
             },
             "state_name": "Delaware"
         },
-        "il": {
+        "IL": {
             "total_votes": 96350,
             "winner": "red",
             "votes": {
@@ -461,7 +461,7 @@
             },
             "state_name": "Illinois"
         },
-        "az": {
+        "AZ": {
             "total_votes": 5146,
             "winner": "purple",
             "votes": {
@@ -471,7 +471,7 @@
             },
             "state_name": "Arizona"
         },
-        "me": {
+        "ME": {
             "total_votes": 5948,
             "winner": "red",
             "votes": {
@@ -481,7 +481,7 @@
             },
             "state_name": "Maine"
         },
-        "nc": {
+        "NC": {
             "total_votes": 18390,
             "winner": "red",
             "votes": {
@@ -491,7 +491,7 @@
             },
             "state_name": "North Carolina"
         },
-        "ny": {
+        "NY": {
             "total_votes": 750295,
             "winner": "red",
             "votes": {
@@ -501,7 +501,7 @@
             },
             "state_name": "New York"
         },
-        "ne": {
+        "NE": {
             "total_votes": 0,
             "winner": "blue",
             "votes": {
