@@ -35,32 +35,6 @@ $(document).ready(function(){
 		});
 	});
 
-	/*let bounds = new google.maps.LatLngBounds();
-
-    // Multiple Markers
-    let markers = [
-        {title: 'Austin', lat: 30.2672, lng: -97.7431},
-        {title: 'Austin', lat: 30.3111, lng: -97.7501},
-        {title: 'Austin', lat: 30.2692, lng: -97.8431},
-        {title: 'Austin', lat: 30.2694, lng: -97.8461},
-    ];
-
-    // Loop through our array of markers & place each one on the map  
-    for(let i = 0; i < markers.length; i++ ) {
-        let position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: markers[i].title,
-            icon: marker_url
-        });
-        
-        // Automatically center the map fitting all markers on the screen
-        map.fitBounds(bounds);
-    }
-*/
-
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
 
 	//insert the zoom div on the top left of the map
