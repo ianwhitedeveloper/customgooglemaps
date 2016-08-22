@@ -1,6 +1,7 @@
 let $ = require('jquery');
 let map = require('./map');
 let geocoderInit = require('./geocoderInit');
+let TEST_API_URL = require('./CONSTANTS').TEST_API_URL;
 let marker_url = 'imgs/cd-icon-location.png';
 let searchBoxInput = $('input[name="cityzip"]');
 let cache = {
@@ -17,7 +18,7 @@ function getData(resultsArray) {
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
 	deleteMarkers();
-	$.get(`https://api-test.7-eleven.com/v3/election/stores/?lat=${lat}&lon=${lng}`)
+	$.get(`${TEST_API_URL}?lat=${lat}&lon=${lng}`)
 		.done(plotMarkers);
 }
 
@@ -31,7 +32,7 @@ function plotMarkers(resultsArray) {
         let position = new google.maps.LatLng(resultsArray[i].lat, resultsArray[i].lon);
      	addMarker(position);
     }
-    
+
  	showMarkers();
 
 }
