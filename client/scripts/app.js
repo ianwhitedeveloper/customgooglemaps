@@ -3,6 +3,7 @@ let $ = require('jquery');
 let map = require('../lib/map');
 let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
 let mapOptions = require('../lib/mapOptions');
+let voteResults = require('../lib/voteResults');
 let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
 
@@ -11,9 +12,10 @@ $(document).ready(function(){
 		//you can use any,location as center on map startup
 		//google map custom marker icon - .png fallback for IE11
 	let	isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
-		marker_url = ( isInternetExplorer11 ) ? 
+		marker_url = 'imgs/cd-icon-location.png',
+		/*marker_url = ( isInternetExplorer11 ) ? 
 			'imgs/cd-icon-location.png' : 
-			'imgs/cd-icon-location.svg',
+			'imgs/cd-icon-location.svg',*/
 		marker,
 		zoomControlDiv = document.createElement('div'),
 		zoomControl,
@@ -22,7 +24,7 @@ $(document).ready(function(){
 		hash = (location.href.split("#")[1] || null);
 	
 
-	$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
+	/*$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
 	.then((usBounds, results) => {
 		if (hash) { hash = hash.toUpperCase(); }
 		init({
@@ -31,20 +33,32 @@ $(document).ready(function(){
 			scope: hash || 'national',
 			boundaryId: hash || 'united states'
 		});
-	});
+	});*/
 
-	/*//add a custom marker to the map				
-	marker = new google.maps.Marker({
-	  	position: defaultLatitudeLongitude,
-	    map: map,
-	    visible: true,
-	 	icon: marker_url,
-	});
+	let bounds = new google.maps.LatLngBounds();
 
-    marker.addListener('click', function() {
-      map.setZoom(8);
-      map.setCenter(marker.getPosition());
-    });*/
+    // Multiple Markers
+    let markers = [
+        {title: 'Austin', lat: 30.2672, lng: -97.7431},
+        {title: 'Austin', lat: 30.3111, lng: -97.7501},
+        {title: 'Austin', lat: 30.2692, lng: -97.8431},
+        {title: 'Austin', lat: 30.2694, lng: -97.8461},
+    ];
+
+    // Loop through our array of markers & place each one on the map  
+    for(let i = 0; i < markers.length; i++ ) {
+        let position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i].title,
+            icon: marker_url
+        });
+        
+        // Automatically center the map fitting all markers on the screen
+        map.fitBounds(bounds);
+    }
 
 
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
@@ -52,28 +66,6 @@ $(document).ready(function(){
 	//insert the zoom div on the top left of the map
 	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomControlDiv);
 	
-
-	/*contentString = 	`<div class="state_info">
-							<h1>Header Lorem Ipsum</h1>
-							<div style="text-align: center;">
-								<img src="imgs/cd-icon-location.png">
-							</div>
-							<div style="text-align: center;">
-								<img src="imgs/cd-icon-location.png">
-							</div>
-							<div style="text-align: center;">
-								<img src="imgs/cd-icon-location.png">
-							</div>
-						</div>`;
-
-	infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-
-	marker.addListener('click', () => {
-		infowindow.open(map, marker);
-	});*/
-
 	//add custom buttons for the zoom-in/zoom-out on the map
 	function CustomZoomControl(controlDiv, map) {
 		//grap the zoom elements from the DOM and insert them in the map 
