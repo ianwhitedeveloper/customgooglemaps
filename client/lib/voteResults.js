@@ -2,7 +2,8 @@ let $ = require('jquery');
 let map = require('./map');
 let geocoderInit = require('./geocoderInit');
 let TEST_API_URL = require('./CONSTANTS').TEST_API_URL;
-let marker_url = 'imgs/cd-icon-location.png';
+let defaultIcon = 'imgs/cd-icon-location.png';
+let activeIcon = 'imgs/cd-icon-location-active.png';
 let searchBoxInput = $('input[name="cityzip"]');
 let cache = {
 	markers: []
@@ -25,7 +26,7 @@ function getData(resultsArray) {
 function plotMarkers(resultsArray) {
 	let bounds = new google.maps.LatLngBounds();
 	let marker;
-	let marker_url = 'imgs/cd-icon-location.png';
+	let marker_url = defaultIcon;
 
     // Loop through our array of markers & place each one on the map  
     for(let i = 0; i < resultsArray.length; i++ ) {
@@ -43,7 +44,15 @@ function addMarker(location) {
 	var marker = new google.maps.Marker({
 		position: location,
 		map: map,
-		icon: marker_url
+		icon: defaultIcon
+	});
+
+	google.maps.event.addListener(marker, "click", function () {
+	    //alert(this.html);
+	    for (var i=0; i<cache.markers.length; i++) {
+	       cache.markers[i].setIcon(defaultIcon);
+	    }
+	    this.setIcon(activeIcon);
 	});
 	cache.markers.push(marker);
 }
