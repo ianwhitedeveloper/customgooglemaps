@@ -4,12 +4,32 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let geocoderInit = require('./geocoderInit');
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let TEST_API_URL = require('./CONSTANTS').TEST_API_URL;
-let defaultIcon = 'imgs/cd-icon-location.png';
-let activeIcon = 'imgs/cd-icon-location-active.png';
 let searchBoxInput = $('input[name="cityzip"]');
 let cache = {
 	markers: []
 };
+
+let customCupMarkers = {
+	blue: {
+		url: 'imgs/cup-blue.svg',
+		// This marker is 32 pixels wide by 32 pixels tall.
+		size: new google.maps.Size(32, 32),
+		// The origin for this image is 0,0.
+		origin: new google.maps.Point(0,0),
+		// The anchor for this image is the base of the flagpole at 0,32.
+		anchor: new google.maps.Point(0, 32)
+	},
+	red: {
+		url: 'imgs/cup-red.svg'
+	},
+	purple: {
+		url: 'imgs/cup-purp.svg'
+	},
+	activeIcon: {
+		url: 'imgs/cup-active.svg'
+	}
+}
+
 
 $('body').on('click', '#findAStore', findAStoreClick);
 
@@ -29,7 +49,6 @@ function getData(resultsArray) {
 function plotMarkers(resultsArray) {
 	let bounds = new google.maps.LatLngBounds();
 	let marker;
-	let marker_url = defaultIcon;
 	sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
     // Loop through our array of markers & place each one on the map  
     for(let i = 0; i < resultsArray.length; i++ ) {
@@ -45,28 +64,30 @@ function plotMarkers(resultsArray) {
 // Adds a marker to the map and push to the array. //
 /////////////////////////////////////////////////////
 function addMarker(position, results) {
+	let winner = customCupMarkers[results.winner];
 	var marker = new google.maps.Marker({
 		position: position,
 		map: map,
-		icon: defaultIcon
+		icon: winner
 	});
 
-	google.maps.event.addListener(marker, "click", function () {
-	    //alert(this.html);
+	google.maps.event.addListener(marker, "click", function (e) {
+		// debugger;
 	    for (var i=0; i<cache.markers.length; i++) {
-	       cache.markers[i].setIcon(defaultIcon);
+			let currentMarker = cache.markers[i];
+			currentMarker.marker.setIcon(currentMarker.winner);
 	    }
-	    this.setIcon(activeIcon);
+	    this.setIcon(customCupMarkers.activeIcon);
 	    calcAndDisplayResults({results: results});
 
 	});
-	cache.markers.push(marker);
+	cache.markers.push({marker: marker, winner: winner});
 }
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
 	for (var i = 0; i < cache.markers.length; i++) {
-		cache.markers[i].setMap(map);
+		cache.markers[i].marker.setMap(map);
 	}
 }
 
