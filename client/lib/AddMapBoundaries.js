@@ -21,7 +21,6 @@ function init({bounds, scope, results, boundaryId}={}) {
 	initializeDataLayer();
 	loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds, scope: scope});
 	boundTheMap({boundaryId: boundaryId});
-	sElEvtEmitter.emit('updateBannerText', {bannerText: scope});
 }
 
 function setResults(r) {
