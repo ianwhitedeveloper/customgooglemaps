@@ -10,10 +10,11 @@ let cache = {
 	markers: []
 };
 
-$('body').on('click', '#findAStore', (e) => {
-	console.log(searchBoxInput.val());
+$('body').on('click', '#findAStore', findAStoreClick);
+
+function findAStoreClick(e) {
 	geocoderInit(searchBoxInput.val()).done(getData);
-});
+}
 
 function getData(resultsArray) {
 	let result = resultsArray[0];
