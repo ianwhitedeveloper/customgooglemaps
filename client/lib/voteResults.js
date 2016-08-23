@@ -43,7 +43,8 @@ let customCupMarkers = {
 $('body').on('click', '#findAStore', findAStoreClick);
 
 function findAStoreClick(e) {
-	geocoderInit(searchBoxInput.val()).done(getData);
+	geocoderInit(searchBoxInput.val())
+	.done(getData);
 }
 
 function getData(resultsArray) {

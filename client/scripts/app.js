@@ -2,6 +2,7 @@ let jQuery = require('jquery');
 let $ = require('jquery');
 let map = require('../lib/map');
 let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
+let CustomZoomControl = require('../lib/CustomZoomControl');
 let mapOptions = require('../lib/mapOptions');
 let voteResults = require('../lib/voteResults');
 let setResults = require('../lib/AddMapBoundaries').setResults;
@@ -12,15 +13,8 @@ $(document).ready(function(){
 		//you can use any,location as center on map startup
 		//google map custom marker icon - .png fallback for IE11
 	let	isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
-		marker_url = 'imgs/cd-icon-location.png',
-		/*marker_url = ( isInternetExplorer11 ) ? 
-			'imgs/cd-icon-location.png' : 
-			'imgs/cd-icon-location.svg',*/
-		marker,
 		zoomControlDiv = document.createElement('div'),
 		zoomControl,
-		contentString,
-		infowindow,
 		hash = (location.href.split("#")[1] || null);
 	
 
@@ -35,28 +29,11 @@ $(document).ready(function(){
 		});
 	});
 
+	///////////////////////////////////////////////////
+	//insert the zoom div on the top left of the map //
+	///////////////////////////////////////////////////
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
-
-	//insert the zoom div on the top left of the map
 	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomControlDiv);
-	
-	//add custom buttons for the zoom-in/zoom-out on the map
-	function CustomZoomControl(controlDiv, map) {
-		//grap the zoom elements from the DOM and insert them in the map 
-	  	var controlUIzoomIn= document.getElementById('cd-zoom-in'),
-	  		controlUIzoomOut= document.getElementById('cd-zoom-out');
-	  	controlDiv.appendChild(controlUIzoomIn);
-	  	controlDiv.appendChild(controlUIzoomOut);
-
-		// Setup the click event listeners and zoom-in or out according to the clicked element
-		google.maps.event.addDomListener(controlUIzoomIn, 'click', function() {
-		    map.setZoom(map.getZoom()+1)
-		});
-		google.maps.event.addDomListener(controlUIzoomOut, 'click', function() {
-		    map.setZoom(map.getZoom()-1)
-		});
-	}
-
 });
 
   
