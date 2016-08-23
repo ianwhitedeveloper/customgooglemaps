@@ -1,0 +1,11 @@
+.search_module
+	.search_box
+		input(
+		  type='text'
+		  name='cityzip'
+		)
+	.state_select
+		select
+			each state in states
+				option(value=state.abbrev) #{state.name}
+	button#findAStore Find a Store
