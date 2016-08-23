@@ -20,13 +20,22 @@ let customCupMarkers = {
 		anchor: new google.maps.Point(0, 32)
 	},
 	red: {
-		url: 'imgs/cup-red.svg'
+		url: 'imgs/cup-red.svg',
+		size: new google.maps.Size(32, 32),
+		origin: new google.maps.Point(0,0),
+		anchor: new google.maps.Point(0, 32)
 	},
 	purple: {
-		url: 'imgs/cup-purp.svg'
+		url: 'imgs/cup-purp.svg',
+		size: new google.maps.Size(32, 32),
+		origin: new google.maps.Point(0,0),
+		anchor: new google.maps.Point(0, 32)
 	},
 	activeIcon: {
-		url: 'imgs/cup-active.svg'
+		url: 'imgs/cup-active.svg',
+		size: new google.maps.Size(32, 32),
+		origin: new google.maps.Point(0,0),
+		anchor: new google.maps.Point(0, 32)
 	}
 }
 
