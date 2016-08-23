@@ -1,6 +1,7 @@
 let $ = require('jquery');
 let map = require('./map');
 let geocoderInit = require('./geocoderInit');
+let calcAndDisplayResults = require('./calcAndDisplayResults');
 let TEST_API_URL = require('./CONSTANTS').TEST_API_URL;
 let defaultIcon = 'imgs/cd-icon-location.png';
 let activeIcon = 'imgs/cd-icon-location-active.png';
@@ -30,8 +31,9 @@ function plotMarkers(resultsArray) {
 
     // Loop through our array of markers & place each one on the map  
     for(let i = 0; i < resultsArray.length; i++ ) {
-        let position = new google.maps.LatLng(resultsArray[i].lat, resultsArray[i].lon);
-     	addMarker(position);
+		let currentResult = resultsArray[i];
+        let position = new google.maps.LatLng(currentResult.lat, currentResult.lon);
+     	addMarker(position, currentResult);
     }
  	showMarkers();
 }
@@ -40,9 +42,9 @@ function plotMarkers(resultsArray) {
 // Helpers                                         //
 // Adds a marker to the map and push to the array. //
 /////////////////////////////////////////////////////
-function addMarker(location) {
+function addMarker(position, results) {
 	var marker = new google.maps.Marker({
-		position: location,
+		position: position,
 		map: map,
 		icon: defaultIcon
 	});
@@ -53,6 +55,8 @@ function addMarker(location) {
 	       cache.markers[i].setIcon(defaultIcon);
 	    }
 	    this.setIcon(activeIcon);
+	    calcAndDisplayResults({results: results});
+
 	});
 	cache.markers.push(marker);
 }
