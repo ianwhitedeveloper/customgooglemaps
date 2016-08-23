@@ -21,12 +21,12 @@ function calcAndDisplayResults({results, scope}) {
 								:
 								results;
 
-		let totalVotes = resultsObject.total_votes,
-			totalRed = resultsObject.votes.red,
-			totalBlue = resultsObject.votes.blue,
+		let totalVotes 	= resultsObject.total_votes,
+			totalRed 	= resultsObject.votes.red,
+			totalBlue 	= resultsObject.votes.blue,
 			totalPurple = resultsObject.votes.purple,
-			address = resultsObject.address || '',
-			bannerText = 	resultsObject.address || 
+			address 	= resultsObject.address || '',
+			bannerText	= 	resultsObject.address || 
 							resultsObject.state_name || 
 							scope;
 
