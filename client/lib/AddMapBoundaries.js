@@ -3,6 +3,7 @@ let map = require('../lib/map');
 let stateDict = require('../lib/stateDict');
 let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
+let sElEvtEmitter = require('./globals').sElEvtEmitter;
 
 let myBoundaries = {};
 // initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
@@ -112,6 +113,7 @@ function updateStateColor(boundaryName) {
 function boundaryClick(e) {
 	boundTheMap({boundaryId: e.feature.f.NAME});
 	calcAndDisplayResults({results: results, scope: e.feature.f.NAME});
+	sElEvtEmitter.emit('updateBannerText', e.feature.f.NAME);
 }
 
 function boundaryMouseOver(e) {

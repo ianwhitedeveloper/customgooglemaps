@@ -1,5 +1,6 @@
 let $ = require('jquery');
 let map = require('./map');
+let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let geocoderInit = require('./geocoderInit');
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let TEST_API_URL = require('./CONSTANTS').TEST_API_URL;
@@ -29,7 +30,7 @@ function plotMarkers(resultsArray) {
 	let bounds = new google.maps.LatLngBounds();
 	let marker;
 	let marker_url = defaultIcon;
-
+	sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
     // Loop through our array of markers & place each one on the map  
     for(let i = 0; i < resultsArray.length; i++ ) {
 		let currentResult = resultsArray[i];

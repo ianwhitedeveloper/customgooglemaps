@@ -1,4 +1,5 @@
 let $ = require('jquery');
+let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let redCupEl = require('./CONSTANTS').redCupEl,
 	blueCupEl = require('./CONSTANTS').blueCupEl,
 	purpleCupEl = require('./CONSTANTS').purpleCupEl,
@@ -31,12 +32,18 @@ function calcAndDisplayResults({results, scope}) {
 		redCupEl.text(`Red: ${calcPercent([totalRed, totalVotes])}%`);
 		blueCupEl.text(`Blue: ${calcPercent([totalBlue, totalVotes])}%`);
 		purpleCupEl.text(`Purple: ${calcPercent([totalPurple, totalVotes])}%`);
-		bannerEl.text(bannerText);
-		directionsEl.text(address);
+		sElEvtEmitter.emit('updateBannerText', {bannerText: bannerText, address: address});
 	}
 	catch (e) {
 		console.warn(e);
 	}
 }
+
+function updateBannerText({bannerText, address=''}) {
+	bannerEl.text(bannerText);
+	directionsEl.text(address);
+}
+
+sElEvtEmitter.on('updateBannerText', updateBannerText);
 
 module.exports = calcAndDisplayResults;
