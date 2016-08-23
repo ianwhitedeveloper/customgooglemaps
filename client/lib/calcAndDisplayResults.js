@@ -21,12 +21,14 @@ function calcAndDisplayResults({results, scope}) {
 								:
 								results;
 
-		let totalVotes = resultsObject.total_votes;
-		let totalRed = resultsObject.votes.red;
-		let totalBlue = resultsObject.votes.blue;
-		let totalPurple = resultsObject.votes.purple;
-		let bannerText = resultsObject.address || resultsObject.state_name;
-		let address = resultsObject.address || '';
+		let totalVotes = resultsObject.total_votes,
+			totalRed = resultsObject.votes.red,
+			totalBlue = resultsObject.votes.blue,
+			totalPurple = resultsObject.votes.purple,
+			address = resultsObject.address || '',
+			bannerText = 	resultsObject.address || 
+							resultsObject.state_name || 
+							scope;
 
 
 		redCupEl.text(`Red: ${calcPercent([totalRed, totalVotes])}%`);
