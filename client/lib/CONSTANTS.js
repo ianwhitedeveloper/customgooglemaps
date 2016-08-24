@@ -5,7 +5,7 @@ let blueCupEl = $('.cup.blue');
 let purpleCupEl = $('.cup.purple')
 let bannerEl = $('.results .banner');
 let directionsEl = $('.results .directions');
-let stateSelect = $('.state_select');
+let stateSelectEl = $('.state_select');
 
 module.exports = {
 	TEST_API_URL,
@@ -14,5 +14,5 @@ module.exports = {
 	purpleCupEl,
 	bannerEl,
 	directionsEl,
-	stateSelect
+	stateSelectEl
 }

@@ -5,7 +5,7 @@
 		  name='cityzip'
 		)
 	select.state_select
-		option(value='national' checked) National
+		option(value='national' selected="true") National
 		each state in states
 			option(value=state.abbrev) #{state.name}
 	button#findAStore Find a Store

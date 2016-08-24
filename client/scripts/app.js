@@ -9,6 +9,7 @@ let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
 
 $(document).ready(function(){
+	let stateDropdown = require('../lib/stateDropdown');
 	    //set your google maps parameters
 		//you can use any,location as center on map startup
 		//google map custom marker icon - .png fallback for IE11
@@ -18,7 +19,10 @@ $(document).ready(function(){
 		hash = (location.href.split("#")[1] || null);
 	
 
-	$.when($.get('/external/boundariesFromGeoJson.json'), $.get('/external/dummyStateResults.json'))
+	$.when(
+		$.get('/external/boundariesFromGeoJson.json'), 
+		$.get('/external/dummyStateResults.json')
+	)
 	.then((usBounds, results) => {
 		if (hash) { hash = hash.toUpperCase(); }
 		init({

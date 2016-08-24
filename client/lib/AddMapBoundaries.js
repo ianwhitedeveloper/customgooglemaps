@@ -20,7 +20,7 @@ function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);
 	initializeDataLayer();
 	loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds, scope: scope});
-	boundTheMap({boundaryId: boundaryId});
+	boundTheMap({boundaryId: boundaryId, scope: scope});
 }
 
 function setResults(r) {
@@ -59,7 +59,7 @@ function initializeDataLayer(){
 	boundariesFromGeoJsonLayer.addListener('mouseout', boundaryMouseOut);
 }
 
-function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
+function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
 	try {
 		/*This means we've found a state
 		so now update state color
@@ -77,6 +77,8 @@ function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click a
 			geocoderInit(boundaryId);
 		});
 		geocoderInit(boundaryId);
+
+		sElEvtEmitter.emit('boundTheMap', {boundaryId: boundaryId, scope: scope});
 	}
 	catch (err) {
 		console.warn(err);
