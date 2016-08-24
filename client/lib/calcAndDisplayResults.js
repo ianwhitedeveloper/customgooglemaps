@@ -38,6 +38,7 @@ function calcAndDisplayResults({results, scope}) {
 	}
 	catch (e) {
 		console.warn(e);
+		sElEvtEmitter.emit('updateBannerText', {bannerText: 'No Results'});
 	}
 }
 
