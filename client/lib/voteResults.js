@@ -4,6 +4,7 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let geocoderInit = require('./geocoderInit');
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let TEST_API_URL = require('./CONSTANTS').TEST_API_URL;
+let stateSelectEl = require('./CONSTANTS').stateSelectEl;
 let searchBoxInput = $('input[name="cityzip"]');
 let cache = {
 	markers: []
@@ -43,7 +44,15 @@ let customCupMarkers = {
 $('body').on('click', '#findAStore', findAStoreClick);
 
 function findAStoreClick(e) {
-	geocoderInit(searchBoxInput.val())
+	let stateSelectVal = stateSelectEl
+		.find('option:selected');
+	let searchBoxInputVal = searchBoxInput.val();
+	let query = stateSelectVal
+				.data('default') 
+					? searchBoxInputVal
+					: `${searchBoxInputVal}, ${stateSelectVal.val()}`;
+
+	geocoderInit(query)
 	.done(getData);
 }
 
