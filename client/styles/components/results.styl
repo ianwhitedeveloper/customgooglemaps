@@ -1,37 +1,14 @@
 .results
-	position: absolute;
-	top 0
-	left 0;	
-	width 350px
-	height 100%
-	z-index 101
+	position relative
+	width auto
 	z-index 102
 	padding 30px 10px
 	text-align center
+	background-color transparent
+
+.striped_bar
 	
-address
-	position absolute
-	width 100%
-	top 0
-	left 0
-	padding 1em 1em
-	background-color rgba(211, 104, 104, 0.9)
-	color white
-	font-size 13px
-	font-size 0.8125rem
-	z-index 101
-	text-align center
-
-
-.blur
-	background-color: rgba(200,200,200,0.7);
-	-webkit-filter: blur(5px);
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-
+	
 header
 	position relative
 	width 100%
@@ -44,10 +21,13 @@ header
 		
 
 @media only screen and (min-width: 768px)
-	address
-	font-size 15px
-	font-size 0.9375rem
-	text-align center
+	.results
+		position absolute
+		top 0
+		left 0;	
+		width 350px
+		height 100vh
+		padding 30px 10px
 
 	header
 		display inline-block

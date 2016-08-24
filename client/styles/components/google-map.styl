@@ -1,9 +1,8 @@
 
 #cd-google-map
-  width calc(100% - 350px)
-  position absolute
-  top 0
-  right 0
+  position relative
+  margin 0 25px
+  
 
 // @media only screen and (min-width: 768px)
 
@@ -20,7 +19,15 @@
 .no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover
   background-color #d36868
 
-@media only screen and (min-width: 768px)     
+@media only screen and (min-width: 768px)  
+  #cd-google-map
+    position absolute
+    top 0
+    right 0
+    width calc(100% - 350px)
+    margin 0
+    
+       
   #cd-zoom-in, #cd-zoom-out
     margin-left 50px
 
