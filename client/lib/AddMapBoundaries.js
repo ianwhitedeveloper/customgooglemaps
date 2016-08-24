@@ -113,7 +113,7 @@ function updateStateColor(boundaryName) {
 }
 
 function boundaryClick(e) {
-	boundTheMap({boundaryId: e.feature.f.NAME});
+	boundTheMap({boundaryId: e.feature.f.NAME, scope: e.feature.f.NAME});
 	calcAndDisplayResults({results: results, scope: e.feature.f.NAME});
 	sElEvtEmitter.emit('updateBannerText', e.feature.f.NAME);
 }
@@ -138,5 +138,6 @@ function boundaryMouseOut(e) {
 }
 
 module.exports = {
-	init
+	init,
+	boundTheMap
 }
