@@ -1,3 +1,5 @@
+@import '../functions/flex'
+
 .results
 	position relative
 	width auto
@@ -5,6 +7,40 @@
 	padding 30px 10px
 	text-align center
 	background-color transparent
+
+.cup_results
+	display(flex)
+	width 265px
+	margin 0 auto
+	margin-top 12px
+
+.cup
+	display(flex)
+	flex-align-items(center)
+	flex-justify-content(space-between)
+	height 90px
+	width 33.3333%;
+	margin auto
+	position relative
+	
+	.percentage
+		flex(1)
+	
+	
+	.color
+		display(flex)
+		position relative
+		top -12px
+		background-image url('../imgs/coffee_colors_votes.png');
+		background-repeat no-repeat
+		background-size cover
+		height 90px
+		width 45px
+	
+	.red
+		&:before
+			background-position 0 0
+	
 
 .striped_bar
 	position absolute
