@@ -19,26 +19,24 @@
 .no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover
   background-color #d36868
 
-@media only screen and (min-width: 768px)  
-  #cd-google-map
-    position fixed
-    top 0
-    right 0
-    width calc(100% - 350px)
-    margin 0
-    
-       
-  #cd-zoom-in, #cd-zoom-out
-    margin-left 50px
-
 #cd-zoom-in
   background-position 50% 0
   margin-top 10px
   margin-bottom 1px
 
-@media only screen and (min-width: 768px)
-  #cd-zoom-in
-    margin-top 50px
-
 #cd-zoom-out
   background-position 50% -32px
+
+@media only screen and (min-width: 768px)  
+  #cd-google-map
+    position fixed
+    top 0
+    right 0
+    width calc(100% - 420px)
+    margin 0
+       
+  #cd-zoom-in, #cd-zoom-out
+    margin-left 50px
+
+  #cd-zoom-in
+    margin-top 50px
