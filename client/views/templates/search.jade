@@ -3,10 +3,10 @@
 		option(value='national' selected="true" data-default="true" disabled) National
 		each state in states
 			option(value=state.abbrev) #{state.name}
-	.search_box
+	.search_box.flex
 		input(
 		  type="text"
 		  name="cityzip"
 		  placeholder="Search by city or zip"
 		)
-	button#findAStore Find a Store
+		button#findAStore Find a Store
