@@ -26,7 +26,7 @@ body
   position relative
   -webkit-font-smoothing antialiased
   font-family 'Nunito', sans-serif
-  font-size 100%
+  font-size 13px
   color #2d313f
   margin 0
   background: repeating-linear-gradient(
@@ -36,7 +36,21 @@ body
     #f0f0f1 10px,
     #f0f0f1 12px
   )
-  
+ 
+h1, h2, h3, h4, h5, h6, p
+	margin 0
+	padding 0
+
+h1 
+	font-size 31px
+h2
+	font-size 20px
+h3 
+	font-size 16px
+h4
+	font-size 12px
+
+
 *, *:after, *:before
   -webkit-box-sizing border-box
   -moz-box-sizing border-box
@@ -79,7 +93,17 @@ main
 	
 @media only screen and (min-width: 768px)
 	body
-	  position static
+		position static
+		font-size 14px
+	  
+		h1 
+			font-size 46px
+		h2
+			font-size 30px
+		h3 
+			font-size 21px
+		h4
+			font-size 15px
 		
 	main
 		margin-bottom -85px
