@@ -7,11 +7,15 @@
 @import './components/results.styl'
 @import './components/search.styl'
 @import './components/footer.styl'
+@import './components/ad-space.styl'
 /* -------------------------------- 
 
 Primary style
 
 -------------------------------- */
+html, body
+  height 100%
+
 html
   *
     -webkit-font-smoothing antialiased
@@ -21,11 +25,18 @@ html
   -webkit-box-sizing border-box
   -moz-box-sizing border-box
   box-sizing border-box
- 
+  
 main
 	position relative
 	width 100%
 	height 100%
+	min-height 100%
+	margin-bottom -150px
+
+	&:after
+		content ""
+		display block
+		height 150px
 	
 #mask 
 	position absolute
@@ -38,4 +49,22 @@ main
 	-ms-transition: background 0.2s linear;
 	-o-transition: background 0.2s linear;
 	transition: background 0.2s linear;
+
+.desktop
+	display none
+
+.mobile
+	display block
+	
+@media only screen and (min-width: 768px)
+	main
+		margin-bottom -85px
+	&:after
+		height 85px
+
+	.desktop
+		display block
+	
+	.mobile
+		display none
 	
