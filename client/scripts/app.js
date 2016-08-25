@@ -37,7 +37,7 @@ $(document).ready(function(){
 	//insert the zoom div on the top left of the map //
 	///////////////////////////////////////////////////
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
-	map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomControlDiv);
+	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(zoomControlDiv);
 });
 
   
