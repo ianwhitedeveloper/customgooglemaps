@@ -9,7 +9,6 @@
 	select
 		width 100%
 
-.search_box
 	input
 		display inline-block
 		width 160px
@@ -21,7 +20,7 @@
 		white-space nowrap
 		
 
-@media only screen and (min-width: 768px)
+@media only screen and (min-width: 1024px)
 	.search_module
 		display(flex)
 		position absolute
@@ -34,6 +33,8 @@
 
 		select
 			width auto
+		
+		select, input
 			margin-right 18px
 			
 		*
