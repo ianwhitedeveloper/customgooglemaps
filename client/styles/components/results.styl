@@ -5,9 +5,46 @@
 	width auto
 	z-index 102
 	padding 30px 10px
-	text-align center
 	background-color transparent
+	
+	header
+		position relative
+		width 210px
+		margin 0 auto
+		
+		h1, p
+			width 100%
+		
+		h1, h2
+			text-transform uppercase
 
+		h1
+			color sevenPurple
+			border-bottom 4px double sevenPurple
+			position relative
+			
+			&:before
+				content "ONLY AT"
+				font-size 7px
+				width 31px
+				position absolute
+				top 0
+				right -3px
+
+			&:after
+				content " "
+				background-image url('../imgs/seven_el_logo.svg')
+				width 26px
+				height 26px
+				background-size cover
+				position absolute
+				top calc(50% - 13px)
+				right 0
+				
+
+		h2
+			word-spacing -6px
+			
 .cup_results
 	display(flex)
 	width 265px
@@ -64,16 +101,8 @@
 		left 0
 	&:after
 		right 0
-	
-header
-	position relative
-	width 100%
-	
-	h1, p
-		width 100%
-	
-	p
-		display none20	
+
+
 
 @media only screen and (min-width: 1024px)
 	.results
@@ -83,10 +112,8 @@ header
 		width 420px
 		height calc(100vh - 150px)
 		padding 30px 10px
-
-	header
-		display inline-block
 		
-		p
-			display block
-		
+		header
+			width 74%
+			h2
+				letter-spacing -0.5px
