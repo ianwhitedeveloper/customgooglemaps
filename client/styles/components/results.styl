@@ -47,53 +47,60 @@
 			
 .cup_results
 	display(flex)
+	flex-justify-content(center)
+	flex-direction(row)
 	width 265px
 	margin 0 auto
 	margin-top 12px
 
 .cup_results_container
-	display(flex)
 	flex-align-items(center)
-	flex-justify-content(space-between)
-	height 90px
-	width 33.3333%;
-	margin auto
-	position relative
-	
-	.percentage
-		flex(1)
-	
+	flex-direction(column)
+	width 75px
+	margin 0 5px
 	
 	.cup
-		display(flex)
+		flex(1 auto)
 		position relative
-		top -12px
 		background-image url('../imgs/coffee_colors_votes.png');
 		background-repeat no-repeat
 		background-size cover
-		height 90px
-		width 45px
+		height 150px
+		width 100%
 
 	.percentage
 		color #fff
 		font-weight bold
-		border-radius 100px
-		padding 11px 5px
+		text-align center
+		
+		.circle
+			width 35px
+			height 35px
+			display inline-block
+			border-radius 50%
+			
+			span
+				line-height 2em
+				
+				sup
+					font-size 9px
 
 	&.red
 		.cup
-			background-position -90px 0
-		.percentage
+			background-position -152px 0
+		.circle
 			border 1px solid sevenRed
 			background-color sevenRed
 	&.purple
 		.cup
-			background-position -45px 0
-		.percentage
+			background-position -75px 0
+		.circle
 			border 1px solid sevenPurple
 			background-color sevenPurple
 	&.blue
-		.percentage
+		.cup
+			background-position 0 0
+		.circle
 			border 1px solid sevenBlue
 			background-color sevenBlue
 

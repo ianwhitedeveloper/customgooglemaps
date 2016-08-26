@@ -31,9 +31,9 @@ function calcAndDisplayResults({results, scope}) {
 							scope;
 
 
-		redCupEl.text(`${calcPercent([totalRed, totalVotes])}%`);
-		blueCupEl.text(`${calcPercent([totalBlue, totalVotes])}%`);
-		purpleCupEl.text(`${calcPercent([totalPurple, totalVotes])}%`);
+		redCupEl.html(`${calcPercent([totalRed, totalVotes])}<sup>%</sup>`);
+		blueCupEl.html(`${calcPercent([totalBlue, totalVotes])}<sup>%</sup>`);
+		purpleCupEl.html(`${calcPercent([totalPurple, totalVotes])}<sup>%</sup>`);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: bannerText, address: address});
 	}
 	catch (e) {
