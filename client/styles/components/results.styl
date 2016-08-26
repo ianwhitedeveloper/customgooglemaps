@@ -1,5 +1,13 @@
 @import '../functions/flex'
 
+.national_results
+	font-size 11px
+
+.share_results
+	font-size 11px
+	position relative
+	bottom 50%
+
 .results
 	position relative
 	width auto
@@ -51,24 +59,30 @@
 			flex-justify-content(space-between)
 
 .banner
-	background-repeat no-repeat 
-	background-position center center
-	color #fff
+	position relative
 	height 40px
 	width 280px
-	background-size cover
-	margin 10px auto
 	font-size 16px
 	line-height 2em
+
+	.location
+		height 100%
+		width 100%
+		background-repeat no-repeat 
+		background-position center center
+		color #fff
+		background-size cover
+		margin 10px auto
+		
 	
-	&[data-winner="red"]
-		background-image url('../imgs/ribbon_banner_red.svg')
+		&[data-winner="red"]
+			background-image url('../imgs/ribbon_banner_red.svg')
 		
-	&[data-winner="blue"]
-		background-image url('../imgs/ribbon_banner_blue.svg')
+		&[data-winner="blue"]
+			background-image url('../imgs/ribbon_banner_blue.svg')
 		
-	&[data-winner="purple"]
-		background-image url('../imgs/ribbon_banner_purple.svg')
+		&[data-winner="purple"]
+			background-image url('../imgs/ribbon_banner_purple.svg')
 
 .cup_results
 	display(flex)
