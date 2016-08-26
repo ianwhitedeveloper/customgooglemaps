@@ -1,5 +1,5 @@
 let $ = require('jquery');
-let TEST_API_URL = 'https://api-test.7-eleven.com/v3/election/stores/';
+let API_URL = 'https://api-test.7-eleven.com/v3/election/stores/';
 let redCupEl = $('.cup_results_container.red .percentage span');
 let blueCupEl = $('.cup_results_container.blue .percentage span');
 let purpleCupEl = $('.cup_results_container.purple .percentage span')
@@ -8,7 +8,7 @@ let directionsEl = $('.results .directions');
 let stateSelectEl = $('.state_select');
 
 module.exports = {
-	TEST_API_URL,
+	API_URL,
 	redCupEl,
 	blueCupEl,
 	purpleCupEl,

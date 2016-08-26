@@ -3,7 +3,7 @@ let map = require('./map');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let geocoderInit = require('./geocoderInit');
 let calcAndDisplayResults = require('./calcAndDisplayResults');
-let TEST_API_URL = require('./CONSTANTS').TEST_API_URL;
+let API_URL = require('./CONSTANTS').API_URL;
 let stateSelectEl = require('./CONSTANTS').stateSelectEl;
 let searchBoxInput = $('input[name="cityzip"]');
 let cache = {
@@ -61,7 +61,7 @@ function getData(resultsArray) {
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
 	deleteMarkers();
-	$.get(`${TEST_API_URL}?lat=${lat}&lon=${lng}`)
+	$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
 		.done(plotMarkers);
 }
 
