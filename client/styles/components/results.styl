@@ -51,7 +51,8 @@
 			flex-justify-content(space-between)
 
 .banner
-	background url('../imgs/ribbon_banner.svg') no-repeat center center
+	background-repeat no-repeat 
+	background-position center center
 	color #fff
 	height 40px
 	width 280px
@@ -59,6 +60,15 @@
 	margin 10px auto
 	font-size 16px
 	line-height 2em
+	
+	&[data-winner="red"]
+		background-image url('../imgs/ribbon_banner_red.svg')
+		
+	&[data-winner="blue"]
+		background-image url('../imgs/ribbon_banner_blue.svg')
+		
+	&[data-winner="purple"]
+		background-image url('../imgs/ribbon_banner_purple.svg')
 
 .cup_results
 	display(flex)
