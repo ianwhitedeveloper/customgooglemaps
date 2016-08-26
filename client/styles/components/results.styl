@@ -73,11 +73,29 @@
 		background-size cover
 		height 90px
 		width 45px
-	
-	.red
-		&:before
-			background-position 0 0
-	
+
+	.percentage
+		color #fff
+		font-weight bold
+		border-radius 100px
+		padding 11px 5px
+
+	&.red
+		.cup
+			background-position -90px 0
+		.percentage
+			border 1px solid sevenRed
+			background-color sevenRed
+	&.purple
+		.cup
+			background-position -45px 0
+		.percentage
+			border 1px solid sevenPurple
+			background-color sevenPurple
+	&.blue
+		.percentage
+			border 1px solid sevenBlue
+			background-color sevenBlue
 
 .striped_bar
 	position absolute
