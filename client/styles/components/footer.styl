@@ -8,6 +8,33 @@ footer
 	padding 25px
 	z-index 200
 	
+	.social_share, p
+		margin 7px 0
+	
+.social_share
+	width 150px
+	display(flex)
+	
+
+.social_share__icon
+	flex(1 auto)
+	width 30px
+	height 30px
+	color transparent
+	position relative
+	
+	svg
+		width 30px
+		height 30px
+		position absolute
+		top 0
+		left 0
+	
 @media only screen and (min-width: 1024px)
-	footer
-		hight 85px
+	// footer
+		// height 85px
+	.social_share
+		position absolute
+		right 25px
+		top 25px
+		
