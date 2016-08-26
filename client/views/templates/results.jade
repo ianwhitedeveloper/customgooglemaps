@@ -1,15 +1,46 @@
 - var states = [{abbrev:'AL', name: 'Alabama'}, {abbrev:'AK', name: 'Alaska'}, {abbrev:'AS', name: 'American Samoa'}, {abbrev:'AZ', name: 'Arizona'}, {abbrev:'AR', name: 'Arkansas'}, {abbrev:'CA', name: 'California'}, {abbrev:'CO', name: 'Colorado'}, {abbrev:'CT', name: 'Connecticut'}, {abbrev:'DE', name: 'Delaware'}, {abbrev:'DC', name: 'District Of Columbia'}, {abbrev:'FM', name: 'Federated States Of Micronesia'}, {abbrev:'FL', name: 'Florida'}, {abbrev:'GA', name: 'Georgia'}, {abbrev:'GU', name: 'Guam'}, {abbrev:'HI', name: 'Hawaii'}, {abbrev:'ID', name: 'Idaho'}, {abbrev:'IL', name: 'Illinois'}, {abbrev:'IN', name: 'Indiana'}, {abbrev:'IA', name: 'Iowa'}, {abbrev:'KS', name: 'Kansas'}, {abbrev:'KY', name: 'Kentucky'}, {abbrev:'LA', name: 'Louisiana'}, {abbrev:'ME', name: 'Maine'}, {abbrev:'MH', name: 'Marshall Islands'}, {abbrev:'MD', name: 'Maryland'}, {abbrev:'MA', name: 'Massachusetts'}, {abbrev:'MI', name: 'Michigan'}, {abbrev:'MN', name: 'Minnesota'}, {abbrev:'MS', name: 'Mississippi'}, {abbrev:'MO', name: 'Missouri'}, {abbrev:'MT', name: 'Montana'}, {abbrev:'NE', name: 'Nebraska'}, {abbrev:'NV', name: 'Nevada'}, {abbrev:'NH', name: 'New Hampshire'}, {abbrev:'NJ', name: 'New Jersey'}, {abbrev:'NM', name: 'New Mexico'}, {abbrev:'NY', name: 'New York'}, {abbrev:'NC', name: 'North Carolina'}, {abbrev:'ND', name: 'North Dakota'}, {abbrev:'MP', name: 'Northern Mariana Islands'}, {abbrev:'OH', name: 'Ohio'}, {abbrev:'OK', name: 'Oklahoma'}, {abbrev:'OR', name: 'Oregon'}, {abbrev:'PW', name: 'Palau'}, {abbrev:'PA', name: 'Pennsylvania'}, {abbrev:'PR', name: 'Puerto Rico'}, {abbrev:'RI', name: 'Rhode Island'}, {abbrev:'SC', name: 'South Carolina'}, {abbrev:'SD', name: 'South Dakota'}, {abbrev:'TN', name: 'Tennessee'}, {abbrev:'TX', name: 'Texas'}, {abbrev:'UT', name: 'Utah'}, {abbrev:'VT', name: 'Vermont'}, {abbrev:'VI', name: 'Virgin Islands'}, {abbrev:'VA', name: 'Virginia'}, {abbrev:'WA', name: 'Washington'}, {abbrev:'WV', name: 'West Virginia'}, {abbrev:'WI', name: 'Wisconsin'}, {abbrev:'WY', name: 'Wyoming'}];
 .results
-	address#bname United States
-	.blur
+	.striped_bar
+
+	a.national_results.uppercase(href="https://google.com" target="_blank") SEE THE ONION’S ELECTION GUIDE
+
 	header
-		h1 Header Lorem Ipsum
-		p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		.details
-			.banner 
-			.directions
-		.cup_results
-			.cup.red
-			.cup.blue
-			.cup.purple
-	
+		.seven_election
+			h1 7Election
+			h2
+				span.seven_blue Choose 
+				span.seven_purple Your 
+				span.seven_red Cup
+
+	p.text_center We’re tallying every XL Stay-Hot 7Election Cup. Explore to see your city’s results.
+
+	h4.uppercase.seven_blue.text_center Results Updated Daily!
+
+	.details.text_center
+		.banner.uppercase
+			.location(data-winner="")
+			.share_results
+				a(href="https://google.com" target="_blank") Share Results
+
+		.directions
+
+	.cup_results
+		.cup_results_container.red
+			div.percentage
+				div.circle
+					span
+			div.cup
+		.cup_results_container.blue
+			div.percentage
+				div.circle
+					span
+			div.cup
+		.cup_results_container.purple
+			div.percentage
+				div.circle
+					span
+			div.cup
+
+	.ad_space.desktop.sixteen-nine
+			.content
+				include ./ad-space

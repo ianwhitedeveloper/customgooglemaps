@@ -1,13 +1,42 @@
 .search_module
-	position absolute
-	top 20px
-	right 20px
-	width calc(100% - 40px)
+	position relative
+	right 0
+	width 100%
 	z-index 900
-	padding 50px
-	background-color #ddd
+	padding 20px 0
+	background-color transparent
 	
-	
-	input, select
+	select
 		width 100%
+
+	input
+		display inline-block
+		width 160px
+		margin-right 2px
+	
+	button
+		display inline-block
+		margin-left 2px
+		white-space nowrap
+		max-width 150px
 		
+
+@media only screen and (min-width: 1024px)
+	.search_module
+		display(flex)
+		position absolute
+		top 20px
+		right 20px
+		width calc(100% - 40px)
+		background-color #fff
+		padding 6px 9px
+		border-radius 5px
+
+		select
+			width auto
+		
+		select, input
+			margin-right 18px
+			
+		*
+			flex(1 auto)

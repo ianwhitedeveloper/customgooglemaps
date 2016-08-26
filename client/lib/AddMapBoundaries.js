@@ -104,12 +104,7 @@ function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#ff
 }
 
 function updateStateColor(boundaryName) {
-	/*boundariesFromGeoJsonLayer.revertStyle();
-	boundariesFromGeoJsonLayer.setStyle({ //using set style we can set styles for all boundaries at once
-		fillColor: '#ddd',
-		fillOpacity: 1
-	});*/
-	overrideGeoStyle({boundaryName: boundaryName, style: {fillOpacity: 0.3}});
+	overrideGeoStyle({boundaryName: boundaryName, style: {strokeColor: '#fff', fillOpacity: 0.3}});
 }
 
 function boundaryClick(e) {

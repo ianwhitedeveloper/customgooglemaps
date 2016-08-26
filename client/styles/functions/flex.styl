@@ -1,0 +1,100 @@
+/*! Prefix flex for IE10 and Safari / iOS in LESS
+* https://gist.github.com/codler/2148ba4ff096a19f08ea
+* Copyright (c) 2014 Han Lin Yap http://yap.nu; MIT license */
+display(value)
+	display -ms-flexbox
+	display -webkit-flex
+	display -ms-inline-flexbox
+	display -webkit-inline-flex
+	display value
+flex(value)
+	-ms-flex value
+	-webkit-flex value
+	flex value
+flex-justify-content(justifyContent)
+	ms-flex-justify-content(justifyContent)
+	-webkit-justify-content justifyContent
+	justify-content justifyContent
+flex-align-content(alignContent)
+	ms-flex-align-content(alignContent)
+	-webkit-align-content alignContent
+	align-content alignContent
+flex-align-items(alignItems)
+	ms-flex-align-items(alignItems)
+	-webkit-align-items alignItems
+	align-items alignItems
+flex-align-self(alignSelf)
+	ms-flex-align-self(alignSelf)
+	-webkit-align-self alignSelf
+	align-self alignSelf
+flex-direction(direction)
+	-ms-flex-direction direction
+	-webkit-flex-direction direction
+	flex-direction direction
+flex-order(order)
+	-ms-flex-order order
+	-webkit-order order
+	order order
+flex-wrap(wrap)
+	ms-flex-wrap(wrap)
+	-webkit-flex-wrap wrap
+	flex-wrap wrap
+/* These are the conditional mixins for the different syntax for IE10 Flexbox */
+ms-flex-justify-content(justifyContent)
+	-ms-flex-pack justify
+	-ms-flex-pack distribute
+	-ms-flex-pack start
+	-ms-flex-pack end
+	-ms-flex-pack center
+ms-flex-align-content(alignContent)
+	-ms-flex-line-pack justify
+	-ms-flex-line-pack distribute
+	-ms-flex-line-pack start
+	-ms-flex-line-pack end
+	-ms-flex-line-pack alignContent
+ms-flex-align-items(alignItems)
+	-ms-flex-align start
+	-ms-flex-align end
+	-ms-flex-align alignItems
+ms-flex-align-self(alignSelf)
+	-ms-flex-item-align start
+	-ms-flex-item-align end
+	-ms-flex-item-align alignSelf
+ms-flex-wrap(wrap)
+	-ms-flex-wrap none
+	-ms-flex-wrap wrap
+	
+aspect-ratio(width, height)
+	position relative
+	&:before 
+		display block
+		content ""
+		width 100%
+		padding-top (height / width) * 100%
+
+
+	& > .content
+		position absolute
+		top 0
+		left 0
+		right 0
+		bottom 0
+
+.sixteen-nine 
+	aspect-ratio(16, 9)
+		
+	&:before
+		display block
+		content ""
+		width 100%
+		padding-top 56.25%
+	& > .content
+		position absolute
+		top 0
+		left 0
+		right 0
+		bottom 0
+		
+		img 
+			width 100%
+			height auto

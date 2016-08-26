@@ -1,14 +1,14 @@
 let $ = require('jquery');
-let TEST_API_URL = 'https://api-test.7-eleven.com/v3/election/stores/';
-let redCupEl = $('.cup.red');
-let blueCupEl = $('.cup.blue');
-let purpleCupEl = $('.cup.purple')
-let bannerEl = $('.results .banner');
+let API_URL = 'https://api-test.7-eleven.com/v3/election/stores/';
+let redCupEl = $('.cup_results_container.red .percentage span');
+let blueCupEl = $('.cup_results_container.blue .percentage span');
+let purpleCupEl = $('.cup_results_container.purple .percentage span')
+let bannerEl = $('.results .banner .location');
 let directionsEl = $('.results .directions');
 let stateSelectEl = $('.state_select');
 
 module.exports = {
-	TEST_API_URL,
+	API_URL,
 	redCupEl,
 	blueCupEl,
 	purpleCupEl,

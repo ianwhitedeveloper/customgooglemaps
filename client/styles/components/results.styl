@@ -1,57 +1,187 @@
+@import '../functions/flex'
+
+.national_results
+	font-size 11px
+
+.share_results
+	font-size 11px
+	position relative
+	bottom 50%
+
 .results
-	position: absolute;
-	top 0
-	left 0;	
-	width 350px
-	height 100%
-	z-index 101
+	position relative
+	width auto
 	z-index 102
-	padding 30px 10px
-	text-align center
+	padding 35px 25px 0
+	background-color transparent
+
+	h4, p
+		margin 7px 0
 	
-address
+	header
+		position relative
+		width 210px
+		margin 0 auto
+		
+		h1, p
+			width 100%
+		
+		h1, h2
+			text-transform uppercase
+			
+
+		h1
+			color sevenPurple
+			border-bottom 4px double sevenPurple
+			position relative
+			
+			&:before
+				content "ONLY AT"
+				font-size 7px
+				width auto
+				position absolute
+				top 0
+				right -3px
+
+			&:after
+				content " "
+				background-image url('../imgs/seven_el_logo.svg')
+				width 26px
+				height 26px
+				background-size cover
+				position absolute
+				top calc(50% - 13px)
+				right 0
+				
+
+		h2
+			display(flex)
+			flex-justify-content(space-between)
+
+.banner
+	position relative
+	height 40px
+	width 280px
+	font-size 16px
+	line-height 2em
+
+	.location
+		height 100%
+		width 100%
+		background-repeat no-repeat 
+		background-position center center
+		color #fff
+		background-size cover
+		margin 10px auto
+		
+	
+		&[data-winner="red"]
+			background-image url('../imgs/ribbon_banner_red.svg')
+		
+		&[data-winner="blue"]
+			background-image url('../imgs/ribbon_banner_blue.svg')
+		
+		&[data-winner="purple"]
+			background-image url('../imgs/ribbon_banner_purple.svg')
+
+.cup_results
+	display(flex)
+	flex-justify-content(center)
+	flex-direction(row)
+	width 265px
+	margin 0 auto
+	margin-top 12px
+
+.cup_results_container
+	flex-align-items(center)
+	flex-direction(column)
+	width 75px
+	margin 0 5px
+	
+	.cup
+		flex(1 auto)
+		position relative
+		background-image url('../imgs/coffee_colors_votes.png');
+		background-repeat no-repeat
+		background-size cover
+		height 150px
+		width 100%
+
+	.percentage
+		color #fff
+		font-weight bold
+		text-align center
+		
+		.circle
+			width 35px
+			height 35px
+			display inline-block
+			border-radius 50%
+			
+			span
+				line-height 2em
+				
+				sup
+					font-size 9px
+
+	&.red
+		.cup
+			background-position -152px 0
+		.circle
+			border 1px solid sevenRed
+			background-color sevenRed
+	&.purple
+		.cup
+			background-position -75px 0
+		.circle
+			border 1px solid sevenPurple
+			background-color sevenPurple
+	&.blue
+		.cup
+			background-position 0 0
+		.circle
+			border 1px solid sevenBlue
+			background-color sevenBlue
+
+.striped_bar
 	position absolute
-	width 100%
 	top 0
 	left 0
-	padding 1em 1em
-	background-color rgba(211, 104, 104, 0.9)
-	color white
-	font-size 13px
-	font-size 0.8125rem
-	z-index 101
-	text-align center
-
-
-.blur
-	background-color: rgba(200,200,200,0.7);
-	-webkit-filter: blur(5px);
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-
-header
-	position relative
 	width 100%
+	background #fff url('../imgs/colored-stripes.svg') no-repeat center center;
+	background-size cover
+	height 22px
 	
-	h1, p
-		width 100%
-	
-	p
-		display none
-		
+	&:before,
+	&:after 
+		height 22px
+		width 22px
+		background #fff url('../imgs/star.svg') no-repeat center center;
+		background-size cover
+		position absolute	
+		top 0
+		content " "
+	&:before
+		left 0
+	&:after
+		right 0
 
-@media only screen and (min-width: 768px)
-	address
-	font-size 15px
-	font-size 0.9375rem
-	text-align center
 
-	header
-		display inline-block
+
+@media only screen and (min-width: 1024px)
+	.banner
+		width 365px
+		height 55px
+		margin 20px auto
+		font-size 21px
+
+	.results
+		position absolute
+		top 0
+		left 0;	
+		width 420px
+		height calc(100vh - 150px)
+		padding 30px 10px
 		
-		p
-			display block
-		
+		header
+			width 74%

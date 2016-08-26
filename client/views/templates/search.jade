@@ -1,11 +1,12 @@
 .search_module
-	.search_box
-		input(
-		  type='text'
-		  name='cityzip'
-		)
 	select.state_select
 		option(value='national' selected="true" data-default="true" disabled) National
 		each state in states
 			option(value=state.abbrev) #{state.name}
-	button#findAStore Find a Store
+	.search_box.flex
+		input(
+		  type="text"
+		  name="cityzip"
+		  placeholder="Search by city or zip"
+		)
+		button#findAStore Find a Store

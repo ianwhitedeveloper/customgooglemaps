@@ -1,15 +1,16 @@
 #google-container
-  position absolute
-  top 0
-  right 0
-  width 100%
-  height 100vh
+  position relative
+  height 250px
   background-color #e7eaf0
 
-@media only screen and (min-width: 768px)
+@media only screen and (min-width: 1024px)
   #google-container
-    height 100vh
+    width 100%
+    position absolute
+    top 0
+    right 0
+    height calc(100vh - 150px)
 
-@media only screen and (min-width: 1170px)
-  #google-container
-    height 100vh
+// @media only screen and (min-width: 1170px)
+//   #google-container
+//     height 100vh

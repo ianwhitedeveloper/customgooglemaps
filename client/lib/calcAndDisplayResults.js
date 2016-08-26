@@ -25,16 +25,17 @@ function calcAndDisplayResults({results, scope}) {
 			totalRed 	= resultsObject.votes.red,
 			totalBlue 	= resultsObject.votes.blue,
 			totalPurple = resultsObject.votes.purple,
+			winner 		= resultsObject.winner,
 			address 	= resultsObject.address || '',
 			bannerText	= 	resultsObject.address || 
 							resultsObject.state_name || 
 							scope;
 
 
-		redCupEl.text(`Red: ${calcPercent([totalRed, totalVotes])}%`);
-		blueCupEl.text(`Blue: ${calcPercent([totalBlue, totalVotes])}%`);
-		purpleCupEl.text(`Purple: ${calcPercent([totalPurple, totalVotes])}%`);
-		sElEvtEmitter.emit('updateBannerText', {bannerText: bannerText, address: address});
+		redCupEl.html(`${calcPercent([totalRed, totalVotes])}<sup>%</sup>`);
+		blueCupEl.html(`${calcPercent([totalBlue, totalVotes])}<sup>%</sup>`);
+		purpleCupEl.html(`${calcPercent([winner, totalVotes])}<sup>%</sup>`);
+		sElEvtEmitter.emit('updateBannerText', {bannerText: bannerText, address: address, winner: winner});
 	}
 	catch (e) {
 		console.warn(e);
@@ -42,8 +43,9 @@ function calcAndDisplayResults({results, scope}) {
 	}
 }
 
-function updateBannerText({bannerText, address=''}) {
+function updateBannerText({bannerText, address='', winner}) {
 	bannerEl.text(bannerText);
+	bannerEl.attr('data-winner', winner);
 	directionsEl.text(address);
 }
 
