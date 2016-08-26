@@ -4,7 +4,6 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let geocoderInit = require('./geocoderInit');
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
-let stateSelectEl = require('./CONSTANTS').stateSelectEl;
 let searchBoxInput = $('input[name="cityzip"]');
 let cache = {
 	markers: []
@@ -44,15 +43,9 @@ let customCupMarkers = {
 $('body').on('click', '#findAStore', findAStoreClick);
 
 function findAStoreClick(e) {
-	let stateSelectVal = stateSelectEl
-		.find('option:selected');
 	let searchBoxInputVal = searchBoxInput.val();
-	let query = stateSelectVal
-				.data('default') 
-					? searchBoxInputVal
-					: `${searchBoxInputVal}, ${stateSelectVal.val()}`;
 
-	geocoderInit(query)
+	geocoderInit(searchBoxInputVal)
 	.done(getData);
 }
 
@@ -66,16 +59,20 @@ function getData(resultsArray) {
 }
 
 function plotMarkers(resultsArray) {
-	let bounds = new google.maps.LatLngBounds();
-	let marker;
-	sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
-    // Loop through our array of markers & place each one on the map  
-    for(let i = 0; i < resultsArray.length; i++ ) {
-		let currentResult = resultsArray[i];
-        let position = new google.maps.LatLng(currentResult.lat, currentResult.lon);
-     	addMarker(position, currentResult);
-    }
- 	showMarkers();
+	try {
+		let bounds = new google.maps.LatLngBounds();
+		let marker;
+		sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
+	    // Loop through our array of markers & place each one on the map  
+	    for(let i = 0; i < resultsArray.length; i++ ) {
+			let currentResult = resultsArray[i];
+	        let position = new google.maps.LatLng(currentResult.lat, currentResult.lon);
+	     	addMarker(position, currentResult);
+	    }
+	 	showMarkers();
+	 } catch (e) {
+	 	sElEvtEmitter.emit('generalError', e);
+	 }
 }
 
 /////////////////////////////////////////////////////
