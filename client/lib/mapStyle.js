@@ -8,7 +8,7 @@ let styles = [
 		// remove all labels (cities, states, oceans, countries, etc)
 		elementType: "labels",
 		stylers: [
-			{ visibility: "off" }
+			{ visibility: "on" }
 		]
 	},  
     {	//poi stands for point of interest - don't show these lables on the map 
