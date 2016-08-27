@@ -77,8 +77,6 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 			geocoderInit(boundaryId);
 		});
 		geocoderInit(boundaryId);
-
-		sElEvtEmitter.emit('boundTheMap', {boundaryId: boundaryId, scope: scope});
 	}
 	catch (err) {
 		console.warn(err);
