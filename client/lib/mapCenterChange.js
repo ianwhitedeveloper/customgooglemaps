@@ -6,7 +6,7 @@ let debouncedFunction = debounce(function(center) {
     return new Promise(function(resolve) {
         resolve(center);
     });
-}, 500);
+}, 600);
 
 map.addListener('center_changed', function debounceMapCenter() {
 	debouncedFunction(map.getCenter())
