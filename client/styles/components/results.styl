@@ -1,5 +1,3 @@
-@import '../functions/flex'
-
 .national_results
 	font-size 11px
 
@@ -15,13 +13,15 @@
 	padding 35px 25px 0
 	background-color transparent
 
-	h4, p
-		margin 7px 0
+	h4
+		margin 12px 0
+	p
+		margin 5px 0
 	
 	header
 		position relative
 		width 210px
-		margin 0 auto
+		margin 20px auto 0
 		
 		h1, p
 			width 100%
@@ -85,64 +85,57 @@
 		&[data-winner="purple"]
 			background-image url('../imgs/ribbon_banner_purple.svg')
 
-.cup_results
-	display(flex)
-	flex-justify-content(center)
-	flex-direction(row)
-	width 265px
-	margin 0 auto
-	margin-top 12px
+html[data-useragent*='evergreen']
+	.cup_results
+		display(flex)
+		max-width 414px
+		margin 25px auto  0
 
-.cup_results_container
-	flex-align-items(center)
-	flex-direction(column)
-	width 75px
-	margin 0 5px
-	
-	.cup
-		flex(1 auto)
-		position relative
-		background-image url('../imgs/coffee_colors_votes.png');
-		background-repeat no-repeat
-		background-size cover
-		height 150px
-		width 100%
-
-	.percentage
-		color #fff
-		font-weight bold
-		text-align center
+	.cup_results_container
+		flex(1)
+		aspect-ratio-cups(347, 673, 'cup')
+		margin 0 5px
 		
-		.circle
-			width 35px
-			height 35px
-			display inline-block
-			border-radius 50%
-			
-			span
-				line-height 2em
-				
-				sup
-					font-size 9px
+		.cup
+			background-image url('../imgs/coffee_colors_votes.png');
+			background-size 300%
 
-	&.red
-		.cup
-			background-position -152px 0
-		.circle
-			border 1px solid sevenRed
-			background-color sevenRed
-	&.purple
-		.cup
-			background-position -75px 0
-		.circle
-			border 1px solid sevenPurple
-			background-color sevenPurple
-	&.blue
-		.cup
-			background-position 0 0
-		.circle
-			border 1px solid sevenBlue
-			background-color sevenBlue
+		.percentage
+			color #fff
+			font-weight bold
+			text-align center
+			font-size 16px
+			
+			.circle
+				width 40px
+				height 40px
+				display inline-block
+				border-radius 50%
+				
+				span
+					line-height 2em
+					
+					sup
+						font-size 9px
+
+		&.red
+			.cup
+				background-position 50% 0
+			.circle
+				border 1px solid sevenRed
+				background-color sevenRed
+		&.purple
+			.cup
+				background-position 100% 0
+			.circle
+				border 1px solid sevenPurple
+				background-color sevenPurple
+		&.blue
+			.cup
+				background-position 0 0
+			.circle
+				border 1px solid sevenBlue
+				background-color sevenBlue
 
 .striped_bar
 	position absolute
@@ -186,3 +179,13 @@
 		
 		header
 			width 74%
+			margin 40px auto 0
+			
+	html[data-useragent*='evergreen']
+		.cup_results_container
+			.percentage
+				font-size 22.5px
+				
+				.circle
+					width 55px
+					height 55px

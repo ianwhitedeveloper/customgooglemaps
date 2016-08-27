@@ -1,0 +1,39 @@
+aspect-ratio(width, height, contentClass)
+	position relative
+	&:before 
+		display block
+		content ""
+		width 100%
+		padding-top (height / width) * 100%
+
+
+	& > .{contentClass}
+		position absolute
+		top 0
+		left 0
+		right 0
+		bottom 0
+
+aspect-ratio-cups(width, height, contentClass)
+	position relative
+	&:before 
+		display block
+		content " "
+		width 100%
+
+
+	& > .{contentClass}
+		padding-top (height / width) * 100%
+		position relative
+		top 0
+		left 0
+		right 0
+		bottom 0
+
+.ad_space_AR
+	aspect-ratio(275, 105, 'content')
+	background-color tansparent
+	.content
+		background transparent url('../imgs/ad_img.jpg') center center no-repeat
+		background-size contain
+
