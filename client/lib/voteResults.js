@@ -53,12 +53,17 @@ function getData(resultsArray) {
 	let result = resultsArray[0];
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
+	
+	queryElectionAPI(lat, lng);
+}
+
+function queryElectionAPI(lat, lng) {
 	deleteMarkers();
 	$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
-		.done(plotMarkers)
-		.fail(() => {
-			sElEvtEmitter.emit('generalError', 'API error - please try again later');
-		})
+	.done(plotMarkers)
+	.fail(() => {
+		sElEvtEmitter.emit('generalError', 'API error - please try again later');
+	});
 }
 
 function plotMarkers(resultsArray) {
@@ -128,6 +133,7 @@ function deleteMarkers() {
 
 sElEvtEmitter.on('clearMarkers', clearMarkers);
 sElEvtEmitter.on('showMarkers', showMarkers);
+sElEvtEmitter.on('queryElectionAPI', queryElectionAPI);
 
 
 // $.when($.get('https://api-test.7-eleven.com/v3/election/votes?sort_by=city&date=07/11/2016&state=TX')).then(drawToDOM);
