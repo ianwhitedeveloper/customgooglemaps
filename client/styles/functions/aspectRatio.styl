@@ -1,0 +1,22 @@
+aspect-ratio(width, height, contentClass)
+	position relative
+	&:before 
+		display block
+		content ""
+		width 100%
+		padding-top (height / width) * 100%
+
+
+	& > .{contentClass}
+		position absolute
+		top 0
+		left 0
+		right 0
+		bottom 0
+
+.sixteen-nine 
+	aspect-ratio(16, 9, 'content')
+	
+	img 
+		width 100%
+		height auto
