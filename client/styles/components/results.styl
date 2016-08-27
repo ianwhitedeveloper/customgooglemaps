@@ -85,26 +85,18 @@
 
 .cup_results
 	display(flex)
-	flex-justify-content(space-between)
-	flex-direction(row)
 	max-width 414px
 	margin 0 auto
 	margin-top 12px
 
 .cup_results_container
-	flex-align-items(center)
-	flex-direction(column)
-	
+	flex(1)
+	aspect-ratio-cups(347, 720, 'cup')
 	margin 0 5px
 	
 	.cup
-		flex(1 auto)
-		position relative
 		background-image url('../imgs/coffee_colors_votes.png');
-		background-repeat no-repeat
-		background-size cover
-		height 150px
-		width 100%
+		background-size 300%
 
 	.percentage
 		color #fff
@@ -125,13 +117,13 @@
 
 	&.red
 		.cup
-			background-position -152px 0
+			background-position 50% 0
 		.circle
 			border 1px solid sevenRed
 			background-color sevenRed
 	&.purple
 		.cup
-			background-position -75px 0
+			background-position 100% 0
 		.circle
 			border 1px solid sevenPurple
 			background-color sevenPurple
