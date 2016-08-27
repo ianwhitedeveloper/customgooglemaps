@@ -44,7 +44,7 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 				new_boundary.feature = boundariesFromGeoJsonLayer.getFeatureById(boundaryId);
 				myBoundaries[boundaryName] = new_boundary;
 
-				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 1, strokeColor: '#fff', fillOpacity: 0.3}});
+				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 1, strokeColor: '#fff', fillOpacity: 0.8}});
 
 			}
 		}
@@ -68,7 +68,7 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 		in certain situations e.g. new york will
 		show NYC, not NY, the state*/
 		if (myBoundaries[boundaryId]) {
-			updateStateColor(boundaryId);
+			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeColor: '#fff', fillOpacity: 0.3}})
 			boundaryId = `${boundaryId} State`
 		}
 
@@ -90,8 +90,19 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 // Helpers //
 /////////////
 
-function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#fff',fillOpacity:0.2}}={}) {
+function resetGeoStyle() {
+	for (let boundaryName in myBoundaries) {
+	    if (myBoundaries.hasOwnProperty(boundaryName)) {
+	    	boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {strokeWeight:1, strokeColor:'#fff',fillOpacity:0.8})
+	    }
+	}
+}
+
+function overrideGeoStyle({boundaryName, style}={}) {
 	if (boundaryName in stateDict) {
+
+		sElEvtEmitter.emit('resetGeoStyle');
+		
 		let boundaryWinner = results.states[boundaryName] ? results.states[boundaryName].winner : '';
 
 		boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
@@ -103,10 +114,6 @@ function overrideGeoStyle({boundaryName, style={strokeWeight:1, strokeColor:'#ff
 	}
 }
 
-function updateStateColor(boundaryName) {
-	overrideGeoStyle({boundaryName: boundaryName, style: {strokeColor: '#fff', fillOpacity: 0.3}});
-}
-
 function boundaryClick(e) {
 	boundTheMap({boundaryId: e.feature.f.NAME, scope: e.feature.f.NAME});
 	calcAndDisplayResults({results: results, scope: e.feature.f.NAME});
@@ -114,12 +121,10 @@ function boundaryClick(e) {
 }
 
 function boundaryMouseOver(e) {
+	var boundaryName = e.feature.f.NAME;
 	boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
 		strokeWeight: 3,
 	});
-
-	var boundaryName = e.feature.f.NAME;
-	
 	if(boundaryName) {
 		$('#bname').html(boundaryName);
 	}
@@ -129,8 +134,10 @@ function boundaryMouseOut(e) {
 	boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
 		strokeWeight: 1
 	});
-	$('#bname').html('United States');
 }
+
+sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
+sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
 
 module.exports = {
 	init,
