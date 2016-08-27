@@ -83,56 +83,57 @@
 		&[data-winner="purple"]
 			background-image url('../imgs/ribbon_banner_purple.svg')
 
-.cup_results
-	display(flex)
-	max-width 414px
-	margin 0 auto
-	margin-top 12px
+html[data-useragent*='evergreen']
+	.cup_results
+		display(flex)
+		max-width 414px
+		margin 0 auto
+		margin-top 12px
 
-.cup_results_container
-	flex(1)
-	aspect-ratio-cups(347, 720, 'cup')
-	margin 0 5px
-	
-	.cup
-		background-image url('../imgs/coffee_colors_votes.png');
-		background-size 300%
-
-	.percentage
-		color #fff
-		font-weight bold
-		text-align center
+	.cup_results_container
+		flex(1)
+		aspect-ratio-cups(347, 720, 'cup')
+		margin 0 5px
 		
-		.circle
-			width 35px
-			height 35px
-			display inline-block
-			border-radius 50%
-			
-			span
-				line-height 2em
-				
-				sup
-					font-size 9px
+		.cup
+			background-image url('../imgs/coffee_colors_votes.png');
+			background-size 300%
 
-	&.red
-		.cup
-			background-position 50% 0
-		.circle
-			border 1px solid sevenRed
-			background-color sevenRed
-	&.purple
-		.cup
-			background-position 100% 0
-		.circle
-			border 1px solid sevenPurple
-			background-color sevenPurple
-	&.blue
-		.cup
-			background-position 0 0
-		.circle
-			border 1px solid sevenBlue
-			background-color sevenBlue
+		.percentage
+			color #fff
+			font-weight bold
+			text-align center
+			
+			.circle
+				width 35px
+				height 35px
+				display inline-block
+				border-radius 50%
+				
+				span
+					line-height 2em
+					
+					sup
+						font-size 9px
+
+		&.red
+			.cup
+				background-position 50% 0
+			.circle
+				border 1px solid sevenRed
+				background-color sevenRed
+		&.purple
+			.cup
+				background-position 100% 0
+			.circle
+				border 1px solid sevenPurple
+				background-color sevenPurple
+		&.blue
+			.cup
+				background-position 0 0
+			.circle
+				border 1px solid sevenBlue
+				background-color sevenBlue
 
 .striped_bar
 	position absolute

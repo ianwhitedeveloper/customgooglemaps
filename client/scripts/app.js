@@ -9,7 +9,9 @@ let errorHandler = require('../lib/errorHandler');
 let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
 var doc = document.documentElement;
-doc.setAttribute('data-useragent', navigator.userAgent);
+// console.log(navigator.userAgent);
+let isIE = navigator.userAgent.match('MSIE');
+doc.setAttribute('data-useragent', isIE ? navigator.userAgent : 'evergreen');
 $(document).ready(function(){
     //set your google maps parameters
 	//you can use any,location as center on map startup
