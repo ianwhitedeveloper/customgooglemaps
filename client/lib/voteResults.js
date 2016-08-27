@@ -123,6 +123,10 @@ function deleteMarkers() {
 	cache.markers = [];
 }
 
+sElEvtEmitter.on('clearMarkers', clearMarkers);
+sElEvtEmitter.on('showMarkers', showMarkers);
+
+
 // $.when($.get('https://api-test.7-eleven.com/v3/election/votes?sort_by=city&date=07/11/2016&state=TX')).then(drawToDOM);
 /*let callbacks = {
 	enableSeachBox: function enableSeachBox(res) {

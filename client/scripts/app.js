@@ -6,6 +6,7 @@ let CustomZoomControl = require('../lib/CustomZoomControl');
 let mapOptions = require('../lib/mapOptions');
 let voteResults = require('../lib/voteResults');
 let errorHandler = require('../lib/errorHandler');
+let mapZoom = require('../lib/mapZoom');
 let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
 var doc = document.documentElement;
