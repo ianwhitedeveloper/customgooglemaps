@@ -8,7 +8,8 @@ let voteResults = require('../lib/voteResults');
 let errorHandler = require('../lib/errorHandler');
 let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
-
+var doc = document.documentElement;
+doc.setAttribute('data-useragent', navigator.userAgent);
 $(document).ready(function(){
     //set your google maps parameters
 	//you can use any,location as center on map startup
