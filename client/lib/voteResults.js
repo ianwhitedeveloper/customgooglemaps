@@ -55,7 +55,10 @@ function getData(resultsArray) {
 	let lng = result.geometry.location.lng();
 	deleteMarkers();
 	$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
-		.done(plotMarkers);
+		.done(plotMarkers)
+		.fail(() => {
+			sElEvtEmitter.emit('generalError', 'API error - please try again later');
+		})
 }
 
 function plotMarkers(resultsArray) {
@@ -71,7 +74,7 @@ function plotMarkers(resultsArray) {
 	    }
 	 	showMarkers();
 	 } catch (e) {
-	 	sElEvtEmitter.emit('generalError', e);
+	 	sElEvtEmitter.emit('generalError', 'Location not found: your search returned no results');
 	 }
 }
 
