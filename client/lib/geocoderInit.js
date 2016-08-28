@@ -1,6 +1,7 @@
 let map = require('../lib/map');
 let $ = require('jquery');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
+let returnCurrentMapZoomLevel = require('../lib/mapZoom').returnCurrentMapZoomLevel;
 
 function geocoderInit(boundaryName) {
 	let deferred = $.Deferred();

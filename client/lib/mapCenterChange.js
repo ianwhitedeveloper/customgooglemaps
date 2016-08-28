@@ -1,6 +1,7 @@
 let map = require('../lib/map');
 let $ = require('jquery');
 let debounce = require('es6-promise-debounce');
+let sElEvtEmitter = require('./globals').sElEvtEmitter;
 
 let debouncedFunction = debounce(function(center) {
     return new Promise(function(resolve) {
@@ -11,8 +12,8 @@ let debouncedFunction = debounce(function(center) {
 map.addListener('center_changed', function debounceMapCenter() {
 	debouncedFunction(map.getCenter())
 	.then(center => { 
-		// console.log('this one should be executed'); 
-		console.log(center.lat());
-		console.log(center.lng());
+		let lat = center.lat(),
+			lng = center.lng();
+		sElEvtEmitter.emit('queryElectionAPI', {lat: lat, lng: lng})
 	});
 });

@@ -9,7 +9,14 @@ function toggleStorePins(zoomLevel) {
 }
 
 map.addListener('zoom_changed', function() {
-	let zoomLevel = map.getZoom();
-	toggleStorePins(zoomLevel);
+	toggleStorePins(returnCurrentMapZoomLevel());
 });
 
+
+function returnCurrentMapZoomLevel() {
+	return map.getZoom();
+}
+
+module.exports = {
+	returnCurrentMapZoomLevel
+}

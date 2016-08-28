@@ -54,16 +54,18 @@ function getData(resultsArray) {
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
 	
-	queryElectionAPI(lat, lng);
+	queryElectionAPI({lat: lat, lng: lng});
 }
 
-function queryElectionAPI(lat, lng) {
-	deleteMarkers();
-	$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
-	.done(plotMarkers)
-	.fail(() => {
-		sElEvtEmitter.emit('generalError', 'API error - please try again later');
-	});
+function queryElectionAPI({lat, lng}={}) {
+	if (map.getZoom() > 5) {
+		deleteMarkers();
+		$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
+		.done(plotMarkers)
+		.fail(() => {
+			sElEvtEmitter.emit('generalError', 'API error - please try again later');
+		});
+	}
 }
 
 function plotMarkers(resultsArray) {
