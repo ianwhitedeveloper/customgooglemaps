@@ -11,34 +11,37 @@
 				span.seven_purple Your 
 				span.seven_red Cup
 
-	p.text_center We’re tallying every XL Stay-Hot 7Election Cup. Explore to see your city’s results.
+		p.text_center We’re tallying every XL Stay-Hot 7Election Cup. Explore to see your city’s results.
 
-	h4.uppercase.seven_blue.text_center
-		i Results Updated Daily!
+	div
+		h4.uppercase.seven_blue.text_center
+			i Results Updated Daily!
 
-	.details.text_center
-		.banner.uppercase
-			.location(data-winner="")
-			.share_results
-				a(href="https://google.com" target="_blank") Share Results
+		.details.text_center
+			.banner.uppercase
+				.location(data-winner="")
+				.share_results
+					a(href="https://google.com" target="_blank") Share Results
 
-		.directions
+			.directions
 
-	.cup_results
-		.cup_results_container.blue
-			div.percentage
-				div.circle
-					span
-			div.cup
-		.cup_results_container.purple
-			div.percentage
-				div.circle
-					span
-			div.cup
-		.cup_results_container.red
-			div.percentage
-				div.circle
-					span
-			div.cup
-
-	include ./ad-space
+	div
+		.cup_results
+			.cup_results_container.blue
+				div.percentage
+					div.circle
+						span
+				div.cup
+			.cup_results_container.purple
+				div.percentage
+					div.circle
+						span
+				div.cup
+			.cup_results_container.red
+				div.percentage
+					div.circle
+						span
+				div.cup
+					
+	div
+		include ./ad-space
