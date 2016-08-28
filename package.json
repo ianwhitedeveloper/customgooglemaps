@@ -6,6 +6,7 @@
     "test": "scripts/test"
   },
   "dependencies": {
+    "es6-promise": "^3.2.1",
     "eventemitter2": "^2.1.0",
     "google-maps-utility-library-v3-infobox": "^1.1.14",
     "notie": "^3.9.2"
