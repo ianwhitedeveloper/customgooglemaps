@@ -23,8 +23,12 @@ let injectConfig = {
 	relative: false
 };
 let configPreprocessor = {
-	compress: true
-};
+  compress: true,
+    'include css': true,
+    include: [
+        './node_modules/../'      // Shortcut references possible everywhere, e.g. @import 'node_modules/bla'
+        ]
+    };
 
 gulp.task('styles-prod', ['clean'], stylesTask);
 
