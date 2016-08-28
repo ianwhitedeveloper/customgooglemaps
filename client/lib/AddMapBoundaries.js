@@ -4,17 +4,14 @@ let stateDict = require('../lib/stateDict');
 let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
+let colorKey = require('../lib/CONSTANTS').colorKey;
 
 let myBoundaries = {};
 // initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 let boundariesFromGeoJsonLayer = new google.maps.Data({map: map});
 let infoWindow = null;
 let results = null;
-let colorKey = {
-	purple: '#4F2169',
-	red: '#DA1F31',
-	blue: '#0099DD'
-};
+
 
 function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);

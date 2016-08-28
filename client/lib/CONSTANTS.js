@@ -5,6 +5,11 @@ let blueCupEl = $('.cup_results_container.blue .percentage span');
 let purpleCupEl = $('.cup_results_container.purple .percentage span')
 let bannerEl = $('.results .banner .location');
 let directionsEl = $('.results .directions');
+let colorKey = {
+	purple: '#4F2169',
+	red: '#DA1F31',
+	blue: '#0099DD'
+};
 
 module.exports = {
 	API_URL,
@@ -12,5 +17,6 @@ module.exports = {
 	blueCupEl,
 	purpleCupEl,
 	bannerEl,
-	directionsEl
+	directionsEl,
+	colorKey
 }
