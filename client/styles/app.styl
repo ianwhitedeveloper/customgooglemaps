@@ -67,8 +67,22 @@ a
 	
 	&:visited, &:active, &:visited:active
 		color sevenPurple
+		
+
+.arrow_right
+	display inline-block
+	width 0
+	height 0
+	border-top 3px solid transparent
+	border-bottom 3px solid transparent
+	border-left 3px solid sevenPurple
+	// vertical-align middle
+	margin 0 3px
+
+
 .share_results
 	font-family 'AvenirNextLTW01-BoldCn', 'Nunito', sans-serif
+	font-size 11px
 
 #notie-confirm-yes,
 #notie-confirm-no
@@ -161,5 +175,14 @@ main
 	
 	.mobile
 		display none
+		
+	.share_results
+		font-size 15px
+
+	.arrow_right
+		border-top 5px solid transparent
+		border-bottom 5px solid transparent
+		border-left 5px solid sevenPurple
+		margin 0 5px
 
 @import './lte-ie10.styl'
