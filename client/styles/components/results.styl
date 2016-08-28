@@ -1,6 +1,16 @@
 .national_results
 	font-size 11px
+	margin-left: 10px;
+	position: relative;
 
+	&:before
+		content: ' ';
+		background: url("../imgs/arrow_left.svg") center center no-repeat;
+		width: 12px;
+		height: 12px;
+		position: absolute;
+		left: -14px;
+		
 .share_results
 	font-size 11px
 	position relative
@@ -170,6 +180,14 @@ html[data-useragent*='evergreen']
 
 
 @media only screen and (min-width: 1024px)
+	.national_results
+		font-size 14px
+		margin-left 17px
+		&:before
+			width: 15px;
+			height: 15px;
+			left: -16px;
+
 	.banner
 		width 365px
 		height 55px
