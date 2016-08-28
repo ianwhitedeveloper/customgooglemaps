@@ -27,7 +27,7 @@ div[rel="js-share-results"]
 	
 	header
 		position relative
-		width 210px
+		width 165px
 		margin 20px auto 0
 		
 		h1, p
@@ -48,7 +48,7 @@ div[rel="js-share-results"]
 				width auto
 				position absolute
 				top 0
-				right -3px
+				right 0
 
 			&:after
 				content " "
@@ -185,8 +185,16 @@ html[data-useragent*='evergreen']
 		padding 30px 10px
 		
 		header
-			width 74%
+			width 60%
 			margin 40px auto 0
+			
+			h1
+				&:before
+					font-size 10px
+				&:after
+					width 35px
+					height 35px
+					top calc(50% - 17.5px)
 			
 	html[data-useragent*='evergreen']
 		.cup_results_container
