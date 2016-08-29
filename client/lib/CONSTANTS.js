@@ -10,6 +10,7 @@ let colorKey = {
 	red: '#DA1F31',
 	blue: '#0099DD'
 };
+let stateMetaEl = $('meta[name=currentState]');
 
 module.exports = {
 	API_URL,
@@ -18,5 +19,6 @@ module.exports = {
 	purpleCupEl,
 	bannerEl,
 	directionsEl,
-	colorKey
+	colorKey,
+	stateMetaEl
 }
