@@ -29,7 +29,7 @@ $('#notie-confirm-no')
 
 function setShareURL() {
 	stateMetaValue = stateMetaEl.attr('content');
-	encodedRelativeURL = encodeURIComponent(`${window.location.href}#${stateMetaValue}`);
+	encodedRelativeURL = encodeURIComponent(`${window.location.origin}/#${stateMetaValue}`);
 	$('#notie-confirm-yes a').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}`);
 
 
