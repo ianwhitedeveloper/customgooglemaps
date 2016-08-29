@@ -123,17 +123,17 @@ html[data-useragent*='evergreen']
 			text-align center
 			font-size 16px
 			
-			.circle
-				width 40px
-				height 40px
-				display inline-block
-				border-radius 50%
+		.circle
+			width 40px
+			height 40px
+			display inline-block
+			border-radius 50%
+			
+			span
+				line-height 2em
 				
-				span
-					line-height 2em
-					
-					sup
-						font-size 9px
+			sup
+				font-size 9px
 
 		&.red
 			.cup
@@ -213,12 +213,20 @@ html[data-useragent*='evergreen']
 					width 35px
 					height 35px
 					top calc(50% - 17.5px)
+					
+	.cup_results_container
+		.circle
+			sup
+				font-size 10px
 			
 	html[data-useragent*='evergreen']
 		.cup_results_container
 			.percentage
 				font-size 22.5px
 				
-				.circle
-					width 55px
-					height 55px
+			.circle
+				width 55px
+				height 55px
+
+				sup
+					font-size 11px
