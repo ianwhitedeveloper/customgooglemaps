@@ -58,7 +58,7 @@ function getData(resultsArray) {
 }
 
 function queryElectionAPI({lat, lng}={}) {
-	if (map.getZoom() > 5) {
+	if (map.getZoom() >= 10) {
 		deleteMarkers();
 		$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
 		.done(plotMarkers)
