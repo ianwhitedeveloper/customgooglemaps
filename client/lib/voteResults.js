@@ -42,6 +42,13 @@ let customCupMarkers = {
 
 $('body').on('click', '#findAStore', findAStoreClick);
 
+document.addEventListener("keydown", function(event) {
+	// keyCode 13 === Enter
+	if (event.keyCode === 13) {
+		sElEvtEmitter.emit('findAStoreClick');
+	}
+})
+
 function findAStoreClick(e) {
 	let searchBoxInputVal = searchBoxInput.val();
 
@@ -136,6 +143,7 @@ function deleteMarkers() {
 sElEvtEmitter.on('clearMarkers', clearMarkers);
 sElEvtEmitter.on('showMarkers', showMarkers);
 sElEvtEmitter.on('queryElectionAPI', queryElectionAPI);
+sElEvtEmitter.on('findAStoreClick', findAStoreClick);
 
 
 // $.when($.get('https://api-test.7-eleven.com/v3/election/votes?sort_by=city&date=07/11/2016&state=TX')).then(drawToDOM);
