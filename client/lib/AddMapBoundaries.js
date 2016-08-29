@@ -1,4 +1,4 @@
-let geocoderInit = require('../lib/geocoderInit');
+let geocoderInit = require('../lib/geocoderInit').geocoderInit;
 let map = require('../lib/map');
 let stateDict = require('../lib/stateDict');
 let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
@@ -65,7 +65,7 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 		in certain situations e.g. new york will
 		show NYC, not NY, the state*/
 		if (myBoundaries[boundaryId]) {
-			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeColor: '#fff', fillOpacity: 0.3}})
+			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeColor: '#fff', fillOpacity: 0.8}})
 			boundaryId = `${boundaryId} State`
 		}
 

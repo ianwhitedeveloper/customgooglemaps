@@ -1,7 +1,8 @@
 let $ = require('jquery');
 let map = require('./map');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
-let geocoderInit = require('./geocoderInit');
+let getStateNameFromGeoResults = require('../lib/getStateNameFromGeoResults');
+let geocoderInit = require('./geocoderInit').geocoderInit;
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
 let searchBoxInput = $('input[name="cityzip"]');
@@ -56,11 +57,23 @@ function findAStoreClick(e) {
 	.done(getData);
 }
 
-function getData(resultsArray) {
-	let result = resultsArray[0];
+function getData(results) {
+	let result = results[0];
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
-	
+	getStateNameFromGeoResults(results)
+	.then(stateName => {
+        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateName, style: {strokeColor: '#fff', fillOpacity: 0.3}});
+	});
+	/*let stateName;
+	for(let i=0; i < results[0].address_components.length; i++)
+    {
+        if (results[0].address_components[i].types[0] === "administrative_area_level_1")
+        {
+            stateName = results[0].address_components[i].short_name;
+
+        }
+    }*/
 	queryElectionAPI({lat: lat, lng: lng});
 }
 
