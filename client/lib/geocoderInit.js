@@ -7,7 +7,7 @@ let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
 function geocoderInit(boundaryName) {
 	let deferred = $.Deferred();
 	var geocoder = new google.maps.Geocoder();
-	geocoder.geocode({'address': `${boundaryName}`}, deferred.resolve);
+	geocoder.geocode({'address': `${boundaryName}, united states`}, deferred.resolve);
 	deferred.then(fitBounds);
 	return deferred.promise();
 }
