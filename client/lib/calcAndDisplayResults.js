@@ -37,9 +37,8 @@ function calcAndDisplayResults({results, scope}) {
 		purpleCupEl.html(`${calcPercent([totalPurple, totalVotes])}<sup>%</sup>`);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: bannerText, address: address, winner: winner});
 	}
-	catch (e) {
-		console.warn(e);
-		sElEvtEmitter.emit('updateBannerText', {bannerText: 'No Results'});
+	catch (error) {
+		sElEvtEmitter.emit('generalError', error);
 	}
 }
 
