@@ -2,7 +2,7 @@ let $ = require('jquery');
 let map = require('./map');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let getStateNameFromGeoResults = require('../lib/getStateNameFromGeoResults');
-let geocoderInit = require('./geocoderInit').geocoderInit;
+let geocoderInit = require('./AddMapBoundaries').geocoderInit;
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
 let searchBoxInput = $('input[name="cityzip"]');
@@ -62,8 +62,8 @@ function getData(results) {
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
 	getStateNameFromGeoResults(results)
-	.then(stateName => {
-        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateName, style: {strokeColor: '#fff', fillOpacity: 0.3}});
+	.then(data => {
+        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeColor: '#fff', fillOpacity: 0.3}});
 	});
 	
 	queryElectionAPI({lat: lat, lng: lng});

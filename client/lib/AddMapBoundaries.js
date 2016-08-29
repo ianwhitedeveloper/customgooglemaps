@@ -1,16 +1,18 @@
-let geocoderInit = require('../lib/geocoderInit').geocoderInit;
+// let geocoderInit = require('../lib/geocoderInit').geocoderInit;
 let map = require('../lib/map');
 let stateDict = require('../lib/stateDict');
 let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let colorKey = require('../lib/CONSTANTS').colorKey;
-
+let returnCurrentMapZoomLevel = require('../lib/mapZoom').returnCurrentMapZoomLevel;
+let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
+let getStateNameFromGeoResults = require('../lib/getStateNameFromGeoResults');
 let myBoundaries = {};
 // initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 let boundariesFromGeoJsonLayer = new google.maps.Data({map: map});
 let infoWindow = null;
-let results = null;
+let globalResults = null;
 
 
 function init({bounds, scope, results, boundaryId}={}) {
@@ -21,7 +23,7 @@ function init({bounds, scope, results, boundaryId}={}) {
 }
 
 function setResults(r) {
-	results = r;
+	globalResults = r;
 }
 
 function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
@@ -47,7 +49,7 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 		}
 	}
 
-	calcAndDisplayResults({results: results, scope: scope});
+	calcAndDisplayResults({results: globalResults, scope: scope});
 }
 
 function initializeDataLayer(){
@@ -98,7 +100,7 @@ function overrideGeoStyle({boundaryName, style}={}) {
 
 		sElEvtEmitter.emit('resetGeoStyle');
 		
-		let boundaryWinner = results.states[boundaryName] ? results.states[boundaryName].winner : '';
+		let boundaryWinner = globalResults.states[boundaryName] ? globalResults.states[boundaryName].winner : '';
 
 		boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
 			strokeWeight: style.strokeWeight,
@@ -131,10 +133,36 @@ function boundaryMouseOut(e) {
 	});
 }
 
+function geocoderInit(boundaryName) {
+	let deferred = $.Deferred();
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'address': `${boundaryName}, united states`}, deferred.resolve);
+	deferred.then(fitBounds);
+	return deferred.promise();
+}
+
+function fitBounds(results) {
+	getStateNameFromGeoResults(results)
+	.then(data => {
+        sElEvtEmitter.emit('updateStateMeta', data.stateNameShort);
+		sElEvtEmitter.emit('updateBannerText', {bannerText: data.stateNameLong, winner: globalResults.states[data.stateNameShort].winner});
+	})
+	.fail(error => { sElEvtEmitter.emit('silentError', error) });
+
+	map.fitBounds(results[0].geometry.viewport);
+}
+
+
+function updateStateMeta(stateName) {
+	stateMetaEl.attr('content', stateName);
+}
+
+sElEvtEmitter.on('updateStateMeta', updateStateMeta);
 sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
 sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
 
 module.exports = {
 	init,
-	boundTheMap
+	boundTheMap,
+	geocoderInit
 }
