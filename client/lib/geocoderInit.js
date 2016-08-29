@@ -17,7 +17,7 @@ function fitBounds(results) {
 	getStateNameFromGeoResults(results)
 	.then(stateName => {
         sElEvtEmitter.emit('updateStateMeta', stateName);
-	});
+	}).fail(error => { sElEvtEmitter.emit('silentError', error) });
 
 	map.fitBounds(results[0].geometry.viewport);
 }

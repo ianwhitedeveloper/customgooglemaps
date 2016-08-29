@@ -10,4 +10,9 @@ function generalError(errorMessage) {
 	notie.alert(3, errorMessage, 2.5);
 }
 
+function silentError(errorMessage) {
+	console.warn(errorMessage);
+}
+
 sElEvtEmitter.on('generalError', generalError);
+sElEvtEmitter.on('silentError', silentError);

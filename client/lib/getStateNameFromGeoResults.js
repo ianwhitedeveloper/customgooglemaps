@@ -12,9 +12,9 @@ function getStateNameFromGeoResults(results) {
         {
             stateName = results[0].address_components[i].short_name;
             deferred.resolve(stateName);
-		    return deferred.promise();
         }
     }
+    return deferred.promise();
 }
 
 sElEvtEmitter.on('getStateNameFromGeoResults', getStateNameFromGeoResults);
