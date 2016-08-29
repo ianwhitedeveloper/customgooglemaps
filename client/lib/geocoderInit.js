@@ -11,7 +11,8 @@ function geocoderInit(boundaryName) {
 	return deferred.promise();
 }
 
-function fitBounds(results) {
+function getStateNameFromGeoResults(results) {
+	// http://stackoverflow.com/questions/6778205/google-maps-geocoder-to-return-state
 	let stateName;
 	for(let i=0; i < results[0].address_components.length; i++)
     {
@@ -21,7 +22,11 @@ function fitBounds(results) {
             sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateName, style: {strokeColor: '#fff', fillOpacity: 0.3}})
         }
     }
+}
+
+function fitBounds(results) {
+	getStateNameFromGeoResults(results);
 	map.fitBounds(results[0].geometry.viewport);
-};
+}
 
 module.exports = geocoderInit;
