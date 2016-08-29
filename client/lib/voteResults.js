@@ -105,7 +105,6 @@ function addMarker(position, results) {
 	});
 
 	google.maps.event.addListener(marker, "click", function (e) {
-		// debugger;
 	    for (var i=0; i<cache.markers.length; i++) {
 			let currentMarker = cache.markers[i];
 			currentMarker.marker.setIcon(currentMarker.winner);
