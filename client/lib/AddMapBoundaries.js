@@ -43,7 +43,7 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 				new_boundary.feature = boundariesFromGeoJsonLayer.getFeatureById(boundaryId);
 				myBoundaries[boundaryName] = new_boundary;
 
-				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 1, strokeColor: '#fff', fillOpacity: 0.8}});
+				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 2, strokeColor: '#fff', fillOpacity: 0.8}});
 
 			}
 		}
@@ -88,7 +88,7 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 function resetGeoStyle() {
 	for (let boundaryName in myBoundaries) {
 	    if (myBoundaries.hasOwnProperty(boundaryName)) {
-	    	boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {strokeWeight:1, strokeColor:'#fff',fillOpacity:0.8})
+	    	boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {strokeWeight: 2, strokeColor:'#fff',fillOpacity:0.8})
 	    }
 	}
 }
