@@ -32,7 +32,8 @@ a[rel="js-share-results"]
 	
 	header
 		position relative
-		width 165px
+		width 75%
+		max-width 205px
 		margin 20px auto 0
 		
 		h1, p
@@ -46,13 +47,15 @@ a[rel="js-share-results"]
 			color sevenPurple
 			border-bottom 4px double sevenPurple
 			position relative
+			line-height 1em
 			
 			&:before
+				line-height normal
 				content "ONLY AT"
 				font-size 7px
 				width auto
 				position absolute
-				top 0
+				top -6px
 				right 0
 
 			&:after
@@ -175,29 +178,19 @@ html[data-useragent*='evergreen']
 		right 0
 
 
-
-@media only screen and (min-width: 1024px)
+@media only screen and (min-width: 768px)
+	main
+		max-width 75%
+		margin 0 auto
+		
 	.national_results
 		font-size 14px
 		margin-left 17px
-
-	.banner
-		width 365px
-		height 55px
-		margin 20px auto
-		font-size 21px
-
-	.results
-		position absolute
-		top 0
-		left 0;	
-		width 420px
-		height calc(100vh - 85px)
-		padding 30px 10px
 		
+	.results
 		header
-			width 75%
 			margin 40px auto 0
+			max-width 304px
 			
 			h1
 				&:before
@@ -209,7 +202,13 @@ html[data-useragent*='evergreen']
 					width 38px
 					height 38px
 					top calc(50% - 19px)
-					
+
+	.banner
+		width 365px
+		height 55px
+		margin 20px auto
+		font-size 21px
+		
 	html[data-useragent*='evergreen'] .cup_results_container .circle sup,
 	.cup_results_container .circle sup
 				font-size 11px
@@ -222,3 +221,20 @@ html[data-useragent*='evergreen']
 			.circle
 				width 55px
 				height 55px
+		
+@media only screen and (min-width: 1024px)
+	main
+		max-width 100%
+		margin auto auto
+
+	.results
+		position absolute
+		top 0
+		left 0;	
+		width 420px
+		height calc(100vh - 85px)
+		padding 30px 10px
+		
+		header
+			max-width 100%
+					

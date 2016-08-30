@@ -46,6 +46,7 @@ h1, h2, h3, h4, h5, h6, p
 
 h1, h2, h3, h4, h5, h6
 	font-family AvenirNextBold
+	font-weight 100
 	
 p
 	AvenirNextMed
@@ -76,7 +77,8 @@ a
 		width: 12px;
 		height: 12px;
 		position: absolute;
-		left: -14px;	
+		left: -14px;
+		top 0
 
 .arrow_right
 	&:after
@@ -156,13 +158,9 @@ main
 	*
 		display(flex auto)
 		flex-align-self(center)
-	
-@media only screen and (min-width: 1024px)
-	html, body
-	  height 100%
-	  
+		
+@media only screen and (min-width: 768px)
 	body
-		position static
 		font-size 14px
 	  
 		h1 
@@ -173,7 +171,11 @@ main
 			font-size 21px
 		h4
 			font-size 15px
-		
+	
+@media only screen and (min-width: 1024px)
+	html, body
+	  height 100%
+	  
 	main
 		margin-bottom -85px
 		
