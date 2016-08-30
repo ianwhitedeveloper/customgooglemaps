@@ -63,7 +63,7 @@ function getData(results) {
 	let lng = result.geometry.location.lng();
 	getStateNameFromGeoResults(results)
 	.then(data => {
-        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeColor: '#fff', fillOpacity: 0.3}});
+        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 3, strokeColor: '#fff', fillOpacity: 0.3}});
 	});
 	
 	queryElectionAPI({lat: lat, lng: lng});

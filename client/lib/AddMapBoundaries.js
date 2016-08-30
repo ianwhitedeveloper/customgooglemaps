@@ -54,8 +54,6 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 
 function initializeDataLayer(){
 	boundariesFromGeoJsonLayer.addListener('click', boundaryClick);
-	boundariesFromGeoJsonLayer.addListener('mouseover', boundaryMouseOver);
-	boundariesFromGeoJsonLayer.addListener('mouseout', boundaryMouseOut);
 }
 
 function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
@@ -67,7 +65,7 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 		in certain situations e.g. new york will
 		show NYC, not NY, the state*/
 		if (myBoundaries[boundaryId]) {
-			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeColor: '#fff', fillOpacity: 0.8}})
+			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeWeight: 3, strokeColor: '#fff', fillOpacity: 0.8}})
 			boundaryId = `${boundaryId} State`
 		}
 
@@ -115,22 +113,6 @@ function boundaryClick(e) {
 	boundTheMap({boundaryId: e.feature.f.NAME, scope: e.feature.f.NAME});
 	calcAndDisplayResults({results: results, scope: e.feature.f.NAME});
 	sElEvtEmitter.emit('updateBannerText', e.feature.f.NAME);
-}
-
-function boundaryMouseOver(e) {
-	var boundaryName = e.feature.f.NAME;
-	boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-		strokeWeight: 3,
-	});
-	if(boundaryName) {
-		$('#bname').html(boundaryName);
-	}
-}
-
-function boundaryMouseOut(e) {
-	boundariesFromGeoJsonLayer.overrideStyle(e.feature, {
-		strokeWeight: 1
-	});
 }
 
 function geocoderInit(boundaryName) {
