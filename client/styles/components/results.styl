@@ -7,7 +7,9 @@
 	font-size 11px
 	position relative
 	bottom 50%
-	
+
+.location
+	font-size 16px
 
 a[rel="js-share-results"]
 	color sevenPurple
@@ -76,24 +78,25 @@ a[rel="js-share-results"]
 	line-height 2em
 	margin 0 auto
 
-	.location
-		height 100%
-		width 100%
-		background-repeat no-repeat 
-		background-position center center
-		color #fff
-		background-size cover
-		margin 10px auto
-		
+.location
+	height 100%
+	width 100%
+	background-repeat no-repeat 
+	background-position center center
+	color #fff
+	background-size cover
+	margin 10px auto
+	font-size 21px
 	
-		&[data-winner="red"]
-			background-image url('../imgs/ribbon_banner_red.svg')
-		
-		&[data-winner="blue"]
-			background-image url('../imgs/ribbon_banner_blue.svg')
-		
-		&[data-winner="purple"]
-			background-image url('../imgs/ribbon_banner_purple.svg')
+
+	&[data-winner="red"]
+		background-image url('../imgs/ribbon_banner_red.svg')
+	
+	&[data-winner="blue"]
+		background-image url('../imgs/ribbon_banner_blue.svg')
+	
+	&[data-winner="purple"]
+		background-image url('../imgs/ribbon_banner_purple.svg')
 
 html[data-useragent*='evergreen']
 	.cup_results
