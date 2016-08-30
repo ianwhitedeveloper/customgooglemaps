@@ -143,12 +143,6 @@ main
 	-ms-transition: background 0.2s linear;
 	-o-transition: background 0.2s linear;
 	transition: background 0.2s linear;
-
-.desktop
-	display none
-
-.mobile
-	display block
 	
 .uppercase
 	text-transform uppercase
@@ -158,7 +152,30 @@ main
 	*
 		display(flex auto)
 		flex-align-self(center)
-		
+
+.striped_bar
+	position absolute
+	top 0
+	left 0
+	width 100%
+	background #fff url('../imgs/colored-stripes.svg') no-repeat center center;
+	background-size cover
+	height 22px
+	
+	&:before,
+	&:after 
+		height 22px
+		width 22px
+		background #fff url('../imgs/star.svg') no-repeat center center;
+		background-size cover
+		position absolute	
+		top 0
+		content " "
+	&:before
+		left 0
+	&:after
+		right 0
+
 @media only screen and (min-width: 768px)
 	body
 		font-size 14px
@@ -182,14 +199,11 @@ main
 		&:after
 			height 85px
 
-	.desktop
-		display block
-	
-	.mobile
-		display none
-		
 	.banner_cta
 		font-size 15px
+		
+	.striped_bar
+		width 420px
 
 	.arrow_left
 		&:before
