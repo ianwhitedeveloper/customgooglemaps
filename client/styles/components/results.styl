@@ -110,12 +110,14 @@ html[data-useragent*='evergreen']
 
 	.cup_results_container
 		flex(1)
-		aspect-ratio-cups(347, 673, 'cup')
 		margin 0 5px
 		
 		.cup
 			background-image url('../imgs/coffee_colors_votes.png');
-			background-size 300%
+			background-size: cover;
+			height 115px
+			width 60px
+			margin 0 auto
 
 		.percentage
 			color #fff
@@ -188,6 +190,10 @@ html[data-useragent*='evergreen']
 			
 	html[data-useragent*='evergreen']
 		.cup_results_container
+			.cup
+				height 190px
+				width 98px
+
 			.percentage
 				font-size 22.5px
 				
