@@ -3,31 +3,45 @@
   position relative
   margin 0 25px
   
-
-// @media only screen and (min-width: 1024px)
-
 #cd-zoom-in, #cd-zoom-out
-  height 32px
-  width 32px
-  cursor pointer
-  margin-left 10px
-  background-color rgba(211, 104, 104, 0.9)
-  background-repeat no-repeat
-  background-size 32px 64px
-  background-image url("../imgs/cd-icon-controller.svg")
-
-.no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover
-  background-color #d36868
-
-#cd-zoom-in
-  background-position 50% 0
-  margin-top 10px
-  margin-bottom 1px
-
-#cd-zoom-out
-  background-position 50% -32px
+  display none
 
 @media only screen and (min-width: 1024px)  
+
+  #cd-zoom-in, #cd-zoom-out
+    display block
+    height 32px
+    width 32px
+    cursor pointer
+    margin 0 15px 15px 0
+    background-color rgba(255, 255, 255, 0.9)
+    background-repeat no-repeat
+    background-size 32px 64px
+    background-image url("../imgs/cd-icon-controller.svg")
+    
+  #cd-zoom-in
+    border-top 1px solid #c2c2c2
+    border-left 1px solid #c2c2c2
+    border-right 1px solid #c2c2c2
+    border-radius 3px 3px 0 0
+
+  #cd-zoom-out
+    border-bottom 1px solid #c2c2c2
+    border-left 1px solid #c2c2c2
+    border-right 1px solid #c2c2c2
+    border-radius 0 0 3px 3px
+
+  .no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover
+    background-color #d36868
+
+  #cd-zoom-in
+    background-position 50% 0
+    margin-top 10px
+    margin-bottom 1px
+
+  #cd-zoom-out
+    background-position 50% -32px
+
   #cd-google-map
     position fixed
     top 0
