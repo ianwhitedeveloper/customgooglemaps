@@ -67,19 +67,30 @@ a
 	
 	&:visited, &:active, &:visited:active
 		color sevenPurple
-		
+
+
+.arrow_left
+	&:before
+		content: ' ';
+		background: url("../imgs/arrow_left.svg") center center no-repeat;
+		width: 12px;
+		height: 12px;
+		position: absolute;
+		left: -14px;	
 
 .arrow_right
-	display inline-block
-	width 0
-	height 0
-	border-top 3px solid transparent
-	border-bottom 3px solid transparent
-	border-left 3px solid sevenPurple
-	margin 0 3px
+	&:after
+		content ' '
+		display inline-block
+		width 0
+		height 0
+		border-top 3px solid transparent
+		border-bottom 3px solid transparent
+		border-left 3px solid sevenPurple
+		margin 0 3px
 
 
-.share_results
+.banner_cta
 	font-family 'AvenirNextLTW01-BoldCn', 'Nunito', sans-serif
 	font-size 11px
 
@@ -175,13 +186,20 @@ main
 	.mobile
 		display none
 		
-	.share_results
+	.banner_cta
 		font-size 15px
 
+	.arrow_left
+		&:before
+			width: 15px;
+			height: 15px;
+			left: -16px;
+
 	.arrow_right
-		border-top 5px solid transparent
-		border-bottom 5px solid transparent
-		border-left 5px solid sevenPurple
-		margin 0 5px
+		&:after
+			border-top 5px solid transparent
+			border-bottom 5px solid transparent
+			border-left 5px solid sevenPurple
+			margin 0 5px
 
 @import './lte-ie10.styl'

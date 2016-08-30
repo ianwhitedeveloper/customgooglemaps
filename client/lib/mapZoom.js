@@ -2,9 +2,14 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let map = require('../lib/map');
 
 function toggleStorePins(zoomLevel) {
-	zoomLevel <= 10
-		? sElEvtEmitter.emit('clearMarkers')
-		: sElEvtEmitter.emit('showMarkers');
+	if (zoomLevel <= 10) {
+		sElEvtEmitter.emit('clearMarkers');
+		sElEvtEmitter.emit('resetBannerCTA');
+	}
+	else 
+	{
+		sElEvtEmitter.emit('showMarkers');
+	}
 
 }
 

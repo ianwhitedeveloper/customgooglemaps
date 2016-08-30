@@ -116,7 +116,7 @@ function addMarker(position, results) {
 	    }
 	    this.setIcon(customCupMarkers.activeIcon);
 	    calcAndDisplayResults({results: results});
-
+	    sElEvtEmitter.emit('storeMarkerSelected', results.address);
 	});
 	cache.markers.push({marker: marker, winner: winner});
 }

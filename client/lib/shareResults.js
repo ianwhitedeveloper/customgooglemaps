@@ -7,11 +7,32 @@ let stateMetaValue;
 let encodedRelativeURL;
 let encodedTwitterMsg = encodeURIComponent(`See my state’s #7Election results! Vote with your choice of XL Stay-Hot Cup at @7Eleven.`);
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
+let bannerCtaEl = require('../lib/CONSTANTS').bannerCtaEl;
 
-$('body').on('click', 'div[rel="js-share-results"]', e => {
+$('body').on('click', 'a[rel="js-share-results"]', e => {
 	sElEvtEmitter.emit('shareResultsClicked');
 	notie.confirm(`Share Your State's Results`, '', '')
 });
+
+function storeMarkerSelected(address) {
+	bannerCtaEl.attr({
+		rel: 'js-share-address',
+		href: `https://maps.google.com?daddr=${encodeURIComponent(address)}`,
+	});
+
+	bannerCtaEl.text('Get Directions');
+}
+
+function resetBannerCTA() {
+	if (bannerCtaEl.attr('rel') === 'js-share-address') {
+		bannerCtaEl.attr({
+			rel: 'js-share-results',
+			href: '',
+		});
+
+		bannerCtaEl.text('Share Results');
+	}
+}
 
 $('#notie-confirm-yes')
 .append(
@@ -34,7 +55,9 @@ function setShareURL() {
 	$('#notie-confirm-yes a').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}`);
 
 
-	$('#notie-confirm-no a').attr('href', `https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}`)
+	$('#notie-confirm-no a').attr('href', `https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}`);
 }
 
-sElEvtEmitter.on('shareResultsClicked', setShareURL)
+sElEvtEmitter.on('shareResultsClicked', setShareURL);
+sElEvtEmitter.on('storeMarkerSelected', storeMarkerSelected);
+sElEvtEmitter.on('resetBannerCTA', resetBannerCTA);

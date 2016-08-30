@@ -113,6 +113,7 @@ function boundaryClick(e) {
 	boundTheMap({boundaryId: e.feature.f.NAME, scope: e.feature.f.NAME});
 	calcAndDisplayResults({results: results, scope: e.feature.f.NAME});
 	sElEvtEmitter.emit('updateBannerText', e.feature.f.NAME);
+	sElEvtEmitter.emit('resetBannerCTA');
 }
 
 function geocoderInit(boundaryName) {
