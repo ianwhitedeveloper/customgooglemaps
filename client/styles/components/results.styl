@@ -106,14 +106,11 @@ a[rel="js-share-results"]
 	&[data-winner="purple"]
 		background-image url('../imgs/ribbon_banner_purple.svg')
 
-html[data-useragent*='evergreen']
-	.cup_results
-		display(flex)
+.cup_results
 		max-width 414px
 		margin 25px auto  0
 
 	.cup_results_container
-		flex(1)
 		margin 0 5px
 		
 		.cup
@@ -160,6 +157,13 @@ html[data-useragent*='evergreen']
 				border 1px solid sevenBlue
 				background-color sevenBlue
 
+html[data-useragent*='evergreen']
+	.cup_results
+		display(flex)
+
+	.cup_results_container
+		flex(1)
+		margin 0 5px
 
 @media only screen and (min-width: 768px)
 	.national_results
@@ -168,7 +172,7 @@ html[data-useragent*='evergreen']
 		
 	.results
 		header
-			margin 40px auto 0
+			margin 5px auto 0
 			max-width 304px
 			
 			h1
@@ -191,7 +195,11 @@ html[data-useragent*='evergreen']
 	html[data-useragent*='evergreen'] .cup_results_container .circle sup,
 	.cup_results_container .circle sup
 				font-size 11px
-			
+
+	.cup_results
+		margin 5px auto 0
+		
+
 	html[data-useragent*='evergreen']
 		.cup_results_container
 			.cup
