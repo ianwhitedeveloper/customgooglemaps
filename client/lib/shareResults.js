@@ -5,6 +5,7 @@ let confirmNoEl = require('../lib/CONSTANTS').confirmNoEl;
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
 let stateMetaValue;
 let encodedRelativeURL;
+let encodedTwitterMsg = encodeURIComponent(`See my state’s #7Election results! Vote with your choice of XL Stay-Hot Cup at @7Eleven.`);
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 
 $('body').on('click', 'div[rel="js-share-results"]', e => {
@@ -33,7 +34,7 @@ function setShareURL() {
 	$('#notie-confirm-yes a').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}`);
 
 
-	$('#notie-confirm-no a').attr('href', `https://twitter.com/intent/tweet?text=Hello%20world ${encodedRelativeURL}`)
+	$('#notie-confirm-no a').attr('href', `https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}`)
 }
 
 sElEvtEmitter.on('shareResultsClicked', setShareURL)
