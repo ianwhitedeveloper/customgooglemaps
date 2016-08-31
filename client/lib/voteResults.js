@@ -61,15 +61,9 @@ document.addEventListener("keydown", function(event) {
 
 function findAStoreClick(e) {
 	let searchBoxInputVal = searchBoxInput.val();
-	let detectNumsRegex = /^\d+$/;
 	sElEvtEmitter.emit('resetBannerCTA');
 
-	// Prevent hitting our API if user enters
-	// a zip code in search box - just bound map
-	detectNumsRegex
-		.test(searchBoxInputVal)
-		? geocoderInit(searchBoxInputVal)
-		: geocoderInit(searchBoxInputVal).done(getData);
+	geocoderInit(searchBoxInputVal).done(getData);
 }
 
 function getData(results) {
@@ -78,12 +72,8 @@ function getData(results) {
 	let lng = result.geometry.location.lng();
 	getStateNameFromGeoResults(results)
 	.then(data => {
-        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 3, strokeColor: '#fff', fillOpacity: 0.3}});
+        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
 	});
-	
-	// this should already be handled by the center changed
-	// function in mapCenterChange.js
-	// queryElectionAPI({lat: lat, lng: lng});
 }
 
 function queryElectionAPI({lat, lng}={}) {

@@ -65,7 +65,8 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 		in certain situations e.g. new york will
 		show NYC, not NY, the state*/
 		if (myBoundaries[boundaryId]) {
-			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeWeight: 3, strokeColor: '#fff', fillOpacity: 0.8}})
+			// Used to reset states to 0.8 opacity
+			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.8}})
 			boundaryId = `${boundaryId} State`
 		}
 
