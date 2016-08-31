@@ -17,7 +17,7 @@ $('body').on('click', 'a[rel="js-share-results"]', e => {
 function storeMarkerSelected(address) {
 	bannerCtaEl.attr({
 		rel: 'js-share-address',
-		href: `https://maps.google.com?daddr=${encodeURIComponent(address)}`,
+		href: `https://maps.google.com?daddr=${encodeURIComponent(address)} ${stateMetaEl.attr('content')}`,
 	});
 
 	bannerCtaEl.text('Get Directions');
