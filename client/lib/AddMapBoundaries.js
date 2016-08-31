@@ -129,6 +129,7 @@ function fitBounds(results) {
 	.then(data => {
         sElEvtEmitter.emit('updateStateMeta', data.stateNameShort);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: data.stateNameLong, winner: globalResults.states[data.stateNameShort].winner});
+		calcAndDisplayResults({results: globalResults, scope: data.stateNameShort});
 	})
 	.fail(error => { sElEvtEmitter.emit('silentError', error) });
 

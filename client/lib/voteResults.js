@@ -6,8 +6,17 @@ let geocoderInit = require('./AddMapBoundaries').geocoderInit;
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
 let searchBoxInput = $('input[name="cityzip"]');
-let cache = {
-	markers: []
+let global = {
+	markers: [],
+	areaResults: {
+			total_votes: 0,
+			votes: {
+				red: 0,
+				blue: 0,
+				purple: 0
+			},
+			scope: null
+		}
 };
 
 let customCupMarkers = {
@@ -52,9 +61,15 @@ document.addEventListener("keydown", function(event) {
 
 function findAStoreClick(e) {
 	let searchBoxInputVal = searchBoxInput.val();
+	let detectNumsRegex = /^\d+$/;
+	sElEvtEmitter.emit('resetBannerCTA');
 
-	geocoderInit(searchBoxInputVal)
-	.done(getData);
+	// Prevent hitting our API if user enters
+	// a zip code in search box - just bound map
+	detectNumsRegex
+		.test(searchBoxInputVal)
+		? geocoderInit(searchBoxInputVal)
+		: geocoderInit(searchBoxInputVal).done(getData);
 }
 
 function getData(results) {
@@ -66,7 +81,9 @@ function getData(results) {
         sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 3, strokeColor: '#fff', fillOpacity: 0.3}});
 	});
 	
-	queryElectionAPI({lat: lat, lng: lng});
+	// this should already be handled by the center changed
+	// function in mapCenterChange.js
+	// queryElectionAPI({lat: lat, lng: lng});
 }
 
 function queryElectionAPI({lat, lng}={}) {
@@ -84,13 +101,19 @@ function plotMarkers(resultsArray) {
 	try {
 		let bounds = new google.maps.LatLngBounds();
 		let marker;
+
 		sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
+     	global.areaResults.scope = resultsArray[0].city;
+     	
 	    // Loop through our array of markers & place each one on the map  
 	    for(let i = 0; i < resultsArray.length; i++ ) {
 			let currentResult = resultsArray[i];
 	        let position = new google.maps.LatLng(currentResult.lat, currentResult.lon);
 	     	addMarker(position, currentResult);
+			updateAreaResults(currentResult);
 	    }
+
+	    calcAndDisplayResults({results: global.areaResults});
 	 	showMarkers();
 	 } catch (e) {
 	 	sElEvtEmitter.emit('generalError', 'Location not found: your search returned no results');
@@ -109,22 +132,40 @@ function addMarker(position, results) {
 		icon: winner
 	});
 
+	resetAreaResults();
+
 	google.maps.event.addListener(marker, "click", function (e) {
-	    for (var i=0; i<cache.markers.length; i++) {
-			let currentMarker = cache.markers[i];
+	    for (var i=0; i<global.markers.length; i++) {
+			let currentMarker = global.markers[i];
 			currentMarker.marker.setIcon(currentMarker.winner);
 	    }
 	    this.setIcon(customCupMarkers.activeIcon);
 	    calcAndDisplayResults({results: results});
 	    sElEvtEmitter.emit('storeMarkerSelected', results.address);
 	});
-	cache.markers.push({marker: marker, winner: winner});
+
+	global.markers.push({marker: marker, winner: winner});
+}
+
+function updateAreaResults(currentResult) {
+	global.areaResults.total_votes 	+= currentResult.total_votes;
+	global.areaResults.votes.red 	+= currentResult.votes.red;
+	global.areaResults.votes.blue 	+= currentResult.votes.blue;
+	global.areaResults.votes.purple += currentResult.votes.purple;
+}
+
+function resetAreaResults() {
+	global.areaResults.total_votes 	= 0;
+	global.areaResults.votes.red 	= 0;
+	global.areaResults.votes.blue 	= 0;
+	global.areaResults.votes.purple = 0;
+	global.areaResults.votes.scope 	= null;
 }
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
-	for (var i = 0; i < cache.markers.length; i++) {
-		cache.markers[i].marker.setMap(map);
+	for (var i = 0; i < global.markers.length; i++) {
+		global.markers[i].marker.setMap(map);
 	}
 }
 
@@ -141,7 +182,7 @@ function showMarkers() {
 // Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
 	clearMarkers();
-	cache.markers = [];
+	global.markers = [];
 }
 
 sElEvtEmitter.on('clearMarkers', clearMarkers);
@@ -152,23 +193,23 @@ sElEvtEmitter.on('findAStoreClick', findAStoreClick);
 
 // $.when($.get('https://api-test.7-eleven.com/v3/election/votes?sort_by=city&date=07/11/2016&state=TX')).then(drawToDOM);
 /*let callbacks = {
-	enableSeachBox: function enableSeachBox(res) {
+	enableSeachBox: function enableSeachBox(areaResults) {
 		$('.search_box input').prop('disabled', false);
 	}
 }
 
 module.exports = function loadVoteResults({state='TX', callback=callbacks.enableSeachBox} = {}) {
-    if(!cache[state]) {
-        cache[state] = $.get(`https://api-test.7-eleven.com/v3/election/votes?sort_by=city&date=07/11/2016&state=${state}`).promise();
+    if(!global[state]) {
+        global[state] = $.get(`https://api-test.7-eleven.com/v3/election/votes?sort_by=city&date=07/11/2016&state=${state}`).promise();
     } 
-    cache[state].done(callback);
+    global[state].done(callback);
 }
 
-if(!cache[result.formatted_address]) {
-	    cache[result.formatted_address] = $.get(`https://api-test.7-eleven.com/v3/election/stores/?lat=${lat}&lon=${lng}`).promise();
+if(!global[result.formatted_address]) {
+	    global[result.formatted_address] = $.get(`https://api-test.7-eleven.com/v3/election/stores/?lat=${lat}&lon=${lng}`).promise();
 	} 
-	cache[result.formatted_address].done((r) => {
-		let c = cache;
+	global[result.formatted_address].done((r) => {
+		let c = global;
 			debugger;
 		});
 
