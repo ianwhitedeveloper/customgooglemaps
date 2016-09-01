@@ -9,6 +9,7 @@ let voteResults = require('../lib/voteResults');
 let errorHandler = require('../lib/errorHandler');
 let mapZoom = require('../lib/mapZoom');
 let mapCenterChange = require('../lib/mapCenterChange');
+let stateDict = require('../lib/stateDict');
 let shareResults = require('../lib/shareResults');
 let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
@@ -42,11 +43,11 @@ $(document).ready(function(){
 		});
 		if (hash) { hash = hash.toUpperCase(); }
 		if (hash && !city) {
-			sElEvtEmitter.emit('geocoderInit', {boundaryName: hash});
+			sElEvtEmitter.emit('geocoderInit', {boundaryName: stateDict[hash]});
 		}
 		if (city && hash) {
 			city = decodeURIComponent(city);
-			sElEvtEmitter.emit('geocoderInit', {boundaryName: `${city}, ${hash}`, override: true});
+			sElEvtEmitter.emit('geocoderInit', {boundaryName: `${city}, ${stateDict[hash]}`, override: true});
 		}
 	});
 

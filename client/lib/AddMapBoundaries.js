@@ -18,6 +18,10 @@ let infoWindow = null;
 let globalResults = null;
 let mapClickDisabled = false;
 
+$('body').on('click', '#reset-map', e => {
+	boundTheMap({boundaryId: 'united states'});
+	calcAndDisplayResults({results: globalResults, scope: 'national'});
+});
 
 function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);
@@ -138,7 +142,7 @@ function boundaryClick(e) {
 	let boundaryName = e.feature.f.NAME;
 
 	if (!(boundaryName in stateBlacklist) && !mapClickDisabled) {
-		boundTheMap({boundaryId: boundaryName});
+		boundTheMap({boundaryId: stateDict[boundaryName]});
 		calcAndDisplayResults({results: globalResults, scope: boundaryName});
 		sElEvtEmitter.emit('updateBannerText', boundaryName);
 		sElEvtEmitter.emit('resetBannerCTA');
