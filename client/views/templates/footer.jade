@@ -1,16 +1,18 @@
 - var footerShareLinks = {fb: 'https://www.facebook.com/7Eleven/', in: 'https://www.instagram.com/7eleven', tw: 'https://twitter.com/7Eleven'}
 
 footer
-	a(href="https://www.7-eleven.com/") 7-Eleven.com
+	a(href="https://www.7-eleven.com/" target="_blank" onclick="ga('send', 'event', '7eleven.com', 'exit_link', '')") 7-Eleven.com
 	span &nbsp;|&nbsp;
-	a(href="https://www.7-eleven.com/7rewards/") 7Rewards 
+	a(href="https://www.7-eleven.com/7rewards/" target="_blank" onclick="ga('send', 'event', '7rewards', 'exit_link', '')") 7Rewards 
 
 	p At participating locations. Limited time offer. Pricing may vary by store. Plus tax where applicable.
 	
 	.social_share
-		a.social_share__icon.facebook(href="#{footerShareLinks.fb}" target="_blank" aria-label="Share on Facebook") Share on Facebook 
+		a.social_share__icon.facebook(href="#{footerShareLinks.fb}" target="_blank" aria-label="Share on Facebook" onclick="ga('send', 'event', 'social', 'follow', 'facebook')") Share on Facebook 
 			<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 103.15 103.16"><title>fb</title><path d="M354.74,197.49H277.37a12.94,12.94,0,0,0-12.9,12.9v77.37a12.93,12.93,0,0,0,12.89,12.89h39.13v-37H304.14V247.55h12.36v-8.07c0-12.44,9.19-22.19,20.92-22.19H348.8v18.2H338.61c-2.66,0-3.44,1.53-3.44,3.64v8.42H348.8v16.12H335.16v37h19.57a12.92,12.92,0,0,0,12.89-12.89V210.38a12.91,12.91,0,0,0-12.88-12.9" transform="translate(-264.47 -197.49)" style="fill:#4f2169"/></svg>
-		a.social_share__icon.instagram(href="#{footerShareLinks.in}" target="_blank" aria-label="Share on Instagram") Share on Instagram
+
+		a.social_share__icon.instagram(href="#{footerShareLinks.in}" target="_blank" aria-label="Share on Instagram" onclick="ga('send', 'event', 'social', 'follow', 'instagram')") Share on Instagram
 			<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 510 510"><title>instagram</title><path d="M459,0H51C22.95,0,0,22.95,0,51v408c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51V51C510,22.95,487.05,0,459,0z M255,153c56.1,0,102,45.9,102,102c0,56.1-45.9,102-102,102c-56.1,0-102-45.9-102-102C153,198.9,198.9,153,255,153z M63.75,459 C56.1,459,51,453.9,51,446.25V229.5h53.55C102,237.15,102,247.35,102,255c0,84.15,68.85,153,153,153c84.15,0,153-68.85,153-153 c0-7.65,0-17.85-2.55-25.5H459v216.75c0,7.65-5.1,12.75-12.75,12.75H63.75z M459,114.75c0,7.65-5.1,12.75-12.75,12.75h-51 c-7.65,0-12.75-5.1-12.75-12.75v-51c0-7.65,5.1-12.75,12.75-12.75h51C453.9,51,459,56.1,459,63.75V114.75z" style="fill:#4f2169"/></svg>
-		a.social_share__icon.twitter(href="#{footerShareLinks.tw}" target="_blank" aria-label="Share on Twitter") Share on Twitter
+
+		a.social_share__icon.twitter(href="#{footerShareLinks.tw}" target="_blank" aria-label="Share on Twitter" onclick="ga('send', 'event', 'social', 'follow', 'twitter')") Share on Twitter
 			<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 54.55 54.55"><title>tw</title><path d="M45.46,0H9.09A9.12,9.12,0,0,0,0,9.09V45.46a9.12,9.12,0,0,0,9.09,9.09H45.46a9.12,9.12,0,0,0,9.09-9.09V9.09A9.12,9.12,0,0,0,45.46,0m-.81,18.21c0,.39,0,.78,0,1.18,0,12.05-9,25.95-25.5,25.95a25,25,0,0,1-13.74-4.1A17.85,17.85,0,0,0,18.7,37.46a9,9,0,0,1-8.37-6.33,8.8,8.8,0,0,0,4-.16A9.08,9.08,0,0,1,7.19,22v-.11a8.84,8.84,0,0,0,4.06,1.14A9.23,9.23,0,0,1,8.47,10.88a25.31,25.31,0,0,0,18.47,9.53,9.25,9.25,0,0,1-.23-2.08,9,9,0,0,1,9-9.12,8.88,8.88,0,0,1,6.54,2.88,17.78,17.78,0,0,0,5.69-2.21,9.13,9.13,0,0,1-3.94,5,17.65,17.65,0,0,0,5.15-1.44,18.4,18.4,0,0,1-4.47,4.72" style="fill:#4f2169"/></svg>
