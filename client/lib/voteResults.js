@@ -75,7 +75,8 @@ function getData(results) {
 }
 
 function queryElectionAPI({lat, lng}={}) {
-	if (map.getZoom() > 8) {
+	console.log(map.getZoom());
+	if (map.getZoom() >= 8) {
 		deleteMarkers();
 		$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
 		.done(plotMarkers)
@@ -103,6 +104,7 @@ function plotMarkers(resultsArray) {
 
 	    calcAndDisplayResults({results: global.areaResults});
 	 	showMarkers();
+	 	map.setZoom(10);
 	 } catch (e) {
 	 	sElEvtEmitter.emit('generalError', generalErrorMsg);
 	 }
