@@ -9,6 +9,7 @@ let returnCurrentMapZoomLevel = require('../lib/mapZoom').returnCurrentMapZoomLe
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
 let getStateNameFromGeoResults = require('../lib/getStateNameFromGeoResults');
 let myBoundaries = {};
+let stateBlacklist = {};
 // initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 let boundariesFromGeoJsonLayer = new google.maps.Data({map: map});
 let infoWindow = null;
@@ -18,8 +19,9 @@ let globalResults = null;
 function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);
 	initializeDataLayer();
-	loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds, scope: scope});
-	boundTheMap({boundaryId: boundaryId, scope: scope});
+	// loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds, scope: scope});
+	loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds});
+	// boundTheMap({boundaryId: boundaryId, scope: scope});
 }
 
 function setResults(r) {
@@ -27,7 +29,8 @@ function setResults(r) {
 }
 
 function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
-	if (boundariesFromGeoJson.type === "FeatureCollection") { //we have a collection of boundaries in geojson format
+	//we have a collection of boundaries in geojson format
+	if (boundariesFromGeoJson.type === "FeatureCollection") { 
 		if (boundariesFromGeoJson.features) {
 			for (var i = 0; i < boundariesFromGeoJson.features.length; i++) {
 				var boundaryId = i + 1;
@@ -38,18 +41,24 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 					boundariesFromGeoJson.features[i].properties = {};
 				}
 
-				boundariesFromGeoJson.features[i].properties.boundaryId = boundaryId; //we will use this id to identify boundary later when clicking on it
+				//we will use this id to identify boundary later when clicking on it
+				boundariesFromGeoJson.features[i].properties.boundaryId = boundaryId; 
 				boundariesFromGeoJsonLayer.addGeoJson(boundariesFromGeoJson.features[i], {idPropertyName: 'boundaryId'});
 				new_boundary.feature = boundariesFromGeoJsonLayer.getFeatureById(boundaryId);
 				myBoundaries[boundaryName] = new_boundary;
 
-				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 2, strokeColor: '#fff', fillOpacity: 0.8}});
+				addToBlacklist({
+					blackListObject: stateBlacklist,
+					condition: globalResults.states[boundaryName] ? globalResults.states[boundaryName].winner === "null" : false,
+					key: boundaryName
+				});
 
+				overrideGeoStyle({boundaryName: boundaryName, style: {strokeWeight: 2, strokeColor: '#fff', fillOpacity: 0.8}});
 			}
 		}
 	}
 
-	calcAndDisplayResults({results: globalResults, scope: scope});
+	// calcAndDisplayResults({results: globalResults, scope: scope});
 }
 
 function initializeDataLayer(){
@@ -85,6 +94,11 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 /////////////
 // Helpers //
 /////////////
+function addToBlacklist({condition, blackListObject, key}={}) {
+	if (condition) {
+		blackListObject[key] = true;
+	}
+}
 
 function resetGeoStyle() {
 	for (let boundaryName in myBoundaries) {
@@ -104,17 +118,21 @@ function overrideGeoStyle({boundaryName, style}={}) {
 		boundariesFromGeoJsonLayer.overrideStyle(myBoundaries[boundaryName].feature, {
 			strokeWeight: style.strokeWeight,
 			strokeColor: style.strokeColor,
-			fillColor: colorKey[boundaryWinner],
+			fillColor: colorKey[boundaryWinner] || '#ddd',
 			fillOpacity: style.fillOpacity
 		});
 	}
 }
 
 function boundaryClick(e) {
-	boundTheMap({boundaryId: e.feature.f.NAME, scope: e.feature.f.NAME});
-	calcAndDisplayResults({results: globalResults, scope: e.feature.f.NAME});
-	sElEvtEmitter.emit('updateBannerText', e.feature.f.NAME);
-	sElEvtEmitter.emit('resetBannerCTA');
+	let boundaryName = e.feature.f.NAME;
+
+	if (!(boundaryName in stateBlacklist)) {
+		boundTheMap({boundaryId: boundaryName, scope: boundaryName});
+		calcAndDisplayResults({results: globalResults, scope: boundaryName});
+		sElEvtEmitter.emit('updateBannerText', boundaryName);
+		sElEvtEmitter.emit('resetBannerCTA');
+	}
 }
 
 function geocoderInit(boundaryName) {

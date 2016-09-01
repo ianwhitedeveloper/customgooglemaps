@@ -21,8 +21,9 @@ $(document).ready(function(){
 	let	isInternetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1,
 		zoomControlDiv = document.createElement('div'),
 		zoomControl,
-		hash = (location.href.split("#")[1] || null);
-	
+		hash = (location.href.split("#")[1] || null),
+		city = getQueryString('city');
+	// debugger;
 
 	$.when(
 		$.get('/external/boundariesFromGeoJson.json'), 
@@ -33,7 +34,7 @@ $(document).ready(function(){
 		init({
 			bounds: usBounds[0],
 			results: results[0],
-			scope: hash || 'national',
+			scope: `${city} ${hash}` || 'national',
 			boundaryId: hash || 'united states'
 		});
 	});
@@ -43,6 +44,20 @@ $(document).ready(function(){
 	///////////////////////////////////////////////////
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
 	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(zoomControlDiv);
+
+
+	/**
+	 * Get the value of a querystring
+	 * @param  {String} field The field to get the value of
+	 * @param  {String} url   The URL to get the value from (optional)
+	 * @return {String}       The field value
+	 */
+	function getQueryString( field, url ) {
+	    var href = url ? url : window.location.href;
+	    var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+	    var string = reg.exec(href);
+	    return string ? string[1] : null;
+	};
 });
 
   
