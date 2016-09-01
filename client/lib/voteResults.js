@@ -5,6 +5,7 @@ let getStateAndCityNameFromGeoResults = require('../lib/getStateAndCityNameFromG
 let geocoderInit = require('./AddMapBoundaries').geocoderInit;
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
+let generalErrorMsg = require('./CONSTANTS').generalErrorMsg;
 let searchBoxInput = $('input[name="cityzip"]');
 let global = {
 	markers: [],
@@ -72,7 +73,7 @@ function getData(results) {
 	let lng = result.geometry.location.lng();
 	getStateAndCityNameFromGeoResults(results)
 	.then(data => {
-        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
+        // sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
 	});
 }
 
@@ -106,7 +107,7 @@ function plotMarkers(resultsArray) {
 	    calcAndDisplayResults({results: global.areaResults});
 	 	showMarkers();
 	 } catch (e) {
-	 	sElEvtEmitter.emit('generalError', 'Location not found: your search returned no results');
+	 	sElEvtEmitter.emit('generalError', generalErrorMsg);
 	 }
 }
 

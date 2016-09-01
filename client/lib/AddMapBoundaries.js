@@ -8,6 +8,7 @@ let colorKey = require('../lib/CONSTANTS').colorKey;
 let returnCurrentMapZoomLevel = require('../lib/mapZoom').returnCurrentMapZoomLevel;
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
 let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
+let generalErrorMsg = require('../lib/CONSTANTS').generalErrorMsg;
 let getStateAndCityNameFromGeoResults = require('../lib/getStateAndCityNameFromGeoResults');
 let myBoundaries = {};
 let stateBlacklist = {};
@@ -157,13 +158,20 @@ function geocoderInit({boundaryName, override=false}={}) {
 function fitBounds({results, override}) {
 	getStateAndCityNameFromGeoResults(results)
 	.then(data => {
-        // sElEvtEmitter.emit('updateStateMeta', data.stateNameShort);
-		sElEvtEmitter.emit('updateBannerText', {bannerText: data.stateNameLong, winner: globalResults.states[data.stateNameShort].winner});
-		calcAndDisplayResults({results: globalResults, scope: data.stateNameShort});
 
-		if (override) {
-			overrideGeoStyle({boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
+		if (!(data.stateNameShort in stateBlacklist)) {
+			calcAndDisplayResults({results: globalResults, scope: data.stateNameShort});
+			
+			sElEvtEmitter.emit('updateBannerText', {bannerText: data.stateNameLong, winner: globalResults.states[data.stateNameShort].winner});
+
+			if (override) {
+				overrideGeoStyle({boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
+			}
 		}
+		else {
+			sElEvtEmitter.emit('generalError', generalErrorMsg);
+		}
+
 	})
 	.fail(error => { sElEvtEmitter.emit('silentError', error) });
 
