@@ -7,7 +7,8 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let colorKey = require('../lib/CONSTANTS').colorKey;
 let returnCurrentMapZoomLevel = require('../lib/mapZoom').returnCurrentMapZoomLevel;
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
-let getStateNameFromGeoResults = require('../lib/getStateNameFromGeoResults');
+let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
+let getStateAndCityNameFromGeoResults = require('../lib/getStateAndCityNameFromGeoResults');
 let myBoundaries = {};
 let stateBlacklist = {};
 // initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
@@ -145,9 +146,9 @@ function geocoderInit({boundaryName, override=false}={}) {
 }
 
 function fitBounds({results, override}) {
-	getStateNameFromGeoResults(results)
+	getStateAndCityNameFromGeoResults(results)
 	.then(data => {
-        sElEvtEmitter.emit('updateStateMeta', data.stateNameShort);
+        // sElEvtEmitter.emit('updateStateMeta', data.stateNameShort);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: data.stateNameLong, winner: globalResults.states[data.stateNameShort].winner});
 		calcAndDisplayResults({results: globalResults, scope: data.stateNameShort});
 
@@ -165,7 +166,12 @@ function updateStateMeta(stateName) {
 	stateMetaEl.attr('content', stateName);
 }
 
+function updateCityMeta(cityName) {
+	cityMetaEl.attr('content', cityName);
+}
+
 sElEvtEmitter.on('updateStateMeta', updateStateMeta);
+sElEvtEmitter.on('updateCityMeta', updateCityMeta);
 sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
 sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
 sElEvtEmitter.on('geocoderInit', geocoderInit);

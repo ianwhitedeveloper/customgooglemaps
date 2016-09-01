@@ -3,7 +3,9 @@ let notie = require('notie');
 let confirmYesEl = require('../lib/CONSTANTS').confirmYesEl;
 let confirmNoEl = require('../lib/CONSTANTS').confirmNoEl;
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
+let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
 let stateMetaValue;
+let cityMetaValue;
 let encodedRelativeURL;
 let encodedTwitterMsg = encodeURIComponent(`See my state’s #7Election results! Vote with your choice of XL Stay-Hot Cup at @7Eleven.`);
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
@@ -51,7 +53,11 @@ $('#notie-confirm-no')
 
 function setShareURL() {
 	stateMetaValue = stateMetaEl.attr('content');
-	encodedRelativeURL = encodeURIComponent(`${window.location.origin}/#${stateMetaValue}`);
+	cityMetaValue = encodeURIComponent(cityMetaEl.attr('content'));
+	encodedRelativeURL = cityMetaValue 
+		? encodeURIComponent(`${window.location.origin}/?city=${cityMetaValue}#${stateMetaValue}`)
+		: encodeURIComponent(`${window.location.origin}/#${stateMetaValue}`);
+
 	$('#notie-confirm-yes a').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}`);
 
 

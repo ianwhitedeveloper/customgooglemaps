@@ -41,7 +41,7 @@ $(document).ready(function(){
 			sElEvtEmitter.emit('geocoderInit', {boundaryName: hash});
 		}
 		if (city && hash) {
-			city = encodeURIComponent(city);
+			city = decodeURIComponent(city);
 			sElEvtEmitter.emit('geocoderInit', {boundaryName: `${city}, ${hash}`, override: true});
 		}
 	});

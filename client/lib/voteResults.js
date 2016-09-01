@@ -1,7 +1,7 @@
 let $ = require('jquery');
 let map = require('./map');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
-let getStateNameFromGeoResults = require('../lib/getStateNameFromGeoResults');
+let getStateAndCityNameFromGeoResults = require('../lib/getStateAndCityNameFromGeoResults');
 let geocoderInit = require('./AddMapBoundaries').geocoderInit;
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
@@ -70,7 +70,7 @@ function getData(results) {
 	let result = results[0];
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
-	getStateNameFromGeoResults(results)
+	getStateAndCityNameFromGeoResults(results)
 	.then(data => {
         sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
 	});

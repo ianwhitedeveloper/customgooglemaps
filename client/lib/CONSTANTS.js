@@ -11,6 +11,7 @@ let colorKey = {
 	blue: '#0099DD'
 };
 let stateMetaEl = $('meta[name=currentState]');
+let cityMetaEl = $('meta[name=currentCity]');
 let bannerCtaEl = $('.banner_cta a');
 
 module.exports = {
@@ -22,5 +23,6 @@ module.exports = {
 	directionsEl,
 	colorKey,
 	stateMetaEl,
-	bannerCtaEl
+	bannerCtaEl,
+	cityMetaEl
 }
