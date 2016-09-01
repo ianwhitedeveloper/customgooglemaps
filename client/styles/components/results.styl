@@ -10,6 +10,7 @@
 
 .location
 	font-size 16px
+	display inline-block
 
 a[rel="js-share-results"]
 	color sevenPurple
@@ -79,10 +80,10 @@ a[rel="js-share-results"]
 
 .banner
 	position relative
-	height 40px
-	max-width 280px
+	height 55px
+	max-width 355px
 	font-size 16px
-	line-height 2em
+	line-height 42px
 	margin 0 auto
 
 .location
@@ -131,10 +132,12 @@ a[rel="js-share-results"]
 			height 40px
 			display inline-block
 			border-radius 50%
+			position relative
 			
 			span
-				line-height 2em
-				
+				position relative
+				top calc(50% - 10px)
+
 			sup
 				font-size 9px
 
@@ -188,12 +191,17 @@ html[data-useragent*='evergreen']
 
 	.banner
 		width 365px
-		height 55px
 		margin 20px auto
 		font-size 21px
 		
 	html[data-useragent*='evergreen'] .cup_results_container .circle sup,
-	.cup_results_container .circle sup
+	.cup_results_container 
+		.circle 
+			span 
+				position relative
+				top calc(50% - 16px)
+				
+			sup
 				font-size 11px
 
 	.cup_results

@@ -1,10 +1,11 @@
 let $ = require('jquery');
 let map = require('./map');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
-let getStateNameFromGeoResults = require('../lib/getStateNameFromGeoResults');
+let getStateAndCityNameFromGeoResults = require('../lib/getStateAndCityNameFromGeoResults');
 let geocoderInit = require('./AddMapBoundaries').geocoderInit;
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
+let generalErrorMsg = require('./CONSTANTS').generalErrorMsg;
 let searchBoxInput = $('input[name="cityzip"]');
 let global = {
 	markers: [],
@@ -63,17 +64,14 @@ function findAStoreClick(e) {
 	let searchBoxInputVal = searchBoxInput.val();
 	sElEvtEmitter.emit('resetBannerCTA');
 
-	geocoderInit(searchBoxInputVal).done(getData);
+	geocoderInit({boundaryName: searchBoxInputVal}).done(getData);
 }
 
 function getData(results) {
 	let result = results[0];
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
-	getStateNameFromGeoResults(results)
-	.then(data => {
-        sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
-	});
+	getStateAndCityNameFromGeoResults(results)
 }
 
 function queryElectionAPI({lat, lng}={}) {
@@ -106,7 +104,7 @@ function plotMarkers(resultsArray) {
 	    calcAndDisplayResults({results: global.areaResults});
 	 	showMarkers();
 	 } catch (e) {
-	 	sElEvtEmitter.emit('generalError', 'Location not found: your search returned no results');
+	 	sElEvtEmitter.emit('generalError', generalErrorMsg);
 	 }
 }
 
