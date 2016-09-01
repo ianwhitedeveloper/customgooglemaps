@@ -131,6 +131,7 @@ function addMarker(position, results) {
 	    this.setIcon(customCupMarkers.activeIcon);
 	    calcAndDisplayResults({results: results});
 	    sElEvtEmitter.emit('storeMarkerSelected', results.address);
+	    sElEvtEmitter.emit('enableBannerCta');
 	});
 
 	global.markers.push({marker: marker, winner: winner});

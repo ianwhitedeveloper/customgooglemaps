@@ -14,6 +14,7 @@ function getStateAndCityNameFromGeoResults(results) {
             if (results[0].address_components.length > 2) {
                 data.cityName = results[0].address_components[0].long_name;
                 sElEvtEmitter.emit('updateCityMeta', data.cityName);
+                sElEvtEmitter.emit('disableBannerCta');
             }
 
             data.stateNameShort = results[0].address_components[i].short_name;
