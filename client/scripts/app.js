@@ -1,5 +1,6 @@
 let jQuery = require('jquery');
 let $ = require('jquery');
+let jQueryTextFill = require('./jquery.textfill.min.js');
 let map = require('../lib/map');
 let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
 let CustomZoomControl = require('../lib/CustomZoomControl');
@@ -24,6 +25,9 @@ $(document).ready(function(){
 		zoomControl,
 		hash = (location.href.split("#")[1] || null),
 		city = getQueryString('city');
+
+	// Force text to fit in banner regardless of length
+	$('.banner').textfill({maxFontPixels: 21, widthOnly: true});
 
 	$.when(
 		$.get('/external/boundariesFromGeoJson.json'), 
