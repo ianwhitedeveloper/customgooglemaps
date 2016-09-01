@@ -72,9 +72,6 @@ function getData(results) {
 	let lat = result.geometry.location.lat();
 	let lng = result.geometry.location.lng();
 	getStateAndCityNameFromGeoResults(results)
-	.then(data => {
-        // sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
-	});
 }
 
 function queryElectionAPI({lat, lng}={}) {

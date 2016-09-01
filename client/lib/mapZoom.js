@@ -6,13 +6,13 @@ function toggleStorePins(zoomLevel) {
 	if (zoomLevel <= 8) {
 		sElEvtEmitter.emit('clearMarkers');
 		sElEvtEmitter.emit('resetBannerCTA');
-		sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateMetaEl.attr('content'), style: {strokeWeight: 2, strokeColor: '#fff', fillOpacity: 0.8}});
+		sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateMetaEl.attr('content'), style: {strokeWeight: 5, strokeColor: '#fff', fillOpacity: 0.8}});
 		sElEvtEmitter.emit('enableStateClickListener');
 	}
 	else 
 	{
 		sElEvtEmitter.emit('showMarkers');
-		sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateMetaEl.attr('content'), style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
+		sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateMetaEl.attr('content'), style: {strokeWeight: 5, strokeColor: '#fff', fillOpacity: 0.3}});
 		sElEvtEmitter.emit('disableStateClickListener');
 	}
 

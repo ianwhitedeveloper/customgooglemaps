@@ -85,7 +85,7 @@ function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click a
 		show NYC, not NY, the state*/
 		if (myBoundaries[boundaryId]) {
 			// Used to reset states to 0.8 opacity
-			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.8}})
+			sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: boundaryId, style: {strokeWeight: 5, strokeColor: '#fff', fillOpacity: 0.8}})
 			boundaryId = `${boundaryId} State`
 		}
 
@@ -165,7 +165,7 @@ function fitBounds({results, override}) {
 			sElEvtEmitter.emit('updateBannerText', {bannerText: data.stateNameLong, winner: globalResults.states[data.stateNameShort].winner});
 
 			if (override) {
-				overrideGeoStyle({boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
+				overrideGeoStyle({boundaryName: data.stateNameShort, style: {strokeWeight: 5, strokeColor: '#fff', fillOpacity: 0.3}});
 			}
 		}
 		else {
