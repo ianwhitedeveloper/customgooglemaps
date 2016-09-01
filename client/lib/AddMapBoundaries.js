@@ -15,6 +15,7 @@ let stateBlacklist = {};
 let boundariesFromGeoJsonLayer = new google.maps.Data({map: map});
 let infoWindow = null;
 let globalResults = null;
+let mapClickDisabled = false;
 
 
 function init({bounds, scope, results, boundaryId}={}) {
@@ -63,6 +64,14 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 
 function initializeDataLayer(){
 	boundariesFromGeoJsonLayer.addListener('click', boundaryClick);
+}
+
+function disableStateClickListener() {
+	mapClickDisabled = true;
+}
+
+function enableStateClickListener() {
+	mapClickDisabled = false;
 }
 
 function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
@@ -127,7 +136,7 @@ function overrideGeoStyle({boundaryName, style}={}) {
 function boundaryClick(e) {
 	let boundaryName = e.feature.f.NAME;
 
-	if (!(boundaryName in stateBlacklist)) {
+	if (!(boundaryName in stateBlacklist) && !mapClickDisabled) {
 		boundTheMap({boundaryId: boundaryName});
 		calcAndDisplayResults({results: globalResults, scope: boundaryName});
 		sElEvtEmitter.emit('updateBannerText', boundaryName);
@@ -175,6 +184,8 @@ sElEvtEmitter.on('updateCityMeta', updateCityMeta);
 sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
 sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
 sElEvtEmitter.on('geocoderInit', geocoderInit);
+sElEvtEmitter.on('disableStateClickListener', disableStateClickListener);
+sElEvtEmitter.on('enableStateClickListener', enableStateClickListener);
 
 module.exports = {
 	init,
