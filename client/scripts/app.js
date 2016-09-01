@@ -38,11 +38,11 @@ $(document).ready(function(){
 		});
 		if (hash) { hash = hash.toUpperCase(); }
 		if (hash && !city) {
-			sElEvtEmitter.emit('geocoderInit', hash);
+			sElEvtEmitter.emit('geocoderInit', {boundaryName: hash});
 		}
 		if (city && hash) {
 			city = encodeURIComponent(city);
-			sElEvtEmitter.emit('geocoderInit', `${city}, ${hash}`);
+			sElEvtEmitter.emit('geocoderInit', {boundaryName: `${city}, ${hash}`, override: true});
 		}
 	});
 

@@ -82,7 +82,7 @@ function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click a
 		$(window).on('resize', () => {
 			geocoderInit(boundaryId);
 		});*/
-		geocoderInit(boundaryId);
+		geocoderInit({boundaryName: boundaryId});
 	}
 	catch (error) {
 		sElEvtEmitter.emit('generalError', error);
@@ -134,20 +134,26 @@ function boundaryClick(e) {
 	}
 }
 
-function geocoderInit(boundaryName) {
+function geocoderInit({boundaryName, override=false}={}) {
 	let deferred = $.Deferred();
 	var geocoder = new google.maps.Geocoder();
 	geocoder.geocode({'address': `${boundaryName}, united states`}, deferred.resolve);
-	deferred.then(fitBounds);
+	deferred.then(results => {
+		fitBounds({results: results, override: override});
+	});
 	return deferred.promise();
 }
 
-function fitBounds(results) {
+function fitBounds({results, override}) {
 	getStateNameFromGeoResults(results)
 	.then(data => {
         sElEvtEmitter.emit('updateStateMeta', data.stateNameShort);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: data.stateNameLong, winner: globalResults.states[data.stateNameShort].winner});
 		calcAndDisplayResults({results: globalResults, scope: data.stateNameShort});
+
+		if (override) {
+			overrideGeoStyle({boundaryName: data.stateNameShort, style: {strokeWeight: 4, strokeColor: '#fff', fillOpacity: 0.3}});
+		}
 	})
 	.fail(error => { sElEvtEmitter.emit('silentError', error) });
 

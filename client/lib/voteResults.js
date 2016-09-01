@@ -63,7 +63,7 @@ function findAStoreClick(e) {
 	let searchBoxInputVal = searchBoxInput.val();
 	sElEvtEmitter.emit('resetBannerCTA');
 
-	geocoderInit(searchBoxInputVal).done(getData);
+	geocoderInit({boundaryName: searchBoxInputVal}).done(getData);
 }
 
 function getData(results) {
