@@ -19,9 +19,8 @@ let globalResults = null;
 function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);
 	initializeDataLayer();
-	// loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds, scope: scope});
-	loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds});
-	// boundTheMap({boundaryId: boundaryId, scope: scope});
+	loadBoundariesFromGeoJson({boundariesFromGeoJson: bounds, scope: scope});
+	boundTheMap({boundaryId: boundaryId});
 }
 
 function setResults(r) {
@@ -58,14 +57,14 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 		}
 	}
 
-	// calcAndDisplayResults({results: globalResults, scope: scope});
+	calcAndDisplayResults({results: globalResults, scope: scope});
 }
 
 function initializeDataLayer(){
 	boundariesFromGeoJsonLayer.addListener('click', boundaryClick);
 }
 
-function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
+function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click and identify boundary based on e.feature.getProperty('boundaryId'); we set when adding boundary to boundariesFromGeoJson layer
 	try {
 		/*This means we've found a state
 		so now update state color
@@ -79,10 +78,10 @@ function boundTheMap({boundaryId, scope} = {}) { //we can listen for a boundary 
 			boundaryId = `${boundaryId} State`
 		}
 
-		$(window).off('resize load');
-		$(window).on('resize load', () => {
+		/*$(window).off('resize');
+		$(window).on('resize', () => {
 			geocoderInit(boundaryId);
-		});
+		});*/
 		geocoderInit(boundaryId);
 	}
 	catch (error) {
@@ -128,7 +127,7 @@ function boundaryClick(e) {
 	let boundaryName = e.feature.f.NAME;
 
 	if (!(boundaryName in stateBlacklist)) {
-		boundTheMap({boundaryId: boundaryName, scope: boundaryName});
+		boundTheMap({boundaryId: boundaryName});
 		calcAndDisplayResults({results: globalResults, scope: boundaryName});
 		sElEvtEmitter.emit('updateBannerText', boundaryName);
 		sElEvtEmitter.emit('resetBannerCTA');
@@ -163,6 +162,7 @@ function updateStateMeta(stateName) {
 sElEvtEmitter.on('updateStateMeta', updateStateMeta);
 sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
 sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
+sElEvtEmitter.on('geocoderInit', geocoderInit);
 
 module.exports = {
 	init,

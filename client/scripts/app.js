@@ -11,6 +11,7 @@ let mapCenterChange = require('../lib/mapCenterChange');
 let shareResults = require('../lib/shareResults');
 let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
+let sElEvtEmitter = require('../lib/globals').sElEvtEmitter;
 var doc = document.documentElement;
 let isIE = navigator.userAgent.match('MSIE');
 doc.setAttribute('data-useragent', isIE ? navigator.userAgent : 'evergreen');
@@ -23,20 +24,26 @@ $(document).ready(function(){
 		zoomControl,
 		hash = (location.href.split("#")[1] || null),
 		city = getQueryString('city');
-	// debugger;
 
 	$.when(
 		$.get('/external/boundariesFromGeoJson.json'), 
 		$.get('/external/dummyStateResults.json')
 	)
 	.then((usBounds, results) => {
-		if (hash) { hash = hash.toUpperCase(); }
 		init({
 			bounds: usBounds[0],
 			results: results[0],
-			scope: `${city} ${hash}` || 'national',
-			boundaryId: hash || 'united states'
+			scope: 'national',
+			boundaryId: 'united states'
 		});
+		if (hash) { hash = hash.toUpperCase(); }
+		if (hash && !city) {
+			sElEvtEmitter.emit('geocoderInit', hash);
+		}
+		if (city && hash) {
+			city = encodeURIComponent(city);
+			sElEvtEmitter.emit('geocoderInit', `${city}, ${hash}`);
+		}
 	});
 
 	///////////////////////////////////////////////////
