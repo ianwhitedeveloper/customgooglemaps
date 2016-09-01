@@ -18,6 +18,10 @@ let infoWindow = null;
 let globalResults = null;
 let mapClickDisabled = false;
 
+$('body').on('click', '#reset-map', e => {
+	boundTheMap({boundaryId: 'united states'});
+	calcAndDisplayResults({results: globalResults, scope: 'national'});
+});
 
 function init({bounds, scope, results, boundaryId}={}) {
 	setResults(results);

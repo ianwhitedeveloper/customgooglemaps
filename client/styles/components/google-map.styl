@@ -1,12 +1,20 @@
+#reset-map
+  display none
 
 #cd-google-map
   position relative
   margin 0 25px
+  height calc(100% - 150px)
   
 #cd-zoom-in, #cd-zoom-out
   display none
 
 @media only screen and (min-width: 1024px)  
+  #reset-map
+    display block
+    position absolute
+    bottom 100px
+    right 0
 
   #cd-zoom-in, #cd-zoom-out
     display block
@@ -47,6 +55,7 @@
     top 0
     right 0
     width calc(100% - 420px)
+    height calc(100% - 85px)
     margin 0
        
   #cd-zoom-in, #cd-zoom-out
