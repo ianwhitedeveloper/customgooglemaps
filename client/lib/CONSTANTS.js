@@ -14,7 +14,8 @@ let stateMetaEl = $('meta[name=currentState]');
 let cityMetaEl = $('meta[name=currentCity]');
 let bannerCtaEl = $('.banner_cta a');
 let generalErrorMsg = 'Location not found: your search returned no results';
-
+let isIE = navigator.userAgent.match('MSIE');
+let isIE11= navigator.userAgent.toLowerCase().indexOf('trident') > -1;
 module.exports = {
 	API_URL,
 	redCupEl,
@@ -26,5 +27,7 @@ module.exports = {
 	stateMetaEl,
 	bannerCtaEl,
 	cityMetaEl,
-	generalErrorMsg
+	generalErrorMsg,
+	isIE,
+	isIE11
 }
