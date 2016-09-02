@@ -11,10 +11,25 @@ let debouncedFunction = debounce(function(center) {
 }, 600);
 
 map.addListener('center_changed', function debounceMapCenter() {
-	debouncedFunction(map.getCenter())
-	.then(center => { 
-		let lat = center.lat(),
-			lng = center.lng();
-		sElEvtEmitter.emit('queryElectionAPI', {lat: lat, lng: lng})
-	});
+	if (map.getZoom() > 9) {
+
+		debouncedFunction(map.getCenter())
+		.then(center => { 
+			let lat = center.lat(),
+				lng = center.lng();
+			sElEvtEmitter.emit('queryElectionAPI', {lat: lat, lng: lng})
+		});
+	}
+});
+
+
+map.addListener('bounds_changed', function debounceMapCenter() {
+	if (map.getZoom() > 9) {
+		debouncedFunction(map.getCenter())
+		.then(center => { 
+			let lat = center.lat(),
+				lng = center.lng();
+			sElEvtEmitter.emit('queryElectionAPI', {lat: lat, lng: lng})
+		});
+	}
 });

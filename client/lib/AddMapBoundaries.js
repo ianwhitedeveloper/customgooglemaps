@@ -181,8 +181,8 @@ function fitBounds({results, override}) {
 	map.fitBounds(results[0].geometry.viewport);
 	// Prevent map from zooming in too 
 	// far and triggering cup results prematurely
-	if (map.getZoom() > 8) {
-		map.setZoom(8); 
+	if (map.getZoom() > 9) {
+		map.setZoom(9);
 	}
 }
 

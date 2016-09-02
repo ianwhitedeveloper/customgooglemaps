@@ -75,7 +75,7 @@ function getData(results) {
 }
 
 function queryElectionAPI({lat, lng}={}) {
-	if (map.getZoom() >= 8) {
+	if (map.getZoom() > 9) {
 		deleteMarkers();
 		$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
 		.done(plotMarkers)
@@ -103,7 +103,12 @@ function plotMarkers(resultsArray) {
 
 	    calcAndDisplayResults({results: global.areaResults});
 	 	showMarkers();
-	 	map.setZoom(10);
+	 	if (map.getZoom() < 9) {
+	 		google.maps.event.addListenerOnce(map, 'idle', function () {
+			 	map.setZoom(9);
+	 	    });
+	 	    google.maps.event.trigger(map, 'idle');
+	 	}
 	 } catch (e) {
 	 	sElEvtEmitter.emit('generalError', generalErrorMsg);
 	 }
