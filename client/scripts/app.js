@@ -43,7 +43,7 @@ $(document).ready(function(){
 		});
 		if (hash) { hash = hash.toUpperCase(); }
 		if (hash && !city) {
-			sElEvtEmitter.emit('geocoderInit', {boundaryName: stateDict[hash]});
+			sElEvtEmitter.emit('geocoderInit', {boundaryName: `${stateDict[hash]} state`});
 		}
 		if (city && hash) {
 			city = decodeURIComponent(city);
