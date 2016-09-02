@@ -14,6 +14,7 @@ let stateMetaEl = $('meta[name=currentState]');
 let cityMetaEl = $('meta[name=currentCity]');
 let bannerCtaEl = $('.banner_cta a');
 let generalErrorMsg = 'Location not found: your search returned no results';
+let hideBannerCtaEl = $('#hideBannerCta');
 
 module.exports = {
 	API_URL,
@@ -26,5 +27,6 @@ module.exports = {
 	stateMetaEl,
 	bannerCtaEl,
 	cityMetaEl,
-	generalErrorMsg
+	generalErrorMsg,
+	hideBannerCtaEl
 }
