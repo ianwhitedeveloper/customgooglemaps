@@ -56,8 +56,8 @@ function setShareURL() {
 	stateMetaValue = stateMetaEl.attr('content');
 	cityMetaValue = encodeURIComponent(cityMetaEl.attr('content'));
 	encodedRelativeURL = cityMetaValue 
-		? encodeURIComponent(`${window.location.origin}${window.location.origin}?city=${cityMetaValue}#${stateMetaValue}`)
-		: encodeURIComponent(`${window.location.origin}${window.location.origin}#${stateMetaValue}`);
+		? encodeURIComponent(`${window.location.origin}${window.location.pathname}?city=${cityMetaValue}#${stateMetaValue}`)
+		: encodeURIComponent(`${window.location.origin}${window.location.pathname}#${stateMetaValue}`);
 
 	$('#notie-confirm-yes a').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}`);
 	$('#notie-confirm-yes a').attr("onclick", "ga('send', 'event', 'share_state', 'share', 'facebook')");
