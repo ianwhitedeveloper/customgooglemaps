@@ -6,7 +6,7 @@ gulp.task('sftp-internal', function () {
         .pipe(sftp({
         	host: '10.1.1.168',
         	auth: 'privateKeyEncrypted',
-        	remotePath: '/var/www/webserve/7-election.internal-l.thethinktank.com'
+        	remotePath: '/var/www/webserve/7-election.internal-l.thethinktank.com/results'
         }));
 });
 
