@@ -5,7 +5,7 @@ let stateMetaEl = require('./CONSTANTS').stateMetaEl;
 function toggleStorePins() {
 	let zoomLevel = map.getZoom();
 
-	if (zoomLevel < 8) {
+	if (zoomLevel < 10) {
 		sElEvtEmitter.emit('clearMarkers');
 		sElEvtEmitter.emit('resetBannerCTA');
 		sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateMetaEl.attr('content'), style: {strokeWeight: 5, strokeColor: '#fff', fillOpacity: 0.8}});

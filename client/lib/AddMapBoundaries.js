@@ -195,8 +195,13 @@ function updateCityMeta(cityName) {
 	cityMetaEl.attr('content', cityName);
 }
 
+function clearCityMeta() {
+	cityMetaEl.attr('content', '');
+}
+
 sElEvtEmitter.on('updateStateMeta', updateStateMeta);
 sElEvtEmitter.on('updateCityMeta', updateCityMeta);
+sElEvtEmitter.on('clearCityMeta', clearCityMeta);
 sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
 sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
 sElEvtEmitter.on('geocoderInit', geocoderInit);

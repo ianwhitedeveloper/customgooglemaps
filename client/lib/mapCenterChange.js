@@ -33,3 +33,9 @@ map.addListener('bounds_changed', function debounceMapCenter() {
 		});
 	}
 });
+
+map.addListener('bounds_changed', function() {
+	if (map.getZoom() < 10) {
+        sElEvtEmitter.emit('clearCityMeta');
+	}
+});

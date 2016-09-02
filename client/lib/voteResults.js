@@ -90,6 +90,7 @@ function plotMarkers(resultsArray) {
 		let bounds = new google.maps.LatLngBounds();
 		let marker;
 
+		sElEvtEmitter.emit('updateCityMeta', resultsArray[0].city);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
      	global.areaResults.scope = resultsArray[0].city;
      	
@@ -103,12 +104,6 @@ function plotMarkers(resultsArray) {
 
 	    calcAndDisplayResults({results: global.areaResults});
 	 	showMarkers();
-	 	if (map.getZoom() < 9) {
-	 		google.maps.event.addListenerOnce(map, 'idle', function () {
-			 	map.setZoom(9);
-	 	    });
-	 	    google.maps.event.trigger(map, 'idle');
-	 	}
 	 } catch (e) {
 	 	sElEvtEmitter.emit('generalError', generalErrorMsg);
 	 }
