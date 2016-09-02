@@ -1,3 +1,4 @@
+let isIE11 = require('./CONSTANTS').isIE11;
 let $ = require('jquery');
 let map = require('./map');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
@@ -20,9 +21,14 @@ let global = {
 		}
 };
 
+let cupBlueImg 		= (isIE11) ? 'imgs/cup-blue.png' : 'imgs/cup-blue.svg';
+let cupRedImg 		= (isIE11) ? 'imgs/cup-red.png' : 'imgs/cup-red.svg';
+let cupPurpleImg 	= (isIE11) ? 'imgs/cup-purp.png' : 'imgs/cup-purp.svg';
+let cupActiveImg 	= (isIE11) ? 'imgs/cup-active.png' : 'imgs/cup-active.svg';
+
 let customCupMarkers = {
 	blue: {
-		url: 'imgs/cup-blue.svg',
+		url: cupBlueImg,
 		// This marker is 32 pixels wide by 32 pixels tall.
 		size: new google.maps.Size(32, 56),
 		// The origin for this image is 0,0.
@@ -31,19 +37,19 @@ let customCupMarkers = {
 		anchor: new google.maps.Point(0, 56)
 	},
 	red: {
-		url: 'imgs/cup-red.svg',
+		url: cupRedImg,
 		size: new google.maps.Size(32, 56),
 		origin: new google.maps.Point(0,0),
 		anchor: new google.maps.Point(0, 56)
 	},
 	purple: {
-		url: 'imgs/cup-purp.svg',
+		url: cupPurpleImg,
 		size: new google.maps.Size(32, 56),
 		origin: new google.maps.Point(0,0),
 		anchor: new google.maps.Point(0, 56)
 	},
 	activeIcon: {
-		url: 'imgs/cup-active.svg',
+		url: cupActiveImg,
 		size: new google.maps.Size(32, 56),
 		origin: new google.maps.Point(0,0),
 		anchor: new google.maps.Point(0, 56)

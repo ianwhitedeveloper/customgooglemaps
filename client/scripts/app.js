@@ -15,8 +15,9 @@ let setResults = require('../lib/AddMapBoundaries').setResults;
 let init = require('../lib/AddMapBoundaries').init;
 let sElEvtEmitter = require('../lib/globals').sElEvtEmitter;
 var doc = document.documentElement;
-let isIE = navigator.userAgent.match('MSIE');
+let isIE = require('../lib/CONSTANTS').isIE;
 doc.setAttribute('data-useragent', isIE ? navigator.userAgent : 'evergreen');
+
 $(document).ready(function(){
     //set your google maps parameters
 	//you can use any,location as center on map startup
@@ -43,7 +44,7 @@ $(document).ready(function(){
 		});
 		if (hash) { hash = hash.toUpperCase(); }
 		if (hash && !city) {
-			sElEvtEmitter.emit('geocoderInit', {boundaryName: stateDict[hash]});
+			sElEvtEmitter.emit('geocoderInit', {boundaryName: `${stateDict[hash]} state`});
 		}
 		if (city && hash) {
 			city = decodeURIComponent(city);

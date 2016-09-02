@@ -56,40 +56,17 @@ function setShareURL() {
 	stateMetaValue = stateMetaEl.attr('content');
 	cityMetaValue = encodeURIComponent(cityMetaEl.attr('content'));
 	encodedRelativeURL = cityMetaValue 
-		? encodeURIComponent(`${window.location.origin}/?city=${cityMetaValue}#${stateMetaValue}`)
-		: encodeURIComponent(`${window.location.origin}/#${stateMetaValue}`);
+		? encodeURIComponent(`${window.location.origin}${window.location.pathname}?city=${cityMetaValue}#${stateMetaValue}`)
+		: encodeURIComponent(`${window.location.origin}${window.location.pathname}#${stateMetaValue}`);
 
 	$('#notie-confirm-yes a').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}`);
+	$('#notie-confirm-yes a').attr("onclick", "ga('send', 'event', 'share_state', 'share', 'facebook')");
 
 
 	$('#notie-confirm-no a').attr('href', `https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}`);
+	$('#notie-confirm-no a').attr("onclick", "ga('send', 'event', 'share_state', 'share', 'twitter')");
 
-	// **** New Tracking code - Keeping until bug is fixed **** //
-	// if (encodedRelativeURL == cityMetaValue ) {
-	// 	encodeURIComponent('${window.location.origin}/?city=${cityMetaValue}#${stateMetaValue}');
-
-	// 	$('#notie-confirm-yes a').attr({
-	// 		'href'    : 'https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}',
-	// 		'onclick' : 'ga("send", "event", "share_state", "share", "facebook")'
-	// 	});
-
-	// 	$('#notie-confirm-no a').attr({
-	// 		'href'  : 'https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}',
-	// 		'onclick' : 'ga("send", "event", "share_state", "share", "twitter")'
-	// 	});
-	// } else {
-	// 	encodeURIComponent('${window.location.origin}/#${stateMetaValue}');
-
-	// 	$('#notie-confirm-yes a').attr({
-	// 		'href' : 'https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}',
-	// 		'onclick' : 'ga("send", "event", "share_national", "share", "facebook")'
-	// 	});
-	// 	$('#notie-confirm-no a').attr({
-	// 		'href'  : 'https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}',
-	// 		'onclick' : 'ga("send", "event", "share_national", "share", "twitter")'
-
-	// 	});
-	// }
+	console.log(cityMetaValue);
 }
 
 sElEvtEmitter.on('shareResultsClicked', setShareURL);
