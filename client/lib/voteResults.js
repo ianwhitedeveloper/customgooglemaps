@@ -75,7 +75,7 @@ function getData(results) {
 }
 
 function queryElectionAPI({lat, lng}={}) {
-	if (map.getZoom() >= 8) {
+	if (map.getZoom() > 9) {
 		deleteMarkers();
 		$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
 		.done(plotMarkers)
@@ -90,6 +90,7 @@ function plotMarkers(resultsArray) {
 		let bounds = new google.maps.LatLngBounds();
 		let marker;
 
+		sElEvtEmitter.emit('updateCityMeta', resultsArray[0].city);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
      	global.areaResults.scope = resultsArray[0].city;
      	
@@ -103,7 +104,6 @@ function plotMarkers(resultsArray) {
 
 	    calcAndDisplayResults({results: global.areaResults});
 	 	showMarkers();
-	 	map.setZoom(10);
 	 } catch (e) {
 	 	sElEvtEmitter.emit('generalError', generalErrorMsg);
 	 }

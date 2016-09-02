@@ -2,8 +2,10 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let map = require('../lib/map');
 let stateMetaEl = require('./CONSTANTS').stateMetaEl;
 
-function toggleStorePins(zoomLevel) {
-	if (zoomLevel < 8) {
+function toggleStorePins() {
+	let zoomLevel = map.getZoom();
+
+	if (zoomLevel < 10) {
 		sElEvtEmitter.emit('clearMarkers');
 		sElEvtEmitter.emit('resetBannerCTA');
 		sElEvtEmitter.emit('overrideGeoStyle', {boundaryName: stateMetaEl.attr('content'), style: {strokeWeight: 5, strokeColor: '#fff', fillOpacity: 0.8}});
@@ -18,15 +20,8 @@ function toggleStorePins(zoomLevel) {
 
 }
 
-map.addListener('zoom_changed', function() {
-	toggleStorePins(returnCurrentMapZoomLevel());
-});
-
-
-function returnCurrentMapZoomLevel() {
-	return map.getZoom();
-}
+map.addListener('idle', toggleStorePins);
 
 module.exports = {
-	returnCurrentMapZoomLevel
+	toggleStorePins
 }

@@ -5,7 +5,6 @@ let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let colorKey = require('../lib/CONSTANTS').colorKey;
-let returnCurrentMapZoomLevel = require('../lib/mapZoom').returnCurrentMapZoomLevel;
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
 let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
 let generalErrorMsg = require('../lib/CONSTANTS').generalErrorMsg;
@@ -182,8 +181,8 @@ function fitBounds({results, override}) {
 	map.fitBounds(results[0].geometry.viewport);
 	// Prevent map from zooming in too 
 	// far and triggering cup results prematurely
-	if (map.getZoom() > 8) {
-		map.setZoom(8); 
+	if (map.getZoom() > 9) {
+		map.setZoom(9);
 	}
 }
 
@@ -196,8 +195,13 @@ function updateCityMeta(cityName) {
 	cityMetaEl.attr('content', cityName);
 }
 
+function clearCityMeta() {
+	cityMetaEl.attr('content', '');
+}
+
 sElEvtEmitter.on('updateStateMeta', updateStateMeta);
 sElEvtEmitter.on('updateCityMeta', updateCityMeta);
+sElEvtEmitter.on('clearCityMeta', clearCityMeta);
 sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
 sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
 sElEvtEmitter.on('geocoderInit', geocoderInit);

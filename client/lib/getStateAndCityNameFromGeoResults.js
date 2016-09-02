@@ -1,5 +1,6 @@
 let $ = require('jquery');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
+let map = require('../lib/map');
 
 
 function getStateAndCityNameFromGeoResults(results) {
@@ -14,7 +15,11 @@ function getStateAndCityNameFromGeoResults(results) {
             if (results[0].address_components.length > 2) {
                 data.cityName = results[0].address_components[0].long_name;
                 sElEvtEmitter.emit('updateCityMeta', data.cityName);
-                sElEvtEmitter.emit('disableBannerCta');
+                setTimeout(() => {
+                    map.setZoom(10);
+                }, 1000);
+            } else {
+                sElEvtEmitter.emit('clearCityMeta');
             }
 
             data.stateNameShort = results[0].address_components[i].short_name;
