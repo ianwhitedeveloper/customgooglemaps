@@ -5,7 +5,6 @@ let calcAndDisplayResults = require('../lib/calcAndDisplayResults');
 let $ = require('jquery');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let colorKey = require('../lib/CONSTANTS').colorKey;
-let returnCurrentMapZoomLevel = require('../lib/mapZoom').returnCurrentMapZoomLevel;
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
 let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
 let generalErrorMsg = require('../lib/CONSTANTS').generalErrorMsg;
