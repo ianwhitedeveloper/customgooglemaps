@@ -12,6 +12,7 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let bannerCtaEl = require('../lib/CONSTANTS').bannerCtaEl;
 
 $('body').on('click', 'a[rel="js-share-results"]', e => {
+	e.preventDefault();
 	sElEvtEmitter.emit('shareResultsClicked');
 	notie.confirm(`Share Your State's Results`, '', '')
 });
