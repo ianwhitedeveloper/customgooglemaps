@@ -1,11 +1,9 @@
 let $ = require('jquery');
 let notie = require('notie');
-let map = require('./map');
 let confirmYesEl = require('../lib/CONSTANTS').confirmYesEl;
 let confirmNoEl = require('../lib/CONSTANTS').confirmNoEl;
 let stateMetaEl = require('../lib/CONSTANTS').stateMetaEl;
 let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
-let hideBannerCtaEl = require('../lib/CONSTANTS').hideBannerCtaEl;
 let stateMetaValue;
 let cityMetaValue;
 let encodedRelativeURL;
@@ -14,36 +12,9 @@ let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let bannerCtaEl = require('../lib/CONSTANTS').bannerCtaEl;
 
 $('body').on('click', 'a[rel="js-share-results"]', e => {
-	e.preventDefault();
 	sElEvtEmitter.emit('shareResultsClicked');
 	notie.confirm(`Share Your State's Results`, '', '')
 });
-
-map.addListener('idle', () => {
-	if (map.getZoom() < 9) {
-		enableBannerCta();
-	} else {
-		disableBannerCta();
-	}
-});
-
-hideBannerCtaEl.change(function() {
-    if($(this).is(":checked")) {
-		console.log('csdcsd');
-        bannerCtaEl.css({display: 'none'});
-    } else {
-	    bannerCtaEl.css({display: 'block'});      
-    }
-});
-
-
-function enableBannerCta() {
-	hideBannerCtaEl.prop('checked', false).trigger('change');
-}
-
-function disableBannerCta() {
-	hideBannerCtaEl.prop('checked', true).trigger('change');
-}
 
 function storeMarkerSelected(address) {
 	bannerCtaEl.attr({
@@ -123,6 +94,3 @@ function setShareURL() {
 sElEvtEmitter.on('shareResultsClicked', setShareURL);
 sElEvtEmitter.on('storeMarkerSelected', storeMarkerSelected);
 sElEvtEmitter.on('resetBannerCTA', resetBannerCTA);
-sElEvtEmitter.on('enableBannerCta', enableBannerCta);
-sElEvtEmitter.on('disableBannerCta', disableBannerCta);
-// sElEvtEmitter.on('storeMarkerSelected', disableBannerCta);
