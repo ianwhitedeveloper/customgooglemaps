@@ -91,6 +91,33 @@ function setShareURL() {
 
 
 	$('#notie-confirm-no a').attr('href', `https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}`);
+
+	// **** New Tracking code - Keeping until bug is fixed **** //
+	// if (encodedRelativeURL == cityMetaValue ) {
+	// 	encodeURIComponent('${window.location.origin}/?city=${cityMetaValue}#${stateMetaValue}');
+
+	// 	$('#notie-confirm-yes a').attr({
+	// 		'href'    : 'https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}',
+	// 		'onclick' : 'ga("send", "event", "share_state", "share", "facebook")'
+	// 	});
+
+	// 	$('#notie-confirm-no a').attr({
+	// 		'href'  : 'https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}',
+	// 		'onclick' : 'ga("send", "event", "share_state", "share", "twitter")'
+	// 	});
+	// } else {
+	// 	encodeURIComponent('${window.location.origin}/#${stateMetaValue}');
+
+	// 	$('#notie-confirm-yes a').attr({
+	// 		'href' : 'https://www.facebook.com/sharer/sharer.php?u=${encodedRelativeURL}',
+	// 		'onclick' : 'ga("send", "event", "share_national", "share", "facebook")'
+	// 	});
+	// 	$('#notie-confirm-no a').attr({
+	// 		'href'  : 'https://twitter.com/intent/tweet?text=${encodedTwitterMsg} ${encodedRelativeURL}',
+	// 		'onclick' : 'ga("send", "event", "share_national", "share", "twitter")'
+
+	// 	});
+	// }
 }
 
 sElEvtEmitter.on('shareResultsClicked', setShareURL);

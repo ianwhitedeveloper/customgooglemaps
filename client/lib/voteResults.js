@@ -156,7 +156,16 @@ function resetAreaResults() {
 function setMapOnAll(map) {
 	for (var i = 0; i < global.markers.length; i++) {
 		global.markers[i].marker.setMap(map);
+
+		var zInd = google.maps.Marker.MAX_ZINDEX;
+
+		google.maps.event.addListener(global.markers[i].marker, "click", function (e) {
+		    zInd++;
+		    this.setZIndex(zInd);
+		});
 	}
+
+	
 }
 
 // Removes the markers from the map, but keeps them in the array.
