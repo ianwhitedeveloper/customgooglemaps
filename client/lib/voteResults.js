@@ -29,30 +29,30 @@ let cupActiveImg 	= (isIE11) ? 'imgs/cup-active.png' : 'imgs/cup-active.svg';
 let customCupMarkers = {
 	blue: {
 		url: cupBlueImg,
-		// This marker is 32 pixels wide by 32 pixels tall.
-		size: new google.maps.Size(32, 56),
+		// This marker is 32 pixels wide by 49 pixels tall.
+		size: new google.maps.Size(32, 49),
 		// The origin for this image is 0,0.
 		origin: new google.maps.Point(0,0),
-		// The anchor for this image is the base of the flagpole at 0,32.
-		anchor: new google.maps.Point(0, 56)
+		// The anchor for this image is the base of the flagpole at 0,49.
+		anchor: new google.maps.Point(0, 49)
 	},
 	red: {
 		url: cupRedImg,
-		size: new google.maps.Size(32, 56),
+		size: new google.maps.Size(32, 49),
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(0, 56)
+		anchor: new google.maps.Point(0, 49)
 	},
 	purple: {
 		url: cupPurpleImg,
-		size: new google.maps.Size(32, 56),
+		size: new google.maps.Size(32, 49),
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(0, 56)
+		anchor: new google.maps.Point(0, 49)
 	},
 	activeIcon: {
 		url: cupActiveImg,
-		size: new google.maps.Size(32, 56),
+		size: new google.maps.Size(32, 49),
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(0, 56)
+		anchor: new google.maps.Point(0, 49)
 	}
 }
 

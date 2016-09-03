@@ -17,9 +17,10 @@ let infoWindow = null;
 let globalResults = null;
 let mapClickDisabled = false;
 
-$('body').on('click', '#reset-map', e => {
+$('body').on('click', '.reset_map', e => {
 	boundTheMap({boundaryId: 'united states'});
 	calcAndDisplayResults({results: globalResults, scope: 'national'});
+	sElEvtEmitter.emit('clearCityMeta');
 });
 
 function init({bounds, scope, results, boundaryId}={}) {

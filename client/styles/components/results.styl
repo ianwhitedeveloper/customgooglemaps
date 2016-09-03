@@ -4,9 +4,12 @@
 	position: relative;
 
 .banner_cta
-	font-size 11px
 	position relative
-	bottom 50%
+	bottom 33px
+	
+	a
+		font-size 11px
+		font-family AvenirNextBold
 
 .location
 	font-size 16px
@@ -18,12 +21,11 @@ a[rel="js-share-results"]
 
 .results
 	display(flex)
-	flex-justify-content(space-between)
 	flex-direction(column)
 	position relative
 	width auto
 	z-index 102
-	padding 35px 25px 0
+	padding 35px 22px 0
 	background-color transparent
 
 	h4
@@ -32,7 +34,6 @@ a[rel="js-share-results"]
 		margin 5px 0
 
 	.header_body_copy
-		max-width 90%
 		margin 5px auto
 	
 	header
@@ -80,11 +81,15 @@ a[rel="js-share-results"]
 
 .banner
 	position relative
-	height 55px
+	height auto
+	max-height 85px
 	max-width 355px
 	font-size 16px
 	line-height 42px
 	margin 0 auto
+	
+	span
+		height 55px
 
 .location
 	height 100%
@@ -109,7 +114,7 @@ a[rel="js-share-results"]
 
 .cup_results
 		max-width 414px
-		margin 25px auto  0
+		margin 0 auto
 
 	.cup_results_container
 		margin 0 5px
@@ -177,10 +182,13 @@ html[data-useragent*='evergreen']
 	.header_cta .arrow_left
 		&:before
 			height 16px
-		
+	
 	.results
+		.header_body_copy
+			font-size 17px
+			
 		header
-			margin 5px auto 0
+			margin 35px auto 0
 			max-width 304px
 			
 			h1
@@ -196,7 +204,6 @@ html[data-useragent*='evergreen']
 
 	.banner
 		width 365px
-		margin 20px auto
 		font-size 21px
 		
 	html[data-useragent*='evergreen'] .cup_results_container .circle sup,
@@ -204,7 +211,7 @@ html[data-useragent*='evergreen']
 		.circle 
 			span 
 				position relative
-				top calc(50% - 16px)
+				top calc(50% - 14px)
 				
 			sup
 				font-size 11px
@@ -216,15 +223,15 @@ html[data-useragent*='evergreen']
 	html[data-useragent*='evergreen']
 		.cup_results_container
 			.cup
-				height 190px
-				width 98px
+				height 160px
+				width 80px
 
 			.percentage
 				font-size 22.5px
 				
 			.circle
-				width 55px
-				height 55px
+				width 50px
+				height 50px
 		
 @media only screen and (min-width: 1024px)
 	.results
@@ -237,4 +244,8 @@ html[data-useragent*='evergreen']
 		
 		header
 			max-width 100%
-					
+
+// @media only screen and (min-width: 1200px)
+// 	.results
+// 		header
+// 			margin: 12.5% auto 0;
