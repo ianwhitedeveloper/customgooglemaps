@@ -94,10 +94,6 @@ function boundTheMap({boundaryId} = {}) { //we can listen for a boundary click a
 			boundaryId = `${boundaryId} State`
 		}
 
-		/*$(window).off('resize');
-		$(window).on('resize', () => {
-			geocoderInit(boundaryId);
-		});*/
 		geocoderInit({boundaryName: boundaryId});
 	}
 	catch (error) {
