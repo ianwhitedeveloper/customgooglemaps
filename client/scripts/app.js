@@ -50,6 +50,9 @@ $(document).ready(function(){
 			city = decodeURIComponent(city);
 			sElEvtEmitter.emit('geocoderInit', {boundaryName: `${city}, ${stateDict[hash]}`, override: true});
 		}
+	})
+	.fail(error => {
+		sElEvtEmitter.emit('fatalError', error);
 	});
 
 	///////////////////////////////////////////////////
