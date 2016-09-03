@@ -9,17 +9,17 @@
     text-align center
     border-radius 3px
     cursor pointer
-    
+
 
 #cd-google-map
     position relative
     margin 0 25px
-    height calc(100% - 150px)
+    height auto
 
 #cd-zoom-in, #cd-zoom-out
     display none
 
-@media only screen and (min-width: 1024px)  
+@media only screen and (min-width: 1024px)
     .reset_map
         display block
         position absolute
@@ -46,7 +46,7 @@
 
     #cd-zoom-in
         border-radius 3px 3px 0 0
-        
+
     #cd-zoom-out
         border-radius 0 0 3px 3px
 
@@ -62,7 +62,7 @@
         background-position 50% -32px
 
     #cd-google-map
-        position fixed
+        position absolute
         top 0
         right 0
         width calc(100% - 420px)
