@@ -1,65 +1,76 @@
-#reset-map
-  display none
+.reset_map
+    display none
+    background-color rgba(255, 255, 255, 0.9)
+    text-transform uppercase
+    font-family AvenirNextBold
+    font-size 12px
+    padding 2px
+    width 45px
+    text-align center
+    border-radius 3px
+    cursor pointer
+    
 
 #cd-google-map
-  position relative
-  margin 0 25px
-  height calc(100% - 150px)
-  
+    position relative
+    margin 0 25px
+    height calc(100% - 150px)
+
 #cd-zoom-in, #cd-zoom-out
-  display none
+    display none
 
 @media only screen and (min-width: 1024px)  
-  #reset-map
-    display block
-    position absolute
-    bottom 100px
-    right 0
+    .reset_map
+        display block
+        position absolute
+        bottom 100px
+        right 9px
 
-  #cd-zoom-in, #cd-zoom-out
-    display block
-    height 32px
-    width 32px
-    cursor pointer
-    margin 0 15px 15px 0
-    background-color rgba(255, 255, 255, 0.9)
-    background-repeat no-repeat
-    background-size 32px 64px
-    background-image url("../imgs/cd-icon-controller.svg")
-    
-  #cd-zoom-in
-    border-top 1px solid #c2c2c2
-    border-left 1px solid #c2c2c2
-    border-right 1px solid #c2c2c2
-    border-radius 3px 3px 0 0
+    #cd-zoom-in, #cd-zoom-out
+        display block
+        height 32px
+        width 32px
+        cursor pointer
+        margin 0 15px 15px 0
+        background-color rgba(255, 255, 255, 0.9)
+        background-repeat no-repeat
+        background-size 32px 64px
+        background-image url("../imgs/cd-icon-controller.svg")
 
-  #cd-zoom-out
-    border-bottom 1px solid #c2c2c2
-    border-left 1px solid #c2c2c2
-    border-right 1px solid #c2c2c2
-    border-radius 0 0 3px 3px
+    #cd-zoom-out,
+    #cd-zoom-in,
+    .reset_map
+        border-top 1px solid #c2c2c2
+        border-left 1px solid #c2c2c2
+        border-right 1px solid #c2c2c2
 
-  .no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover
-    background-color #d36868
+    #cd-zoom-in
+        border-radius 3px 3px 0 0
+        
+    #cd-zoom-out
+        border-radius 0 0 3px 3px
 
-  #cd-zoom-in
-    background-position 50% 0
-    margin-top 10px
-    margin-bottom 1px
+    .no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover
+        background-color #d36868
 
-  #cd-zoom-out
-    background-position 50% -32px
+    #cd-zoom-in
+        background-position 50% 0
+        margin-top 10px
+        margin-bottom 1px
 
-  #cd-google-map
-    position fixed
-    top 0
-    right 0
-    width calc(100% - 420px)
-    height calc(100% - 85px)
-    margin 0
-       
-  #cd-zoom-in, #cd-zoom-out
-    margin-left 50px
+    #cd-zoom-out
+        background-position 50% -32px
 
-  #cd-zoom-in
-    margin-top 50px
+    #cd-google-map
+        position fixed
+        top 0
+        right 0
+        width calc(100% - 420px)
+        height calc(100% - 85px)
+        margin 0
+
+    #cd-zoom-in, #cd-zoom-out
+        margin-left 50px
+
+    #cd-zoom-in
+        margin-top 50px
