@@ -16,6 +16,7 @@ let init = require('../lib/AddMapBoundaries').init;
 let sElEvtEmitter = require('../lib/globals').sElEvtEmitter;
 var doc = document.documentElement;
 let isIE = require('../lib/CONSTANTS').isIE;
+let getQueryString = require('../lib/getQueryString');
 doc.setAttribute('data-useragent', isIE ? navigator.userAgent : 'evergreen');
 
 $(document).ready(function(){
@@ -33,7 +34,7 @@ $(document).ready(function(){
 
 	$.when(
 		$.get('external/boundariesFromGeoJson.json'), 
-		$.get('https://api.7-eleven.com/v3/election/votes')
+		$.get('external/dummyStateResults.json')
 	)
 	.then((usBounds, results) => {
 		init({
@@ -57,20 +58,6 @@ $(document).ready(function(){
 	///////////////////////////////////////////////////
 	zoomControl = new CustomZoomControl(zoomControlDiv, map);
 	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(zoomControlDiv);
-
-
-	/**
-	 * Get the value of a querystring
-	 * @param  {String} field The field to get the value of
-	 * @param  {String} url   The URL to get the value from (optional)
-	 * @return {String}       The field value
-	 */
-	function getQueryString( field, url ) {
-	    var href = url ? url : window.location.href;
-	    var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
-	    var string = reg.exec(href);
-	    return string ? string[1] : null;
-	};
 });
 
   
