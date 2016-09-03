@@ -21,6 +21,7 @@ $('body').on('click', '.reset_map', e => {
 	boundTheMap({boundaryId: 'united states'});
 	calcAndDisplayResults({results: globalResults, scope: 'national'});
 	sElEvtEmitter.emit('clearCityMeta');
+	sElEvtEmitter.emit('clearStateMeta');
 });
 
 function init({bounds, scope, results, boundaryId}={}) {
@@ -200,9 +201,14 @@ function clearCityMeta() {
 	cityMetaEl.attr('content', '');
 }
 
+function clearStateMeta() {
+	stateMetaEl.attr('content', '');
+}
+
 sElEvtEmitter.on('updateStateMeta', updateStateMeta);
 sElEvtEmitter.on('updateCityMeta', updateCityMeta);
 sElEvtEmitter.on('clearCityMeta', clearCityMeta);
+sElEvtEmitter.on('clearStateMeta', clearStateMeta);
 sElEvtEmitter.on('overrideGeoStyle', overrideGeoStyle);
 sElEvtEmitter.on('resetGeoStyle', resetGeoStyle);
 sElEvtEmitter.on('geocoderInit', geocoderInit);

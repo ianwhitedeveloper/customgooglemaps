@@ -1,5 +1,5 @@
 let $ = require('jquery');
-let API_URL = 'https://api.7-eleven.com/v3/election/stores/';
+let API_URL = 'https://api-test.7-eleven.com/v3/election/stores/';
 let redCupEl = $('.cup_results_container.red .percentage span');
 let blueCupEl = $('.cup_results_container.blue .percentage span');
 let purpleCupEl = $('.cup_results_container.purple .percentage span')
