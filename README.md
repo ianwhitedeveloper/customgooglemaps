@@ -1,6 +1,7 @@
 # Usage
 
 ## First, make sure you have all the dependencies installed:
+### (NOTE: you must have at least node v 6.0.0)
 ```sh
 npm install
 ```
