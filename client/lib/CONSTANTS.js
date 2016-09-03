@@ -16,6 +16,9 @@ let bannerCtaEl = $('.banner_cta a');
 let generalErrorMsg = 'Location not found: your search returned no results';
 let isIE = navigator.userAgent.match('MSIE');
 let isIE11= navigator.userAgent.toLowerCase().indexOf('trident') > -1;
+let RESULTS_ZOOM_LVL = 10;
+let STATE_ZOOM_LVL = 9;
+
 module.exports = {
 	API_URL,
 	redCupEl,
@@ -29,5 +32,7 @@ module.exports = {
 	cityMetaEl,
 	generalErrorMsg,
 	isIE,
-	isIE11
+	isIE11,
+	RESULTS_ZOOM_LVL,
+	STATE_ZOOM_LVL
 }

@@ -16,6 +16,7 @@ let boundariesFromGeoJsonLayer = new google.maps.Data({map: map});
 let infoWindow = null;
 let globalResults = null;
 let mapClickDisabled = false;
+let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
 
 $('body').on('click', '.reset_map', e => {
 	boundTheMap({boundaryId: 'united states'});
@@ -179,8 +180,8 @@ function fitBounds({results, override}) {
 	map.fitBounds(results[0].geometry.viewport);
 	// Prevent map from zooming in too 
 	// far and triggering cup results prematurely
-	if (map.getZoom() > 9) {
-		map.setZoom(9);
+	if (map.getZoom() > STATE_ZOOM_LVL) {
+		map.setZoom(STATE_ZOOM_LVL);
 	}
 }
 

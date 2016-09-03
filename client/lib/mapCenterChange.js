@@ -3,6 +3,8 @@ let $ = require('jquery');
 let debounce = require('es6-promise-debounce');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let Promise = require('es6-promise').Promise;
+let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
+let RESULTS_ZOOM_LVL = require('./CONSTANTS').RESULTS_ZOOM_LVL;
 
 let debouncedFunction = debounce(function(center) {
     return new Promise(function(resolve) {
@@ -11,7 +13,7 @@ let debouncedFunction = debounce(function(center) {
 }, 600);
 
 map.addListener('center_changed', function debounceMapCenter() {
-	if (map.getZoom() > 9) {
+	if (map.getZoom() > STATE_ZOOM_LVL) {
 
 		debouncedFunction(map.getCenter())
 		.then(center => { 
@@ -24,7 +26,7 @@ map.addListener('center_changed', function debounceMapCenter() {
 
 
 map.addListener('bounds_changed', function debounceMapCenter() {
-	if (map.getZoom() > 9) {
+	if (map.getZoom() > STATE_ZOOM_LVL) {
 		debouncedFunction(map.getCenter())
 		.then(center => { 
 			let lat = center.lat(),
@@ -35,7 +37,7 @@ map.addListener('bounds_changed', function debounceMapCenter() {
 });
 
 map.addListener('bounds_changed', function() {
-	if (map.getZoom() < 10) {
+	if (map.getZoom() < RESULTS_ZOOM_LVL) {
         sElEvtEmitter.emit('clearCityMeta');
 	}
 });

@@ -8,6 +8,7 @@ let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
 let generalErrorMsg = require('./CONSTANTS').generalErrorMsg;
 let searchBoxInput = $('input[name="cityzip"]');
+let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
 let global = {
 	markers: [],
 	areaResults: {
@@ -81,7 +82,7 @@ function getData(results) {
 }
 
 function queryElectionAPI({lat, lng}={}) {
-	if (map.getZoom() > 9) {
+	if (map.getZoom() > STATE_ZOOM_LVL) {
 		deleteMarkers();
 		$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
 		.done(plotMarkers)
