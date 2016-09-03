@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 	$.when(
 		$.get('external/boundariesFromGeoJson.json'), 
-		$.get('external/dummyStateResults.json')
+		$.get('https://api.7-eleven.com/v3/election/votes')
 	)
 	.then((usBounds, results) => {
 		init({
