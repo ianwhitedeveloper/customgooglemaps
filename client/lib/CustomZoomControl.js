@@ -1,5 +1,5 @@
 //add custom buttons for the zoom-in/zoom-out on the map
-module.exports = function CustomZoomControl(controlDiv, map) {
+module.exports = function customZoomControl(controlDiv, map) {
 	//grap the zoom elements from the DOM and insert them in the map 
   	var controlUIzoomIn= document.getElementById('cd-zoom-in'),
   		controlUIzoomOut= document.getElementById('cd-zoom-out');

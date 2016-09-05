@@ -3,7 +3,7 @@ let $ = require('jquery');
 let map = require('./map');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let getStateAndCityNameFromGeoResults = require('../lib/getStateAndCityNameFromGeoResults');
-let geocoderInit = require('./AddMapBoundaries').geocoderInit;
+let geocoderInit = require('./addMapBoundaries').geocoderInit;
 let calcAndDisplayResults = require('./calcAndDisplayResults');
 let API_URL = require('./CONSTANTS').API_URL;
 let generalErrorMsg = require('./CONSTANTS').generalErrorMsg;
@@ -63,14 +63,8 @@ function findAStoreClick(e) {
 	let searchBoxInputVal = searchBoxInput.val();
 	sElEvtEmitter.emit('resetBannerCTA');
 
-	geocoderInit({boundaryName: searchBoxInputVal}).done(getData);
-}
-
-function getData(results) {
-	let result = results[0];
-	let lat = result.geometry.location.lat();
-	let lng = result.geometry.location.lng();
-	getStateAndCityNameFromGeoResults(results)
+	geocoderInit({boundaryName: searchBoxInputVal})
+	.done(getStateAndCityNameFromGeoResults);
 }
 
 function queryElectionAPI({lat, lng}={}) {
@@ -102,7 +96,9 @@ function plotMarkers(resultsArray) {
 	     	addMarker(position, result);
 			updateAreaResults(result, cityName);
 	    });
-
+	    calculateWinner(cityName);
+	    // global.areaResults[cityName].winner = calculateWinner(cityName);
+// debugger;
 	    calcAndDisplayResults({results: global.areaResults[cityName]});
 	 	showMarkers();
 	 } catch (e) {
@@ -133,6 +129,18 @@ function addMarker(position, results) {
 	});
 
 	global.markers.push({marker: marker, winner: winner});
+}
+
+function calculateWinner(cityName) {
+	let votes = global.areaResults[cityName].votes;
+
+	Object
+	.keys(votes)
+	.reduce((a, b) => { 
+		return votes[a] > votes[b] 
+			? global.areaResults[cityName].winner = a 
+			: global.areaResults[cityName].winner = b;
+	});
 }
 
 function updateAreaResults(result, cityName) {

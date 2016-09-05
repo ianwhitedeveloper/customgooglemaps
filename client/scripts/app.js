@@ -3,7 +3,7 @@ let $ = require('jquery');
 let jQueryTextFill = require('./jquery.textfill.min.js');
 let map = require('../lib/map');
 let defaultLatitudeLongitude = require('../lib/defaultLatitudeLongitude');
-let CustomZoomControl = require('../lib/CustomZoomControl');
+let customZoomControl = require('../lib/customZoomControl');
 let mapOptions = require('../lib/mapOptions');
 let voteResults = require('../lib/voteResults');
 let errorHandler = require('../lib/errorHandler');
@@ -11,8 +11,8 @@ let mapZoom = require('../lib/mapZoom');
 let mapCenterChange = require('../lib/mapCenterChange');
 let stateDict = require('../lib/stateDict');
 let shareResults = require('../lib/shareResults');
-let setResults = require('../lib/AddMapBoundaries').setResults;
-let init = require('../lib/AddMapBoundaries').init;
+let setResults = require('../lib/addMapBoundaries').setResults;
+let init = require('../lib/addMapBoundaries').init;
 let sElEvtEmitter = require('../lib/globals').sElEvtEmitter;
 var doc = document.documentElement;
 let isIE = require('../lib/CONSTANTS').isIE;
@@ -58,7 +58,7 @@ $(document).ready(function(){
 	///////////////////////////////////////////////////
 	//insert the zoom div on the top left of the map //
 	///////////////////////////////////////////////////
-	zoomControl = new CustomZoomControl(zoomControlDiv, map);
+	zoomControl = new customZoomControl(zoomControlDiv, map);
 	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(zoomControlDiv);
 });
 
