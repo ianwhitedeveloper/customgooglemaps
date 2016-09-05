@@ -63,14 +63,8 @@ function findAStoreClick(e) {
 	let searchBoxInputVal = searchBoxInput.val();
 	sElEvtEmitter.emit('resetBannerCTA');
 
-	geocoderInit({boundaryName: searchBoxInputVal}).done(getData);
-}
-
-function getData(results) {
-	let result = results[0];
-	let lat = result.geometry.location.lat();
-	let lng = result.geometry.location.lng();
-	getStateAndCityNameFromGeoResults(results)
+	geocoderInit({boundaryName: searchBoxInputVal})
+	.done(getStateAndCityNameFromGeoResults);
 }
 
 function queryElectionAPI({lat, lng}={}) {
