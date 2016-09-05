@@ -12,7 +12,7 @@
 @import './components/footer.styl'
 @import './components/ad-space.styl'
 @import 'node_modules/notie/dist/notie.css'
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -39,7 +39,7 @@ body
 		rgba(240, 240, 241, 0.7) 0px,
 		rgba(240, 240, 241, 0.7) 13px
 	)
- 
+
 h1, h2, h3, h4, h5, h6, p
 	margin 0
 	padding 0
@@ -47,25 +47,25 @@ h1, h2, h3, h4, h5, h6, p
 h1, h2, h3, h4, h5, h6
 	font-family AvenirNextBold
 	font-weight 100
-	
+
 p
 	AvenirNextMed
-	
 
-h1 
+
+h1
 	font-size 31px
 h2
 	font-size 20px
-h3 
+h3
 	font-size 16px
 h4
 	font-size 12px
 
-a 
+a
 	font-family AvenirNextDemi
 	text-decoration none
 	color sevenPurple
-	
+
 	&:visited, &:active, &:visited:active
 		color sevenPurple
 
@@ -113,26 +113,24 @@ a
 #notie-alert-inner
 	background-color sevenRed
 
-.text_center 
+.text_center
 	text-align center
 
 *, *:after, *:before
   -webkit-box-sizing border-box
   -moz-box-sizing border-box
   box-sizing border-box
-  
+
 main
-	// position relative
 	width 100%
-	height auto
-	margin-bottom -150px
+	height 100%
 
 	&:after
-		content ""
+		content " "
 		display block
 		height 150px
-	
-#mask 
+
+#mask
 	position absolute
 	top 0
 	left 0
@@ -145,14 +143,14 @@ main
 	-ms-transition: background 0.2s linear;
 	-o-transition: background 0.2s linear;
 	transition: background 0.2s linear;
-	
+
 	.fatal_error
 		text-align center
 		margin-top 50vh
-	
+
 .uppercase
 	text-transform uppercase
-	
+
 .flex
 	display(flex)
 	*
@@ -167,14 +165,14 @@ main
 	background #fff url('../imgs/colored-stripes.svg') no-repeat center center;
 	background-size cover
 	height 22px
-	
+
 	&:before,
-	&:after 
+	&:after
 		height 22px
 		width 22px
 		background #fff url('../imgs/star.svg') no-repeat center center;
 		background-size cover
-		position absolute	
+		position absolute
 		top 0
 		content " "
 	&:before
@@ -182,35 +180,29 @@ main
 	&:after
 		right 0
 
+@media only screen and (min-height: 680px)
+	html
+		height auto
+	body
+		min-height 800px
+
 @media only screen and (min-width: 768px)
 	body
 		font-size 14px
-		min-height 768px
-	  
-		h1 
+
+		h1
 			font-size 46px
 		h2
 			font-size 30px
-		h3 
+		h3
 			font-size 21px
 		h4
 			font-size 15px
-	
+
 @media only screen and (min-width: 1024px)
 	html, body
-	  height 100%
-	  
-	main
-		margin-bottom -85px
-		
-		&:after
-			height 85px
-
-	.banner_cta
-		font-size 15px
-		
-	.striped_bar
-		width 420px
+		height 100%
+		min-height 800px
 
 	.arrow_left
 		&:before

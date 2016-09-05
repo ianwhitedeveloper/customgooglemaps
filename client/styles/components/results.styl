@@ -8,7 +8,7 @@
 	bottom 33px
 	
 	a
-		font-size 11px
+		font-size 12px
 		font-family AvenirNextBold
 
 .location
@@ -67,12 +67,12 @@ a[rel="js-share-results"]
 			&:after
 				content " "
 				background-image url('../imgs/seven_el_logo.svg')
-				width 26px
-				height 26px
+				width 25px
+				height 25px
 				background-size cover
 				position absolute
 				top calc(50% - 13px)
-				right 0
+				right 2px
 				
 
 		h2
@@ -128,6 +128,7 @@ a[rel="js-share-results"]
 
 		.percentage
 			color #fff
+			font-family AvenirNextBold
 			font-weight bold
 			text-align center
 			font-size 16px
@@ -205,6 +206,12 @@ html[data-useragent*='evergreen']
 	.banner
 		width 365px
 		font-size 21px
+	
+	.banner_cta
+		bottom 28px
+		
+		a
+			font-size 15px
 		
 	html[data-useragent*='evergreen'] .cup_results_container .circle sup,
 	.cup_results_container 
@@ -234,18 +241,19 @@ html[data-useragent*='evergreen']
 				height 50px
 		
 @media only screen and (min-width: 1024px)
+	.striped_bar
+		width 420px
+
 	.results
 		position absolute
 		top 0
 		left 0;	
 		width 420px
-		height calc(100vh - 85px)
 		padding 30px 10px
 		
 		header
 			max-width 100%
 
-// @media only screen and (min-width: 1200px)
-// 	.results
-// 		header
-// 			margin: 12.5% auto 0;
+@media only screen and (min-width: 1200px)
+	.results
+		header

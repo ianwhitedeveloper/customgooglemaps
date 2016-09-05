@@ -11,15 +11,7 @@ let searchBoxInput = $('input[name="cityzip"]');
 let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
 let global = {
 	markers: [],
-	areaResults: {
-			total_votes: 0,
-			votes: {
-				red: 0,
-				blue: 0,
-				purple: 0
-			},
-			scope: null
-		}
+	areaResults: {}
 };
 
 let cupBlueImg 		= (isIE11) ? 'imgs/cup-blue.png' : 'imgs/cup-blue.svg';
@@ -95,21 +87,23 @@ function queryElectionAPI({lat, lng}={}) {
 function plotMarkers(resultsArray) {
 	try {
 		let bounds = new google.maps.LatLngBounds();
+		let cityName = resultsArray[0].city.toLowerCase();
 		let marker;
+		// Reset results
+		global.areaResults = {};
 
-		sElEvtEmitter.emit('updateCityMeta', resultsArray[0].city);
-		sElEvtEmitter.emit('updateBannerText', {bannerText: resultsArray[0].city});
-     	global.areaResults.scope = resultsArray[0].city;
-     	
+		sElEvtEmitter.emit('updateCityMeta', cityName);
+		sElEvtEmitter.emit('updateBannerText', {bannerText: cityName});
+
 	    // Loop through our array of markers & place each one on the map  
-	    for(let i = 0; i < resultsArray.length; i++ ) {
-			let currentResult = resultsArray[i];
-	        let position = new google.maps.LatLng(currentResult.lat, currentResult.lon);
-	     	addMarker(position, currentResult);
-			updateAreaResults(currentResult);
-	    }
+	    resultsArray.forEach(result => {
+	        let position = new google.maps.LatLng(result.lat, result.lon);
 
-	    calcAndDisplayResults({results: global.areaResults});
+	     	addMarker(position, result);
+			updateAreaResults(result, cityName);
+	    });
+
+	    calcAndDisplayResults({results: global.areaResults[cityName]});
 	 	showMarkers();
 	 } catch (e) {
 	 	sElEvtEmitter.emit('generalError', generalErrorMsg);
@@ -128,8 +122,6 @@ function addMarker(position, results) {
 		icon: winner
 	});
 
-	resetAreaResults();
-
 	google.maps.event.addListener(marker, "click", function (e) {
 	    for (var i=0; i<global.markers.length; i++) {
 			let currentMarker = global.markers[i];
@@ -143,19 +135,18 @@ function addMarker(position, results) {
 	global.markers.push({marker: marker, winner: winner});
 }
 
-function updateAreaResults(currentResult) {
-	global.areaResults.total_votes 	+= currentResult.total_votes;
-	global.areaResults.votes.red 	+= currentResult.votes.red;
-	global.areaResults.votes.blue 	+= currentResult.votes.blue;
-	global.areaResults.votes.purple += currentResult.votes.purple;
-}
-
-function resetAreaResults() {
-	global.areaResults.total_votes 	= 0;
-	global.areaResults.votes.red 	= 0;
-	global.areaResults.votes.blue 	= 0;
-	global.areaResults.votes.purple = 0;
-	global.areaResults.votes.scope 	= null;
+function updateAreaResults(result, cityName) {
+	if (!global.areaResults[cityName]) {
+	    global.areaResults[cityName] = {
+	        total_votes: result.total_votes,
+	        votes: result.votes
+	    };
+	} else {
+	    global.areaResults[cityName].total_votes     += result.total_votes;
+	    global.areaResults[cityName].votes.red       += result.votes.red;
+	    global.areaResults[cityName].votes.blue      += result.votes.blue;
+	    global.areaResults[cityName].votes.purple    += result.votes.purple;
+	}
 }
 
 // Sets the map on all markers in the array.
