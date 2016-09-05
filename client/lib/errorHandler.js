@@ -6,18 +6,19 @@ notie.setOptions({
 	animationDelay: 1500
 })
 
-function generalError(errorMessage) {
-	notie.alert(3, errorMessage, 2.5);
+function generalError(error) {
+	notie.alert(3, error, 2.5);
+	console.trace(error);
 }
 
-function silentError(errorMessage) {
-	console.warn(errorMessage);
+function silentError(error) {
+	console.trace(error);
 }
 
-function fatalError(errorMessage) {
+function fatalError(error) {
 	$('#mask').css({background: 'rgba(230, 230, 230, 0.9)', zIndex: '999'});
 	$('#mask .fatal_error').html(`<h1>Site temporarily down for maintenance</h1>`);
-	console.warn(errorMessage);
+	console.trace(error);
 
 }
 
