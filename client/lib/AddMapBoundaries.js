@@ -178,11 +178,6 @@ function fitBounds({results, override}) {
 	.fail(error => { sElEvtEmitter.emit('silentError', error) });
 
 	map.fitBounds(results[0].geometry.viewport);
-	// Prevent map from zooming in too 
-	// far and triggering cup results prematurely
-	if (map.getZoom() > STATE_ZOOM_LVL) {
-		map.setZoom(STATE_ZOOM_LVL);
-	}
 }
 
 
