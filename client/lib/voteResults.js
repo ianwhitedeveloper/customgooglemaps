@@ -96,7 +96,9 @@ function plotMarkers(resultsArray) {
 	     	addMarker(position, result);
 			updateAreaResults(result, cityName);
 	    });
-
+	    calculateWinner(cityName);
+	    // global.areaResults[cityName].winner = calculateWinner(cityName);
+// debugger;
 	    calcAndDisplayResults({results: global.areaResults[cityName]});
 	 	showMarkers();
 	 } catch (e) {
@@ -127,6 +129,18 @@ function addMarker(position, results) {
 	});
 
 	global.markers.push({marker: marker, winner: winner});
+}
+
+function calculateWinner(cityName) {
+	let votes = global.areaResults[cityName].votes;
+
+	Object
+	.keys(votes)
+	.reduce((a, b) => { 
+		return votes[a] > votes[b] 
+			? global.areaResults[cityName].winner = a 
+			: global.areaResults[cityName].winner = b;
+	});
 }
 
 function updateAreaResults(result, cityName) {
