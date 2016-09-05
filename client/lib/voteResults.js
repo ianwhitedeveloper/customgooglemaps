@@ -97,8 +97,6 @@ function plotMarkers(resultsArray) {
 			updateAreaResults(result, cityName);
 	    });
 	    calculateWinner(cityName);
-	    // global.areaResults[cityName].winner = calculateWinner(cityName);
-// debugger;
 	    calcAndDisplayResults({results: global.areaResults[cityName]});
 	 	showMarkers();
 	 } catch (e) {

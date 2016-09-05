@@ -21,6 +21,7 @@ let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
 $('body').on('click', '.reset_map', e => {
 	boundTheMap({boundaryId: 'united states'});
 	calcAndDisplayResults({results: globalResults, scope: 'national'});
+	overrideGeoStyle({boundaryName: stateMetaEl.attr('content'), style: {strokeWeight: 2, strokeColor: '#fff', fillOpacity: 0.8}});
 	sElEvtEmitter.emit('clearCityMeta');
 	sElEvtEmitter.emit('clearStateMeta');
 });
@@ -178,11 +179,6 @@ function fitBounds({results, override}) {
 	.fail(error => { sElEvtEmitter.emit('silentError', error) });
 
 	map.fitBounds(results[0].geometry.viewport);
-	// Prevent map from zooming in too 
-	// far and triggering cup results prematurely
-	if (map.getZoom() > STATE_ZOOM_LVL) {
-		map.setZoom(STATE_ZOOM_LVL);
-	}
 }
 
 

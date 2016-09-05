@@ -1,6 +1,8 @@
 let $ = require('jquery');
 let sElEvtEmitter = require('./globals').sElEvtEmitter;
 let map = require('../lib/map');
+let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
+let RESULTS_ZOOM_LVL = require('./CONSTANTS').RESULTS_ZOOM_LVL;
 
 
 function getStateAndCityNameFromGeoResults(results) {
@@ -15,10 +17,14 @@ function getStateAndCityNameFromGeoResults(results) {
             if (results[0].address_components.length > 2) {
                 data.cityName = results[0].address_components[0].long_name;
                 sElEvtEmitter.emit('updateCityMeta', data.cityName);
-                setTimeout(() => {
-                    map.setZoom(10);
-                }, 1000);
             } else {
+                // Attmept to prevent map from zooming in too 
+                // far and triggering cup results prematurely
+                setTimeout(() => {
+                    if (map.getZoom() > STATE_ZOOM_LVL) {
+                        map.setZoom(STATE_ZOOM_LVL);
+                    }
+                }, 100);
                 sElEvtEmitter.emit('clearCityMeta');
             }
 
