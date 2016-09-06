@@ -145,7 +145,11 @@ function updateAreaResults(result, cityName) {
 	if (!global.areaResults[cityName]) {
 	    global.areaResults[cityName] = {
 	        total_votes: result.total_votes,
-	        votes: result.votes
+	        votes: {
+	        	red: result.votes.red,
+	        	blue: result.votes.blue,
+	        	purple: result.votes.purple
+	        }
 	    };
 	} else {
 	    global.areaResults[cityName].total_votes     += result.total_votes;
