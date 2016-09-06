@@ -141,7 +141,7 @@ function boundaryClick(e) {
 	let boundaryName = e.feature.f.NAME;
 
 	if (!(boundaryName in stateBlacklist) && !mapClickDisabled) {
-		boundTheMap({boundaryId: `${stateDict[boundaryName]} state`});
+		boundTheMap({boundaryId: `state of ${stateDict[boundaryName]}`});
 		calcAndDisplayResults({results: globalResults, scope: boundaryName});
 		sElEvtEmitter.emit('updateBannerText', boundaryName);
 		sElEvtEmitter.emit('resetBannerCTA');
