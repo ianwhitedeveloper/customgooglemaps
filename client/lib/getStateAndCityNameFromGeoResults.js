@@ -17,6 +17,12 @@ function getStateAndCityNameFromGeoResults(results) {
             if (results[0].address_components.length > 2) {
                 data.cityName = results[0].address_components[0].long_name;
                 sElEvtEmitter.emit('updateCityMeta', data.cityName);
+
+                setTimeout(() => {
+                    if (map.getZoom() <= STATE_ZOOM_LVL) {
+                        map.setZoom(RESULTS_ZOOM_LVL);
+                    }
+                }, 100);
             } else {
                 // Attmept to prevent map from zooming in too 
                 // far and triggering cup results prematurely
