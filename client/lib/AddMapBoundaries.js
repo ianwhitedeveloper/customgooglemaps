@@ -58,7 +58,7 @@ function loadBoundariesFromGeoJson({boundariesFromGeoJson, scope} = {}) {
 
 				addToBlacklist({
 					blackListObject: stateBlacklist,
-					condition: globalResults.states[boundaryName] ? globalResults.states[boundaryName].winner === "null" : false,
+					condition: globalResults.states[boundaryName] ? !globalResults.states[boundaryName].winner ||globalResults.states[boundaryName].winner === "null" : false,
 					key: boundaryName
 				});
 
