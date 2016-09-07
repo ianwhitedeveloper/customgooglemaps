@@ -9,6 +9,7 @@ let API_URL = require('./CONSTANTS').API_URL;
 let generalErrorMsg = require('./CONSTANTS').generalErrorMsg;
 let searchBoxInput = $('input[name="cityzip"]');
 let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
+let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
 let global = {
 	markers: [],
 	areaResults: {}
@@ -80,8 +81,7 @@ function queryElectionAPI({lat, lng}={}) {
 
 function plotMarkers(resultsArray) {
 	try {
-		let bounds = new google.maps.LatLngBounds();
-		let cityName = resultsArray[0].city.toLowerCase();
+		let cityName = cityMetaEl.attr('content');
 		let marker;
 		// Reset results
 		global.areaResults = {};

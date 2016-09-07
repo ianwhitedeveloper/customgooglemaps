@@ -11,6 +11,7 @@ let autoprefixer = require('gulp-autoprefixer');
 let config = require('./gulp.config.js');
 let plumber = require('gulp-plumber');
 let errorHandler = require('./errorHandler');
+let cleanCSS = require('gulp-clean-css');
 
 let injectTransform = {
 	starttag: '/* inject:imports */',
@@ -40,6 +41,6 @@ function stylesTask() {
     .pipe(plumber({ errorHandler: errorHandler }))
     .pipe(stylus(configPreprocessor))
     .pipe(autoprefixer())
+    .pipe(cleanCSS())
     .pipe(gulp.dest(config.styles.dest))
-    .pipe(config.browserSync.stream({match: '**/*.css'}));
 }

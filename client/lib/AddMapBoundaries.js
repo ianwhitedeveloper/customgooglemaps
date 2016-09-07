@@ -20,6 +20,7 @@ let infoWindow = null;
 let globalResults = null;
 let mapClickDisabled = false;
 let STATE_ZOOM_LVL = require('./CONSTANTS').STATE_ZOOM_LVL;
+let RESULTS_ZOOM_LVL = require('./CONSTANTS').RESULTS_ZOOM_LVL;
 
 $('body').on('click', '.reset_map', e => {
 	boundTheMap({boundaryId: 'united states'});
@@ -154,7 +155,7 @@ function boundaryClick(e) {
 function geocoderInit({boundaryName, override=false}={}) {
 	let deferred = $.Deferred();
 	var geocoder = new google.maps.Geocoder();
-	geocoder.geocode({'address': `${boundaryName}, united states`}, deferred.resolve);
+	geocoder.geocode({address: `${boundaryName}, united states`, region: 'US'}, deferred.resolve);
 	deferred.then(results => {
 		fitBounds({results: results, override: override});
 	});
