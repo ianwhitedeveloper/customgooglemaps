@@ -10,7 +10,10 @@ let cityMetaEl = require('../lib/CONSTANTS').cityMetaEl;
 let generalErrorMsg = require('../lib/CONSTANTS').generalErrorMsg;
 let getStateAndCityNameFromGeoResults = require('../lib/getStateAndCityNameFromGeoResults');
 let myBoundaries = {};
-let stateBlacklist = {};
+let stateBlacklist = {
+	// Add Puerto Rico by default
+	PR: true
+};
 // initialize boundariesFromGeoJson layer which contains the boundaries. It's possible to have multiple boundariesFromGeoJson layers on one map
 let boundariesFromGeoJsonLayer = new google.maps.Data({map: map});
 let infoWindow = null;
