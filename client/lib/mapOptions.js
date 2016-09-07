@@ -5,6 +5,7 @@ let style = require('../lib/mapStyle');
 let mapOptions = {
 	bounds: defaultLatitudeLongitude,
   	center: defaultLatitudeLongitude,
+    disableDoubleClickZoom: true,
   	panControl: false,
   	draggable: true,
   	zoomControl: false,
