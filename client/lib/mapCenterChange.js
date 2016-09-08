@@ -33,6 +33,9 @@ function getCityNameAndUpdateMeta(results) {
 	if (results[0].address_components.length) {
 		results[0].address_components.forEach(r => {
 			if (r.types.indexOf('locality') > -1) {
+				// Hacky way to not zoom in due to 
+				// aparent center of US (stored in defaultLattitudeLongitude.js)
+				// is Lyndon..
 				if (r.long_name.toLowerCase() !== 'lyndon') {
 				 	sElEvtEmitter.emit('updateCityMeta', r.long_name);
 			 	}
