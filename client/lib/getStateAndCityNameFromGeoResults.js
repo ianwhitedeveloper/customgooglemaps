@@ -14,7 +14,15 @@ function getStateAndCityNameFromGeoResults(results) {
             {
                 if (results[0].address_components[i].types.indexOf("administrative_area_level_1") > -1 )
                 {
-                    if (results[0].address_components[0].types.indexOf("locality") > -1 ) {
+                    if (
+                        results[0]
+                            .address_components[0]
+                            .types.indexOf("locality") > -1
+                        ||
+                        results[0]
+                            .address_components[0]
+                            .types.indexOf("postal_code") > -1
+                    ) {
                         setTimeout(() => {
                             if (map.getZoom() <= STATE_ZOOM_LVL) {
                                 map.setZoom(RESULTS_ZOOM_LVL);
