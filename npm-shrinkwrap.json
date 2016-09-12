@@ -1,0 +1,31 @@
+{
+  "name": "maptest",
+  "version": "1.0.0",
+  "dependencies": {
+    "coffee-script": {
+      "version": "1.10.0",
+      "from": "coffee-script@1.10.0",
+      "resolved": "https://registry.npmjs.org/coffee-script/-/coffee-script-1.10.0.tgz"
+    },
+    "es6-promise": {
+      "version": "3.2.1",
+      "from": "es6-promise@latest",
+      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.2.1.tgz"
+    },
+    "eventemitter2": {
+      "version": "2.1.0",
+      "from": "eventemitter2@>=2.1.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/eventemitter2/-/eventemitter2-2.1.0.tgz"
+    },
+    "google-maps-utility-library-v3-infobox": {
+      "version": "1.1.14",
+      "from": "google-maps-utility-library-v3-infobox@>=1.1.14 <2.0.0",
+      "resolved": "https://registry.npmjs.org/google-maps-utility-library-v3-infobox/-/google-maps-utility-library-v3-infobox-1.1.14.tgz"
+    },
+    "notie": {
+      "version": "3.9.2",
+      "from": "notie@latest",
+      "resolved": "https://registry.npmjs.org/notie/-/notie-3.9.2.tgz"
+    }
+  }
+}
