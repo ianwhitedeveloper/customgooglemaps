@@ -72,7 +72,7 @@ function queryElectionAPI({lat, lng}={}) {
 	if (map.getZoom() > STATE_ZOOM_LVL) {
 		deleteMarkers();
 		// $.get(`${API_URL}?lat=${lat}&lon=${lng}`)
-		$.get(`/external/austinDemoData.json`)
+		$.getJSON(`external/austinDemoData.json`)
 		.done(plotMarkers)
 		.fail(() => {
 			sElEvtEmitter.emit('generalError', 'API error - please try again later');

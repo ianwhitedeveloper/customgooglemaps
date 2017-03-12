@@ -32,8 +32,8 @@ $(document).ready(function(){
 	$('.banner').textfill({maxFontPixels: 21, widthOnly: true});
 
 	$.when(
-		$.get('external/boundariesFromGeoJson.json'),
-		$.get('external/dummyStateResults.json')
+		$.getJSON('external/boundariesFromGeoJson.json'),
+		$.getJSON('external/dummyStateResults.json')
 	)
 	.then((usBounds, results) => {
 		init({
