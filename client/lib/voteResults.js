@@ -71,7 +71,8 @@ function findAStoreClick(e) {
 function queryElectionAPI({lat, lng}={}) {
 	if (map.getZoom() > STATE_ZOOM_LVL) {
 		deleteMarkers();
-		$.get(`${API_URL}?lat=${lat}&lon=${lng}`)
+		// $.get(`${API_URL}?lat=${lat}&lon=${lng}`)
+		$.get(`/external/austinDemoData.json`)
 		.done(plotMarkers)
 		.fail(() => {
 			sElEvtEmitter.emit('generalError', 'API error - please try again later');
@@ -89,7 +90,7 @@ function plotMarkers(resultsArray) {
 		sElEvtEmitter.emit('updateCityMeta', cityName);
 		sElEvtEmitter.emit('updateBannerText', {bannerText: cityName});
 
-	    // Loop through our array of markers & place each one on the map  
+	    // Loop through our array of markers & place each one on the map
 	    resultsArray.forEach(result => {
 	        let position = new google.maps.LatLng(result.lat, result.lon);
 
@@ -134,9 +135,9 @@ function calculateWinner(cityName) {
 
 	Object
 	.keys(votes)
-	.reduce((a, b) => { 
-		return votes[a] > votes[b] 
-			? global.areaResults[cityName].winner = a 
+	.reduce((a, b) => {
+		return votes[a] > votes[b]
+			? global.areaResults[cityName].winner = a
 			: global.areaResults[cityName].winner = b;
 	});
 }
@@ -172,7 +173,7 @@ function setMapOnAll(map) {
 		});
 	}
 
-	
+
 }
 
 // Removes the markers from the map, but keeps them in the array.
@@ -207,13 +208,13 @@ sElEvtEmitter.on('findAStoreClick', findAStoreClick);
 module.exports = function loadVoteResults({state='TX', callback=callbacks.enableSeachBox} = {}) {
     if(!global[state]) {
         global[state] = $.get(`https://api-test.7-eleven.com/v3/election/votes?sort_by=city&date=07/11/2016&state=${state}`).promise();
-    } 
+    }
     global[state].done(callback);
 }
 
 if(!global[result.formatted_address]) {
 	    global[result.formatted_address] = $.get(`https://api-test.7-eleven.com/v3/election/stores/?lat=${lat}&lon=${lng}`).promise();
-	} 
+	}
 	global[result.formatted_address].done((r) => {
 		let c = global;
 			debugger;
