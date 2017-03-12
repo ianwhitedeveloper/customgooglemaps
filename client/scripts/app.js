@@ -32,8 +32,8 @@ $(document).ready(function(){
 	$('.banner').textfill({maxFontPixels: 21, widthOnly: true});
 
 	$.when(
-		$.get('external/boundariesFromGeoJson.json'), 
-		$.get('https://api.7-eleven.com/v3/election/votes')
+		$.get('external/boundariesFromGeoJson.json'),
+		$.get('https://api-test.7-eleven.com/v3/election/votes')
 	)
 	.then((usBounds, results) => {
 		init({
@@ -62,4 +62,4 @@ $(document).ready(function(){
 	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(zoomControlDiv);
 });
 
-  
+
